@@ -24,3 +24,8 @@ pre: " <b> 1.6. </b> "
 | 6   | - Continued progress on Week 3 of the Coursera course <br> - Reviewed material for the upcoming AWS midterm exam <br> - Redesigned the project architecture                                                                                                                                                                                     | 10/17/2025 | 10/17/2025      | <>                                                           |
 
 ### Week 6 Achievements:
+
+- Completed Week 2 of the Coursera course **“Natural Language Processing with Probabilistic Models”**
+- Made significant progress on Week 3 of the Coursera course
+- Expanded knowdledge by attending two events: **"Data Science On AWS"** workshop and **"Reinventing DevSecOps with AWS Generative AI"** 
+- Redesigned the project architecture to enhance system efficiency and service integration
