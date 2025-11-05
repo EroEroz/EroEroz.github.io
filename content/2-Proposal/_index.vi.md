@@ -6,75 +6,111 @@ chapter: false
 pre: " <b> 2. </b> "
 ---
 
-# Gym Management System
+# Chuyển đổi số cho Mini-market trên nền tảng đám mây AWS
 
-## Giải pháp AWS Serverless hợp nhất cho giám sát thời tiết thời gian thực
+## Giải pháp E-commerce .NET 3-lớp (3-tier) áp dụng Repository và Unit of Work Pattern
 
 ### 1. Tóm tắt điều hành
-
-IoT Weather Platform được thiết kế dành cho nhóm _ITea Lab_ tại TP. Hồ Chí Minh nhằm nâng cao khả năng thu thập và phân tích dữ liệu thời tiết. Nền tảng hỗ trợ tối đa 5 trạm thời tiết, có khả năng mở rộng lên 10–15 trạm, sử dụng thiết bị biên Raspberry Pi kết hợp cảm biến ESP32 để truyền dữ liệu qua MQTT. Nền tảng tận dụng các dịch vụ AWS Serverless để cung cấp giám sát thời gian thực, phân tích dự đoán và tiết kiệm chi phí, với quyền truy cập giới hạn cho 5 thành viên phòng lab thông qua Amazon Cognito.
-
+to be không tình yêu
 ### 2. Tuyên bố vấn đề
 
 _Vấn đề hiện tại_  
-Các trạm thời tiết hiện tại yêu cầu thu thập dữ liệu thủ công, khó quản lý khi có nhiều trạm. Không có hệ thống tập trung cho dữ liệu hoặc phân tích thời gian thực, và các nền tảng bên thứ ba thường tốn kém và quá phức tạp.
+Các doanh nghiệp bán lẻ nhỏ và vừa, đặc biệt là mô hình "mini-market" truyền thống tại Việt Nam, đang vận hành dựa trên các quy trình thủ công đã lỗi thời. Trong bối cảnh thị trường ngày càng số hóa, việc không áp dụng công nghệ vào môi trường làm việc đã tạo ra một số vấn đề, trực tiếp ảnh hưởng đến khả năng tồn tại và phát triển của họ.
 
-_Giải pháp_  
-Nền tảng sử dụng AWS IoT Core để tiếp nhận dữ liệu MQTT, AWS Lambda và API Gateway để xử lý, Amazon S3 để lưu trữ (bao gồm data lake), và AWS Glue Crawlers cùng các tác vụ ETL để trích xuất, chuyển đổi, tải dữ liệu từ S3 data lake sang một S3 bucket khác để phân tích. AWS Amplify với Next.js cung cấp giao diện web, và Amazon Cognito đảm bảo quyền truy cập an toàn. Tương tự như Thingsboard và CoreIoT, người dùng có thể đăng ký thiết bị mới và quản lý kết nối, nhưng nền tảng này hoạt động ở quy mô nhỏ hơn và phục vụ mục đích sử dụng nội bộ. Các tính năng chính bao gồm bảng điều khiển thời gian thực, phân tích xu hướng và chi phí vận hành thấp.
+_Một số vấn đề chính_
 
-_Lợi ích và hoàn vốn đầu tư (ROI)_  
-Giải pháp tạo nền tảng cơ bản để các thành viên phòng lab phát triển một nền tảng IoT lớn hơn, đồng thời cung cấp nguồn dữ liệu cho những người nghiên cứu AI phục vụ huấn luyện mô hình hoặc phân tích. Nền tảng giảm bớt báo cáo thủ công cho từng trạm thông qua hệ thống tập trung, đơn giản hóa quản lý và bảo trì, đồng thời cải thiện độ tin cậy dữ liệu. Chi phí hàng tháng ước tính 0,66 USD (theo AWS Pricing Calculator), tổng cộng 7,92 USD cho 12 tháng. Tất cả thiết bị IoT đã được trang bị từ hệ thống trạm thời tiết hiện tại, không phát sinh chi phí phát triển thêm. Thời gian hoàn vốn 6–12 tháng nhờ tiết kiệm đáng kể thời gian thao tác thủ công.
+- **Vấn đề về quản lý kho thủ công dẫn đến tính thiếu chính xác trong số liệu và lãng phí nguồn lực:** Đa số mini-market hiện nay quản lý hàng nghìn mã sản phẩm (SKUs) bằng sổ sách hoặc file Excel. Việc nhập/xuất kho và kiểm kê cuối ngày hoàn toàn dựa vào việc đếm và nhập thủ công. Việc này có thể dẫn đến sai sót trong dữ liệu vì quy trình nhập tay rất dễ xảy ra nhầm lẫn, tiêu biểu như mã sản phẩm và số lượng, việc này gây ra chênh lệch lớn giữa dữ liệu "trên sổ" và "thực tế" trong kho. Việc kiểm hàng hóa thủ công như này cũng sẽ đòi hỏi nguồn lực cao khi mà nhân viên sẽ phải dành hàng giờ mỗi ngày để kiểm kê, đối chiếu và chỉnh sữa báo cáo, thay vì tập trung vào phần bán hàng hoặc chăm sóc khách hàng. Cuối cùng là thất thoát tài chính, khi mà dữ liệu không được nhập chính xác, chủ cửa hàng sẽ không thể kiểm soát được tình trạng của hàng hóa như là hàng hóa hết hạng, hàng hóa bị hư hỏng, hoặc là bị mất cắp, dẫn đến thất thoát 5-10% giá trị hàng tồn kho hàng tháng.
+- **Vấn đề lệ thuộc vào bán hàng offline, bỏ lỡ thị trường E-commerce:** Thông thường các mini-market ở Việt Nam đa số sẽ phụ thuộc vào khách vãng lai(offline). Họ cũng bị giới hạn bởi vị trí địa lí (chỉ phục vụ trong khu vực) và tệp khách hàng quen thuộc. Các cửa hàng như này sẽ đứng ngoài thị trường E-commerce, bỏ lỡ tệp khách hàng trẻ vốn đã quen thuộc với việc mua sắm online. Họ sẽ không thể cạnh tranh về sự tiện lợi như là đặt hàng 24/7 hay là giao hàng tận nơi so với các chuỗi cửa hàng tiện lợi lớn như là Circle K hoặc 7-Eleven và các ứng dụng giao hàng như Grab và Shopee, dẫn đến mất nguy cơ mất khách hàng theo thời gian.
+- **Vấn đề về vận hành và trải nghiệm của khách hàng:** Quy trình thanh toán và tra cứu thông tin ở các mini-market truyền thống thông thường sẽ rất chậm chạp. Khi khách hàng hỏi về giá, thông tin của sản phẩm, hoặc là chương trình khuyến mãi, nhân viên (đặc biệt là nhân viên mới) sẽ phải tra cứu thủ công trong sổ sách dẫn đến tốn thời gian. Việc bắt khách hàng phải chờ đợi lâu để tra cứu thông tin hoặc tính tiền sẽ tạo ra sự ức chế và thiếu chuyên nghiệp. Nhân viên sẽ mất quá nhiều thời gian cho các tác vụ đơn giản, dễ nhầm lẫn (như là đọc nhầm giá do chữ viết xấu), làm giảm số lượng khách hàng có thể phục vụ trong giờ cao điểm. 
+
+
 
 ### 3. Kiến trúc giải pháp
 
-Nền tảng áp dụng kiến trúc AWS Serverless để quản lý dữ liệu từ 5 trạm dựa trên Raspberry Pi, có thể mở rộng lên 15 trạm. Dữ liệu được tiếp nhận qua AWS IoT Core, lưu trữ trong S3 data lake và xử lý bởi AWS Glue Crawlers và ETL jobs để chuyển đổi và tải vào một S3 bucket khác cho mục đích phân tích. Lambda và API Gateway xử lý bổ sung, trong khi Amplify với Next.js cung cấp bảng điều khiển được bảo mật bởi Cognito.
+Kiến trúc được thiết kế để giải quyết các vấn đề đã nêu, bằng cách kết hợp kiến trúc phần mềm .NET 3-lớp (Tier-3) với các dịch vụ đám mây được quản lý (Managed Services) của AWS. Kiến trúc này tuân thủ các nguyên tắc của AWS Well-Architected Framework, đảm bảo tính bảo mật, hiệu năng cao, khả năng phục hồi lỗi và tối ưu chi phí. 
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+![Mini-market Architecture](/images/2-Proposal/Project_Architecture_3.0.jpg)
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
 
 _Dịch vụ AWS sử dụng_
 
-- _AWS IoT Core_: Tiếp nhận dữ liệu MQTT từ 5 trạm, mở rộng lên 15.
-- _AWS Lambda_: Xử lý dữ liệu và kích hoạt Glue jobs (2 hàm).
-- _Amazon API Gateway_: Giao tiếp với ứng dụng web.
-- _Amazon S3_: Lưu trữ dữ liệu thô (data lake) và dữ liệu đã xử lý (2 bucket).
-- _AWS Glue_: Crawlers lập chỉ mục dữ liệu, ETL jobs chuyển đổi và tải dữ liệu.
-- _AWS Amplify_: Lưu trữ giao diện web Next.js.
-- _Amazon Cognito_: Quản lý quyền truy cập cho người dùng phòng lab.
+- _AWS Elastic Beanstalk_: Dịch vụ PaaS (Platform as a Service) được chọn để triển khai ứng dụng .NET 3-lớp (gồm Lớp Presentation WebShop và Lớp Application Services). Beanstalk tự động hóa 100% việc quản lý hạ tầng, bao gồm tự động tạo Auto Scaling Group (ASG) để đảm bảo tính co giãn (Scalability) và tiết kiệm chi phí. 
 
-_Thiết kế thành phần_
+- _Amazon RDS (SQL Server)_: Dịch vụ Cơ Sở Dữ Liệu (CSDL) (Managed Relational Database Service) để host Lớp Persistence. SQL Server được chọn vì ứng dụng .NET của nhóm đã được phát triển và tối ưu cho SQL Server. Việc sử dụng RDS for SQL Server cho phép di chuyển (migrate) ứng dụng lên AWS mà không cần thay đổi code ở Lớp Dữ liệu. RDS cũng sẽ tự động hóa các tác vụ phức tạp như sao lưu (backup) hàng ngày, vá lỗi (patching) và phục hồi khi có sự cố (failover). Về tính bảo mật thì RDS được đặt trong Private Subnet, không thể truy cập trực tiếp từ Internet, chỉ cho phép ứng dụng trên Beanstalk kết nối. Và về vấn đề tối ưu chi phí, để tối ưu chi phí trong giai đoạn đầu, chúng ta có thể bắt đầu với phiên bản SQL Server Express Edition trên RDS, phiên bản này nằm trong Free Tier của AWS. 
 
-- _Thiết bị biên_: Raspberry Pi thu thập và lọc dữ liệu cảm biến, gửi tới IoT Core.
-- _Tiếp nhận dữ liệu_: AWS IoT Core nhận tin nhắn MQTT từ thiết bị biên.
-- _Lưu trữ dữ liệu_: Dữ liệu thô lưu trong S3 data lake; dữ liệu đã xử lý lưu ở một S3 bucket khác.
-- _Xử lý dữ liệu_: AWS Glue Crawlers lập chỉ mục dữ liệu; ETL jobs chuyển đổi để phân tích.
-- _Giao diện web_: AWS Amplify lưu trữ ứng dụng Next.js cho bảng điều khiển và phân tích thời gian thực.
-- _Quản lý người dùng_: Amazon Cognito giới hạn 5 tài khoản hoạt động.
+- _Amazon S3_: Dịch vụ lưu trữ đối tượng (Object Storage). Dùng để lưu trữ các static assets như hình ảnh sản phẩm, file CSS, và JavaScript. S3 cung cấp chi phí cực rẻ và khả năng mở rộng vô hạn.
+
+- _Amazon CloudFront_: Dịch vụ Content Delivery Network - CDN. CloudFront lưu đệm (cache) các file tĩnh từ S3 tại các máy chủ (Edge Locations) trên toàn cầu, giúp người dùng tải trang nhanh hơn đáng kể. Giúp giảm tải trực tiếp cho máy chủ Beanstalk, và giúp ứng dụng .NET tập trung xử lý logic.
+
+- _Amazon WAF và Route 53_: WAF (Web Application Firewall) và Route 53 (Dịch vụ DNS). WAF được liên kết với CloudFront để chặn các cuộc tấn công web phổ biến (như SQL injection, XSS). Route 53 cung cấp tên miền cho người dùng.
+
+- _Amazon ElastiCache (Redis)_: Dịch vụ in-memory data stores. Giúp giảm tải tối đa cho CSDL RDS khi có các truy vấn lặp đi lặp lại (ví dụ: lấy danh sách sản phẩm trang chủ). Ứng dụng .NET sẽ cache các dữ liệu "nóng" này trên ElastiCache, giúp tăng tốc độ phản hồi (Performance). Tương tự như RDS, ElastiCache cũng được đặt trong Private Subnet để đảm bảo an toàn.
+
+- _NAT Gateway_: Dịch vụ Network Address Translation. NAT sẽ cung cấp lối ra Internet an toàn cho các dịch vụ trong Private Subnet (như Elastic Beanstalk). Điều này cho phép máy chủ tải về các bản vá bảo mật mà không bị truy cập trực tiếp từ bên ngoài.
+
+- _AWS CodePipeline/CodeBuild_: Dịch vụ tích hợp và triển khai liên tục (CI/CD). Các dịch vụ này được tích hợp với GitLab để tự động hóa quy trình: (1) CodeBuild biên dịch (build) code .NET, (2) CodePipeline triển khai (deploy) phiên bản mới lên Elastic Beanstalk.
+
+_Luồng dữ liệu_
+
+- [1]-[2] Người dùng truy cập tên miền (qua Route 53) và được điều hướng đến CloudFront. Amazon WAF sẽ lọc request này.
+
+- [3] (Luồng Tĩnh) Nếu là file tĩnh (ảnh, css), CloudFront lấy trực tiếp từ Amazon S3.
+
+- [4]-[6] (Luồng Động) Nếu là request động, CloudFront chuyển tiếp qua Internet Gateway đến Application Load Balancer, sau đó ALB gửi request vào Elastic Beanstalk.
+
+- [7]-[8] Ứng dụng .NET (trên Beanstalk) sẽ kiểm tra ElastiCache trước, nếu không có sẽ truy vấn Amazon RDS.
+
+- [9]-[10] Khi Elastic Beanstalk cần ra Internet (để tải bản vá), nó sẽ đi qua NAT Gateway rồi ra Internet Gateway.
+
+- [11]-[14] (Luồng CI/CD) Khi Dev push code lên Github, CodePipeline và CodeBuild sẽ tự động build và triển khai (deploy) phiên bản mới lên Elastic Beanstalk.
 
 ### 4. Triển khai kỹ thuật
 
 _Các giai đoạn triển khai_  
-Dự án gồm 2 phần — thiết lập trạm thời tiết biên và xây dựng nền tảng thời tiết — mỗi phần trải qua 4 giai đoạn:
+Dự án sẽ được chia thành 4 giai đoạn chính, kéo dài trong 11 tuần để đảm bảo tiến độ và chất lượng:
 
-1. _Nghiên cứu và vẽ kiến trúc_: Nghiên cứu Raspberry Pi với cảm biến ESP32 và thiết kế kiến trúc AWS Serverless (1 tháng trước kỳ thực tập).
-2. _Tính toán chi phí và kiểm tra tính khả thi_: Sử dụng AWS Pricing Calculator để ước tính và điều chỉnh (Tháng 1).
-3. _Điều chỉnh kiến trúc để tối ưu chi phí/giải pháp_: Tinh chỉnh (ví dụ tối ưu Lambda với Next.js) để đảm bảo hiệu quả (Tháng 2).
-4. _Phát triển, kiểm thử, triển khai_: Lập trình Raspberry Pi, AWS services với CDK/SDK và ứng dụng Next.js, sau đó kiểm thử và đưa vào vận hành (Tháng 2–3).
+1. _Xây dựng nền móng kỹ thuật_: Tập trung xây dựng nền móng kỹ thuật, bao gồm việc chốt mô hình dữ liệu cho các thực thể chính, thiết lập cấu trúc solution .NET 3-lớp (Domain, Application, Persistence, WebShop), khởi tạo repository trên Github, và tìm hiểu về các dịch vụ của AWS. (Tuần 1-4)
+
+2. _Xây dựng các tính năng cốt lõi_: Hoàn thiện Lớp Persistence (Repositories, Unit of Work) và Lớp Application (Services) cho các nhiệm vụ chính như quản lý sản phẩm, người dùng và đơn hàng. Song song đó, Lớp WebShop (Controllers, Views) sẽ được xây dựng cho các luồng đăng nhập, giỏ hàng, thanh toán và bắt đầu viết Unit Test cho Services. (Tuần 5-7)
+
+3. _Tích hợp các dịch vụ của AWS_: Tích hợp Amazon S3 cho ảnh sản phẩm, ElastiCache (Redis) để cache. Nhóm cũng sẽ hoàn thiện CI/CD Pipeline để tự động deploy lên môi trường Staging trên Elastic Beanstalk và thực hiện Integration Testing. (Tuần 8-10)
+
+4. _Hoàn thiện và triển khai_: Cấu hình các dịch vụ bảo mật như CloudFront, WAF, và Route 53. Sau đó, triển khai phiên bản 1.0 lên Elastic Beanstalk, thực hiện UAT cuối cùng, và thiết lập giám sát cơ bản qua CloudWatch. (Tuần 11)
+
 
 _Yêu cầu kỹ thuật_
 
-- _Trạm thời tiết biên_: Cảm biến (nhiệt độ, độ ẩm, lượng mưa, tốc độ gió), vi điều khiển ESP32, Raspberry Pi làm thiết bị biên. Raspberry Pi chạy Raspbian, sử dụng Docker để lọc dữ liệu và gửi 1 MB/ngày/trạm qua MQTT qua Wi-Fi.
-- _Nền tảng thời tiết_: Kiến thức thực tế về AWS Amplify (lưu trữ Next.js), Lambda (giảm thiểu do Next.js xử lý), AWS Glue (ETL), S3 (2 bucket), IoT Core (gateway và rules), và Cognito (5 người dùng). Sử dụng AWS CDK/SDK để lập trình (ví dụ IoT Core rules tới S3). Next.js giúp giảm tải Lambda cho ứng dụng web fullstack.
+- _Backend_: ASP.NET Core MVC 9.0.
+- _ORM_: Entity Framework Core.
+- _Database_: MS SQL Server 2022 (Local) và Amazon RDS for SQL Server (Cloud).
+- _Frontend_: Bootstrap 5, jQuery, và Bootstrap Icons.
+- _Cloud Platform (AWS)_: Elastic Beanstalk, RDS, S3, CloudFront, WAF, Route 53, ElastiCache, VPC, NAT Gateway, CodePipeline, CodeBuild.
+- _Source Control_: Git.
+- _Tools_: Visual Studio 2022, Docker Desktop.
+
+_Phương pháp phát triển_
+
+Áp dụng phương pháp Agile (Scrum-like) để linh hoạt điều chỉnh theo yêu cầu và đảm bảo tiến độ, bám sát 4 giai đoạn triển khai đã đề ra. Mọi công việc (features, bugs) sẽ được theo dõi và quản lý thông qua Kanban board, giúp nhóm dễ dàng nắm bắt tiến độ của từng tác vụ (ví dụ: To Do, In Progress, Done). Mọi code mới phải được review thông qua merge requests trên Github trước khi được merge vào nhánh main, đảm bảo chất lượng code nhất quán.
+
+_Chiến lược kiểm thử_
+
+Để đảm bảo chất lượng và tính ổn định, nhóm sẽ thực hiện 3 cấp độ kiểm thử. Đầu tiên là Unit Testing, tập trung 100% vào Lớp Application (ví dụ: ProductService, OrderService) bằng cách giả lập các repository để cách ly Business Logic, sử dụng các framework kiểm thử tiêu chuẩn của .NET. Cấp độ thứ hai là Integration Testing, thực hiện trên môi trường Staging (trên Elastic Beanstalk) để kiểm tra sự tương tác giữa Lớp Application và Lớp Persistence (EF Core) với CSDL Amazon RDS thật. Cuối cùng, User Acceptance Testing sẽ được thực hiện trên môi trường Production để nhóm kiểm tra các luồng chức năng hoàn chỉnh trên giao diện người dùng như "Đăng ký, Đăng nhập, Thanh toán".
+
+_Kế hoạch triển khai_
+
+Áp dụng quy trình CI/CD tự động hóa hoàn toàn. Quy trình được kích hoạt tự động mỗi khi Dev push code lên Github. Github sẽ gửi webhook kích hoạt AWS CodePipeline, dịch vụ này sẽ lấy code và ra lệnh cho AWS CodeBuild thực hiện biên dịch dự án .NET, chạy Unit Test, và đóng gói ứng dụng thành file .zip. Nếu CodeBuild thành công, CodePipeline sẽ lấy file .zip và tự động triển khai phiên bản mới này lên môi trường Staging trên Elastic Beanstalk.
 
 ### 5. Lộ trình & Mốc triển khai
 
-- _Trước thực tập (Tháng 0)_: 1 tháng lên kế hoạch và đánh giá trạm cũ.
-- _Thực tập (Tháng 1–3)_:
-  - Tháng 1: Học AWS và nâng cấp phần cứng.
-  - Tháng 2: Thiết kế và điều chỉnh kiến trúc.
-  - Tháng 3: Triển khai, kiểm thử, đưa vào sử dụng.
-- _Sau triển khai_: Nghiên cứu thêm trong vòng 1 năm.
+Dự án được lên kế hoạch thực hiện trong 11 tuần, chia thành 4 giai đoạn chính. Tiến độ này đảm bảo thời gian cho việc phát triển, integration, và testing kỹ lưỡng.
+
+Phase 1 (Tuần 1 - 4): Giai đoạn này tập trung xây dựng nền tảng kỹ thuật, bao gồm việc chốt data models, thiết lập Solution Architecture .NET 3-lớp, khởi tạo Github Repository, và tìm hiểu về các dịch vụ AWS. Milestone của giai đoạn này là Solution Architecture và Repository được thiết lập, cùng với môi trường AWS (VPC, Subnets).
+
+Phase 2 (Tuần 5 - 7): Sau khi Phase 1 hoàn thành, nhóm sẽ xây dựng các core features, hoàn thiện Lớp Persistence và Application (Quản lý Sản phẩm, Đơn hàng) và các feature flows cơ bản trên WebShop (Auth, Giỏ hàng). Milestone là các feature flows chính (Đăng nhập, Xem sản phẩm, Giỏ hàng, Thanh toán) hoạt động ổn định trên local, và Unit Test cho Services.
+
+Phase 3 (Tuần 8 - 10): Phụ thuộc vào Phase 2, giai đoạn này sẽ integrate các dịch vụ AWS như Amazon S3 cho ảnh sản phẩm và ElastiCache (Redis) để cache. Milestone là CI/CD pipeline hoạt động, tự động deploy lên Staging environment trên Elastic Beanstalk thành công và Integration Testing hoàn tất.
+
+Phase 4 (Tuần 11): Giai đoạn cuối cùng này tập trung vào hoàn thiện và triển khai, phụ thuộc vào bản build Staging ổn định từ Phase 3. Nhóm sẽ cấu hình các dịch vụ bảo mật (CloudFront, WAF, Route 53). Milestone là Version 1.0 được triển khai thành công lên Production environment (Elastic Beanstalk), User Acceptance Testing cuối cùng hoàn tất, và hệ thống được monitoring qua CloudWatch.
 
 ### 6. Ước tính ngân sách
 
@@ -83,39 +119,25 @@ Hoặc tải [tệp ước tính ngân sách](../attachments/budget_estimation.p
 
 _Chi phí hạ tầng_
 
-- AWS Lambda: 0,00 USD/tháng (1.000 request, 512 MB lưu trữ).
-- S3 Standard: 0,15 USD/tháng (6 GB, 2.100 request, 1 GB quét).
-- Truyền dữ liệu: 0,02 USD/tháng (1 GB vào, 1 GB ra).
-- AWS Amplify: 0,35 USD/tháng (256 MB, request 500 ms).
-- Amazon API Gateway: 0,01 USD/tháng (2.000 request).
-- AWS Glue ETL Jobs: 0,02 USD/tháng (2 DPU).
-- AWS Glue Crawlers: 0,07 USD/tháng (1 crawler).
-- MQTT (IoT Core): 0,08 USD/tháng (5 thiết bị, 45.000 tin nhắn).
-
-_Tổng_: 0,7 USD/tháng, 8,40 USD/12 tháng
-
-- _Phần cứng_: 265 USD một lần (Raspberry Pi 5 và cảm biến).
+to be không tình yêu
 
 ### 7. Đánh giá rủi ro
 
 _Ma trận rủi ro_
 
-- Mất mạng: Ảnh hưởng trung bình, xác suất trung bình.
-- Hỏng cảm biến: Ảnh hưởng cao, xác suất thấp.
-- Vượt ngân sách: Ảnh hưởng trung bình, xác suất thấp.
+to be không tình yêu
 
 _Chiến lược giảm thiểu_
 
-- Mạng: Lưu trữ cục bộ trên Raspberry Pi với Docker.
-- Cảm biến: Kiểm tra định kỳ, dự phòng linh kiện.
-- Chi phí: Cảnh báo ngân sách AWS, tối ưu dịch vụ.
+to be không tình yêu
+
 
 _Kế hoạch dự phòng_
 
-- Quay lại thu thập thủ công nếu AWS gặp sự cố.
-- Sử dụng CloudFormation để khôi phục cấu hình liên quan đến chi phí.
+to be không tình yêu
+
 
 ### 8. Kết quả kỳ vọng
 
-_Cải tiến kỹ thuật_: Dữ liệu và phân tích thời gian thực thay thế quy trình thủ công. Có thể mở rộng tới 10–15 trạm.  
-_Giá trị dài hạn_: Nền tảng dữ liệu 1 năm cho nghiên cứu AI, có thể tái sử dụng cho các dự án tương lai.
+to be không tình yêu
+
