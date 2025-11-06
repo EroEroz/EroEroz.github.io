@@ -11,7 +11,9 @@ pre: " <b> 2. </b> "
 ## Giải pháp E-commerce .NET 3-lớp (3-tier) áp dụng Repository và Unit of Work Pattern
 
 ### 1. Tóm tắt điều hành
+
 to be không tình yêu
+
 ### 2. Tuyên bố vấn đề
 
 _Vấn đề hiện tại_  
@@ -21,22 +23,19 @@ _Một số vấn đề chính_
 
 - **Vấn đề về quản lý kho thủ công dẫn đến tính thiếu chính xác trong số liệu và lãng phí nguồn lực:** Đa số mini-market hiện nay quản lý hàng nghìn mã sản phẩm (SKUs) bằng sổ sách hoặc file Excel. Việc nhập/xuất kho và kiểm kê cuối ngày hoàn toàn dựa vào việc đếm và nhập thủ công. Việc này có thể dẫn đến sai sót trong dữ liệu vì quy trình nhập tay rất dễ xảy ra nhầm lẫn, tiêu biểu như mã sản phẩm và số lượng, việc này gây ra chênh lệch lớn giữa dữ liệu "trên sổ" và "thực tế" trong kho. Việc kiểm hàng hóa thủ công như này cũng sẽ đòi hỏi nguồn lực cao khi mà nhân viên sẽ phải dành hàng giờ mỗi ngày để kiểm kê, đối chiếu và chỉnh sữa báo cáo, thay vì tập trung vào phần bán hàng hoặc chăm sóc khách hàng. Cuối cùng là thất thoát tài chính, khi mà dữ liệu không được nhập chính xác, chủ cửa hàng sẽ không thể kiểm soát được tình trạng của hàng hóa như là hàng hóa hết hạng, hàng hóa bị hư hỏng, hoặc là bị mất cắp, dẫn đến thất thoát 5-10% giá trị hàng tồn kho hàng tháng.
 - **Vấn đề lệ thuộc vào bán hàng offline, bỏ lỡ thị trường E-commerce:** Thông thường các mini-market ở Việt Nam đa số sẽ phụ thuộc vào khách vãng lai(offline). Họ cũng bị giới hạn bởi vị trí địa lí (chỉ phục vụ trong khu vực) và tệp khách hàng quen thuộc. Các cửa hàng như này sẽ đứng ngoài thị trường E-commerce, bỏ lỡ tệp khách hàng trẻ vốn đã quen thuộc với việc mua sắm online. Họ sẽ không thể cạnh tranh về sự tiện lợi như là đặt hàng 24/7 hay là giao hàng tận nơi so với các chuỗi cửa hàng tiện lợi lớn như là Circle K hoặc 7-Eleven và các ứng dụng giao hàng như Grab và Shopee, dẫn đến mất nguy cơ mất khách hàng theo thời gian.
-- **Vấn đề về vận hành và trải nghiệm của khách hàng:** Quy trình thanh toán và tra cứu thông tin ở các mini-market truyền thống thông thường sẽ rất chậm chạp. Khi khách hàng hỏi về giá, thông tin của sản phẩm, hoặc là chương trình khuyến mãi, nhân viên (đặc biệt là nhân viên mới) sẽ phải tra cứu thủ công trong sổ sách dẫn đến tốn thời gian. Việc bắt khách hàng phải chờ đợi lâu để tra cứu thông tin hoặc tính tiền sẽ tạo ra sự ức chế và thiếu chuyên nghiệp. Nhân viên sẽ mất quá nhiều thời gian cho các tác vụ đơn giản, dễ nhầm lẫn (như là đọc nhầm giá do chữ viết xấu), làm giảm số lượng khách hàng có thể phục vụ trong giờ cao điểm. 
-
-
+- **Vấn đề về vận hành và trải nghiệm của khách hàng:** Quy trình thanh toán và tra cứu thông tin ở các mini-market truyền thống thông thường sẽ rất chậm chạp. Khi khách hàng hỏi về giá, thông tin của sản phẩm, hoặc là chương trình khuyến mãi, nhân viên (đặc biệt là nhân viên mới) sẽ phải tra cứu thủ công trong sổ sách dẫn đến tốn thời gian. Việc bắt khách hàng phải chờ đợi lâu để tra cứu thông tin hoặc tính tiền sẽ tạo ra sự ức chế và thiếu chuyên nghiệp. Nhân viên sẽ mất quá nhiều thời gian cho các tác vụ đơn giản, dễ nhầm lẫn (như là đọc nhầm giá do chữ viết xấu), làm giảm số lượng khách hàng có thể phục vụ trong giờ cao điểm.
 
 ### 3. Kiến trúc giải pháp
 
-Kiến trúc được thiết kế để giải quyết các vấn đề đã nêu, bằng cách kết hợp kiến trúc phần mềm .NET 3-lớp (Tier-3) với các dịch vụ đám mây được quản lý (Managed Services) của AWS. Kiến trúc này tuân thủ các nguyên tắc của AWS Well-Architected Framework, đảm bảo tính bảo mật, hiệu năng cao, khả năng phục hồi lỗi và tối ưu chi phí. 
+Kiến trúc được thiết kế để giải quyết các vấn đề đã nêu, bằng cách kết hợp kiến trúc phần mềm .NET 3-lớp (Tier-3) với các dịch vụ đám mây được quản lý (Managed Services) của AWS. Kiến trúc này tuân thủ các nguyên tắc của AWS Well-Architected Framework, đảm bảo tính bảo mật, hiệu năng cao, khả năng phục hồi lỗi và tối ưu chi phí.
 
-![Mini-market Architecture](/images/2-Proposal/Project_Architecture_3.0.jpg)
-
+![Mini-market Architecture](/images/2-Proposal/project_architecture.jpg)
 
 _Dịch vụ AWS sử dụng_
 
-- _AWS Elastic Beanstalk_: Dịch vụ PaaS (Platform as a Service) được chọn để triển khai ứng dụng .NET 3-lớp (gồm Lớp Presentation WebShop và Lớp Application Services). Beanstalk tự động hóa 100% việc quản lý hạ tầng, bao gồm tự động tạo Auto Scaling Group (ASG) để đảm bảo tính co giãn (Scalability) và tiết kiệm chi phí. 
+- _AWS Elastic Beanstalk_: Dịch vụ PaaS (Platform as a Service) được chọn để triển khai ứng dụng .NET 3-lớp (gồm Lớp Presentation WebShop và Lớp Application Services). Beanstalk tự động hóa 100% việc quản lý hạ tầng, bao gồm tự động tạo Auto Scaling Group (ASG) để đảm bảo tính co giãn (Scalability) và tiết kiệm chi phí.
 
-- _Amazon RDS (SQL Server)_: Dịch vụ Cơ Sở Dữ Liệu (CSDL) (Managed Relational Database Service) để host Lớp Persistence. SQL Server được chọn vì ứng dụng .NET của nhóm đã được phát triển và tối ưu cho SQL Server. Việc sử dụng RDS for SQL Server cho phép di chuyển (migrate) ứng dụng lên AWS mà không cần thay đổi code ở Lớp Dữ liệu. RDS cũng sẽ tự động hóa các tác vụ phức tạp như sao lưu (backup) hàng ngày, vá lỗi (patching) và phục hồi khi có sự cố (failover). Về tính bảo mật thì RDS được đặt trong Private Subnet, không thể truy cập trực tiếp từ Internet, chỉ cho phép ứng dụng trên Beanstalk kết nối. Và về vấn đề tối ưu chi phí, để tối ưu chi phí trong giai đoạn đầu, chúng ta có thể bắt đầu với phiên bản SQL Server Express Edition trên RDS, phiên bản này nằm trong Free Tier của AWS. 
+- _Amazon RDS (SQL Server)_: Dịch vụ Cơ Sở Dữ Liệu (CSDL) (Managed Relational Database Service) để host Lớp Persistence. SQL Server được chọn vì ứng dụng .NET của nhóm đã được phát triển và tối ưu cho SQL Server. Việc sử dụng RDS for SQL Server cho phép di chuyển (migrate) ứng dụng lên AWS mà không cần thay đổi code ở Lớp Dữ liệu. RDS cũng sẽ tự động hóa các tác vụ phức tạp như sao lưu (backup) hàng ngày, vá lỗi (patching) và phục hồi khi có sự cố (failover). Về tính bảo mật thì RDS được đặt trong Private Subnet, không thể truy cập trực tiếp từ Internet, chỉ cho phép ứng dụng trên Beanstalk kết nối. Và về vấn đề tối ưu chi phí, để tối ưu chi phí trong giai đoạn đầu, chúng ta có thể bắt đầu với phiên bản SQL Server Express Edition trên RDS, phiên bản này nằm trong Free Tier của AWS.
 
 - _Amazon S3_: Dịch vụ lưu trữ đối tượng (Object Storage). Dùng để lưu trữ các static assets như hình ảnh sản phẩm, file CSS, và JavaScript. S3 cung cấp chi phí cực rẻ và khả năng mở rộng vô hạn.
 
@@ -76,7 +75,6 @@ Dự án sẽ được chia thành 4 giai đoạn chính, kéo dài trong 11 tu�
 3. _Tích hợp các dịch vụ của AWS_: Tích hợp Amazon S3 cho ảnh sản phẩm, ElastiCache (Redis) để cache. Nhóm cũng sẽ hoàn thiện CI/CD Pipeline để tự động deploy lên môi trường Staging trên Elastic Beanstalk và thực hiện Integration Testing. (Tuần 8-10)
 
 4. _Hoàn thiện và triển khai_: Cấu hình các dịch vụ bảo mật như CloudFront, WAF, và Route 53. Sau đó, triển khai phiên bản 1.0 lên Elastic Beanstalk, thực hiện UAT cuối cùng, và thiết lập giám sát cơ bản qua CloudWatch. (Tuần 11)
-
 
 _Yêu cầu kỹ thuật_
 
@@ -131,13 +129,10 @@ _Chiến lược giảm thiểu_
 
 to be không tình yêu
 
-
 _Kế hoạch dự phòng_
 
 to be không tình yêu
 
-
 ### 8. Kết quả kỳ vọng
 
 to be không tình yêu
-
