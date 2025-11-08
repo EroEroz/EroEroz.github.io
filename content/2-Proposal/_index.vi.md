@@ -121,17 +121,22 @@ to be không tình yêu
 
 ### 7. Đánh giá rủi ro
 
-_Ma trận rủi ro_
+Một số rủi ro tiềm ẩn nằm trong ba lĩnh vực: Technical, Business, và Operational. Vậy nên một kế hoạch giảm thiểu và kế hoạch dự phòng đã được chuẩn bị cho các rủi ro có tác động cao.
 
-to be không tình yêu
+1. Rủi ro Kỹ thuật: Quá tải Hệ thống (Performance Bottleneck):
 
-_Chiến lược giảm thiểu_
+   - Impact: **High** | Probability: **Medium**
+   - Đây là rủi ro hệ thống bị chậm hoặc sập khi có lượng traffic cao. Chiến lược giảm thiểu của nhóm là sử dụng ElastiCache để giảm tải query cho RDS, cấu hình Auto Scaling (trong Elastic Beanstalk) với các trigger hợp lý (ví dụ: CPU > 70%), và dùng CloudFront để cache file tĩnh. Kế hoạch dự phòng là sử dụng CloudWatch Alarms để cảnh báo ngay lập tức, và nếu RDS quá tải, nhóm sẽ thực hiện vertical scaling instance của RDS ngay lập tức.
 
-to be không tình yêu
+2. Rủi ro Nghiệp vụ: Người dùng không chấp nhận (Low User Adoption):
 
-_Kế hoạch dự phòng_
+   - Impact: **High** | Probability: **Medium**
+   - Đây là rủi ro các chủ mini-market thấy giải pháp quá phức tạp và không sử dụng. Để giảm thiểu rủi ro này, nhóm sẽ bám sát thiết kế frontend (Bootstrap) đơn giản, thu thập feedback của chủ tiệm sớm từ Phase 2, và cung cấp tài liệu hướng dẫn. Kế hoạch dự phòng là nếu adoption thấp sau khi deploy, nhóm sẽ thực hiện một Sprint bổ sung (Phase 5) để ưu tiên điều chỉnh các features dựa trên feedback thu được.
 
-to be không tình yêu
+3. Rủi ro Vận hành: Mất mát hoặc Lộ dữ liệu (Data Loss / Breach):
+
+   - Impact: **Critical** | Probability: **Low**
+   - Chiến lược giảm thiểu của nhóm là cấu hình RDS tự động backup hàng ngày, đặt RDS và Beanstalk trong Private Subnet, sử dụng WAF để chặn tấn công, và quản lý connection string qua environment variables của Beanstalk. Kế hoạch dự phòng là nếu mất dữ liệu, nhóm sẽ thực hiện Point-in-Time Recovery (PITR) ngay lập tức từ backup của RDS.
 
 ### 8. Kết quả kỳ vọng
 
