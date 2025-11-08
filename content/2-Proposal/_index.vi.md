@@ -117,7 +117,13 @@ Hoặc tải [tệp ước tính ngân sách](/attachments/pricing.pdf).
 
 _Chi phí hạ tầng_
 
-to be không tình yêu
+Bản ước tính từ AWS Pricing Calculator cho thấy chi phí vận hành hàng tháng của architecture này là 138.06 USD, với chi phí trả trước là 0.00 USD. Chiến lược tối ưu chi phí của nhóm tập trung vào việc tận dụng tối đa AWS Free Tier và các managed services. Con số 138.06 USD/tháng là một chi phí thực tế cho việc vận hành dài hạn (sau 12 tháng) một hệ thống e-commerce hoàn chỉnh, có khả năng scale và bảo mật cao.
+
+Chi phí cho Elastic Beanstalk được chia nhỏ thành các resources mà nó quản lý: Amazon EC2 (1 instance t3a.small) với chi phí 19.15 USD/tháng và Elastic Load Balancing (1 Application Load Balancer) với chi phí 18.69 USD/tháng. Dịch vụ Amazon VPC có chi phí 46.02 USD/tháng, đây là chi phí cho 1 NAT Gateway, một thành phần bắt buộc cho thiết kế bảo mật Private Subnet của Elastic Beanstalk. Về database và cache, Amazon RDS for SQL Server (phiên bản Express Edition trên db.t3.micro) có chi phí 25.86 USD/tháng, và Amazon ElastiCache (cache.t4g.micro) là 17.52 USD/tháng. Các dịch vụ bảo mật và CI/CD như WAF (7.20 USD/tháng), CloudFront (2.43 USD/tháng), Route 53 (0.90 USD/tháng), S3 (0.17 USD/tháng), và CodeBuild (0.12 USD/tháng) chiếm phần chi phí còn lại.
+
+Chiến lược tối ưu chi phí quan trọng nhất là tận dụng AWS Free Tier trong 12 tháng đầu. Mặc dù tổng ước tính là 138.06 USD/tháng, nhiều services cốt lõi trong đây (bao gồm EC2 t3a.small, RDS db.t3.micro, ElastiCache t4g.micro, S3, và CloudFront) đều nằm trong Free tier miễn phí 12 tháng. Do đó, chi phí vận hành thực tế trong năm đầu tiên sẽ thấp hơn đáng kể, chủ yếu chỉ bao gồm chi phí cho NAT Gateway (46.02 USD) và WAF (7.20 USD).
+
+Về phần tính toán ROI, và đầu tư lúc ban đầu gần như bằng 0 (do chi phí hạ tầng được nằm trong Free Tier và development costs là công sức của nhóm trong kỳ thực tập). Phần lợi nhuận gần như là ngay lập tức, vì giải pháp giải quyết trực tiếp các vấn đề thất thoát doanh thu (từ quản lý kho thủ công) và bỏ lỡ thị trường (do chỉ bán offline) đã nêu trong Problem Statement (Phần 1). Do đó, ROI (lợi tức đầu tư) là rất cao.
 
 ### 7. Đánh giá rủi ro
 
