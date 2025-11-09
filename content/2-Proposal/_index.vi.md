@@ -12,7 +12,13 @@ pre: " <b> 2. </b> "
 
 ### 1. Tóm tắt điều hành
 
-to be không tình yêu
+Bản Proposal này trình bày một giải pháp end-to-end nhằm "Chuyển đổi số cho Mini-market trên nền tảng đám mây AWS". Các mini-market truyền thống hiện đang đối mặt với ba thách thức lớn: (1) Quản lý kho thủ công (bằng Excel/sổ tay) gây thất thoát doanh thu và lãng phí nguồn lực; (2) Lệ thuộc 100% vào kênh bán offline, bỏ lỡ thị trường e-commerce đang phát triển và mất khả năng cạnh tranh; và (3) Quy trình vận hành chậm chạp (như tra giá thủ công), mang lại trải nghiệm khách hàng kém.
+
+Solution (Giải pháp) của nhóm là xây dựng một nền tảng e-commerce và quản lý vận hành toàn diện. Về software architecture, nhóm sẽ sử dụng kiến trúc .NET 3-lớp (ASP.NET Core MVC, EF Core) kết hợp Repository Pattern và Unit of Work Pattern. Về infrastructure architecture được thiết kế theo AWS Well-Architected Framework, chạy trên AWS Elastic Beanstalk (cho backend .NET), Amazon RDS for SQL Server (cho database), và Amazon S3 (cho static assets). Hệ thống được tối ưu hiệu năng bằng CloudFront và ElastiCache, và bảo mật bằng WAF, VPC, và NAT Gateway. Quy trình triển khai được tự động hóa hoàn toàn bằng CI/CD pipeline tích hợp với GitHub.
+
+Business benefits là ngay lập tức, bao gồm tự động hóa quản lý kho (giảm thất thoát) và mở ra một kênh doanh thu online mới. Về investment, chi phí hạ tầng trong 12 tháng đầu tiên là gần như bằng 0 nhờ chiến lược tận dụng AWS Free Tier (ví dụ: RDS Express Edition, EC2 t3.micro). Chi phí vận hành dài hạn (sau Free Tier) cũng rất thực tế, ước tính chỉ khoảng 138.06 USD/tháng cho toàn bộ hệ thống. Với investment ban đầu tối thiểu và khả năng giải quyết trực tiếp các vấn đề gây thất thoát doanh thu, ROI là rất cao và gần như tức thì.
+
+Dự án được đề xuất triển khai trong 11 tuần, chia thành 4 phases (giai đoạn) chính: (1) Foundation & Architecture, (2) Core Feature Development, (3) AWS Integration & CI/CD, và (4) Finalization & Deployment. Kết quả mong đợi được đo lường bằng các success metrics cụ thể: giảm 90% sai sót kho vận, giảm 50% thời gian thanh toán, và đạt 20% doanh thu từ kênh online trong 6 tháng đầu. Giải pháp này không chỉ giải quyết các vấn đề trước mắt mà còn cung cấp cho mini-market một nền tảng scalable để đưa ra quyết định dựa trên dữ liệu trong tương lai.
 
 ### 2. Tuyên bố vấn đề
 
@@ -146,4 +152,6 @@ Một số rủi ro tiềm ẩn nằm trong ba lĩnh vực: Technical, Business,
 
 ### 8. Kết quả kỳ vọng
 
-to be không tình yêu
+Mục tiêu của giải pháp này là giải quyết trực tiếp các vấn đề đã nêu trong phần Tuyên bố vấn đề. Về business metrics, nhóm kỳ vọng giảm 90% sai sót trong quản lý kho (so với Excel/sổ tay), giảm 50% thời gian thanh toán tại quầy, và đạt được ít nhất 20% doanh thu mới từ kênh online trong 6 tháng đầu. Về technical metrics, mục tiêu là duy trì uptime (thời gian hoạt động) 99.9%, đảm bảo page load time (thời gian tải trang) trung bình dưới 2 giây (nhờ CloudFront và ElastiCache), và deployment frequency (tần suất triển khai) ổn định qua CI/CD pipeline.
+
+Các benefits được kỳ vọng là sẽ gia tăng theo thời gian. Trong short-term (0-6 tháng), chủ mini-market sẽ thấy trải nghiệm người dùng được cải thiện ngay lập tức và phần vận hành được cải thiện đáng kể (quản lý kho tự động). Trong medium-term (6-18 tháng), giá trị đến từ việc mở rộng thị trường (tiếp cận khách hàng online) và bắt đầu thu thập được business data có giá trị. Long-term value và strategic capabilities thu được chính là khả năng đưa ra quyết định dựa trên dữ liệu (data-driven decisions) (ví dụ: biết sản phẩm nào bán chạy) và khả năng scale hệ thống dễ dàng (thêm nhiều cửa hàng mới) nhờ Solution Architecture trên Elastic Beanstalk và RDS.
