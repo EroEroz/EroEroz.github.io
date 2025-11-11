@@ -8,15 +8,15 @@ pre: " <b> 2. </b> "
 
 # Chuyển đổi số cho Mini-market trên nền tảng đám mây AWS
 
-## Giải pháp E-commerce .NET 3-lớp (3-tier) áp dụng Repository và Unit of Work Pattern
+## Giải pháp E-commerce .NET 3-tier áp dụng Repository và Unit of Work Pattern
 
 ### 1. Tóm tắt điều hành
 
-Bản Proposal này trình bày một giải pháp end-to-end nhằm "Chuyển đổi số cho Mini-market trên nền tảng đám mây AWS". Các mini-market truyền thống hiện đang đối mặt với ba thách thức lớn: (1) Quản lý kho thủ công (bằng Excel/sổ tay) gây thất thoát doanh thu và lãng phí nguồn lực; (2) Lệ thuộc 100% vào kênh bán offline, bỏ lỡ thị trường e-commerce đang phát triển và mất khả năng cạnh tranh; và (3) Quy trình vận hành chậm chạp (như tra giá thủ công), mang lại trải nghiệm khách hàng kém.
+Bản đề xuất này trình bày một giải pháp end-to-end nhằm "Chuyển đổi số cho Mini-market trên nền tảng đám mây AWS". Các mini-market truyền thống hiện đang đối mặt với ba thách thức lớn: (1) Quản lý kho thủ công (bằng Excel/sổ tay) gây thất thoát doanh thu và lãng phí nguồn lực; (2) Lệ thuộc 100% vào kênh bán offline, bỏ lỡ thị trường e-commerce đang phát triển và mất khả năng cạnh tranh; và (3) Quy trình vận hành chậm chạp (như tra giá thủ công), mang lại trải nghiệm khách hàng kém.
 
-Solution (Giải pháp) của nhóm là xây dựng một nền tảng e-commerce và quản lý vận hành toàn diện. Về software architecture, nhóm sẽ sử dụng kiến trúc .NET 3-lớp (ASP.NET Core MVC, EF Core) kết hợp Repository Pattern và Unit of Work Pattern. Về infrastructure architecture được thiết kế theo AWS Well-Architected Framework, chạy trên AWS Elastic Beanstalk (cho backend .NET), Amazon RDS for SQL Server (cho database), và Amazon S3 (cho static assets). Hệ thống được tối ưu hiệu năng bằng CloudFront và ElastiCache, và bảo mật bằng WAF, VPC, và NAT Gateway. Quy trình triển khai được tự động hóa hoàn toàn bằng CI/CD pipeline tích hợp với GitHub.
+Giải pháp của nhóm là xây dựng một nền tảng e-commerce và quản lý vận hành toàn diện. Về software architecture, nhóm sẽ sử dụng kiến trúc .NET 3-lớp (ASP.NET Core MVC, EF Core) kết hợp Repository Pattern và Unit of Work Pattern. Về infrastructure architecture được thiết kế theo AWS Well-Architected Framework, chạy trên AWS Elastic Beanstalk (cho backend .NET), Amazon RDS for SQL Server (cho database), và Amazon S3 (cho static assets). Hệ thống được tối ưu hiệu năng bằng CloudFront và ElastiCache, và bảo mật bằng WAF, VPC, và NAT Gateway. Quy trình triển khai được tự động hóa hoàn toàn bằng CI/CD pipeline tích hợp với GitHub.
 
-Business benefits là ngay lập tức, bao gồm tự động hóa quản lý kho (giảm thất thoát) và mở ra một kênh doanh thu online mới. Về investment, chi phí hạ tầng trong 12 tháng đầu tiên là gần như bằng 0 nhờ chiến lược tận dụng AWS Free Tier (ví dụ: RDS Express Edition, EC2 t3.micro). Chi phí vận hành dài hạn (sau Free Tier) cũng rất thực tế, ước tính chỉ khoảng 138.06 USD/tháng cho toàn bộ hệ thống. Với investment ban đầu tối thiểu và khả năng giải quyết trực tiếp các vấn đề gây thất thoát doanh thu, ROI là rất cao và gần như tức thì.
+Business benefits là ngay lập tức, bao gồm tự động hóa quản lý kho (giảm thất thoát) và mở ra một kênh doanh thu online mới. Về investment, chi phí hạ tầng trong 12 tháng đầu tiên là gần như bằng 0 nhờ tận dụng AWS Free Tier (ví dụ: RDS Express Edition, EC2 t3.micro). Chi phí vận hành dài hạn (sau Free Tier) cũng rất thực tế, ước tính chỉ khoảng 138.06 USD/tháng cho toàn bộ hệ thống. Với investment ban đầu tối thiểu và khả năng giải quyết trực tiếp các vấn đề gây thất thoát doanh thu, ROI là rất cao và gần như tức thì.
 
 Dự án được đề xuất triển khai trong 11 tuần, chia thành 4 phases (giai đoạn) chính: (1) Foundation & Architecture, (2) Core Feature Development, (3) AWS Integration & CI/CD, và (4) Finalization & Deployment. Kết quả mong đợi được đo lường bằng các success metrics cụ thể: giảm 90% sai sót kho vận, giảm 50% thời gian thanh toán, và đạt 20% doanh thu từ kênh online trong 6 tháng đầu. Giải pháp này không chỉ giải quyết các vấn đề trước mắt mà còn cung cấp cho mini-market một nền tảng scalable để đưa ra quyết định dựa trên dữ liệu trong tương lai.
 
@@ -27,7 +27,7 @@ Các doanh nghiệp bán lẻ nhỏ và vừa, đặc biệt là mô hình "mini
 
 _Một số vấn đề chính_
 
-- **Vấn đề về quản lý kho thủ công dẫn đến tính thiếu chính xác trong số liệu và lãng phí nguồn lực:** Đa số mini-market hiện nay quản lý hàng nghìn mã sản phẩm (SKUs) bằng sổ sách hoặc file Excel. Việc nhập/xuất kho và kiểm kê cuối ngày hoàn toàn dựa vào việc đếm và nhập thủ công. Việc này có thể dẫn đến sai sót trong dữ liệu vì quy trình nhập tay rất dễ xảy ra nhầm lẫn, tiêu biểu như mã sản phẩm và số lượng, việc này gây ra chênh lệch lớn giữa dữ liệu "trên sổ" và "thực tế" trong kho. Việc kiểm hàng hóa thủ công như này cũng sẽ đòi hỏi nguồn lực cao khi mà nhân viên sẽ phải dành hàng giờ mỗi ngày để kiểm kê, đối chiếu và chỉnh sữa báo cáo, thay vì tập trung vào phần bán hàng hoặc chăm sóc khách hàng. Cuối cùng là thất thoát tài chính, khi mà dữ liệu không được nhập chính xác, chủ cửa hàng sẽ không thể kiểm soát được tình trạng của hàng hóa như là hàng hóa hết hạng, hàng hóa bị hư hỏng, hoặc là bị mất cắp, dẫn đến thất thoát 5-10% giá trị hàng tồn kho hàng tháng.
+- **Vấn đề về quản lý kho thủ công dẫn đến tính thiếu chính xác trong số liệu và lãng phí nguồn lực:** Đa số mini-market hiện nay quản lý hàng nghìn mã sản phẩm (SKUs) bằng sổ sách hoặc file Excel. Việc nhập/xuất kho và kiểm kê cuối ngày hoàn toàn dựa vào việc đếm và nhập thủ công. Việc này có thể dẫn đến sai sót trong dữ liệu vì quy trình nhập tay rất dễ xảy ra nhầm lẫn, tiêu biểu như mã sản phẩm và số lượng, việc này gây ra chênh lệch lớn giữa dữ liệu "trên sổ" và "thực tế" trong kho. Việc kiểm hàng hóa thủ công như này cũng sẽ đòi hỏi nguồn lực cao khi mà nhân viên sẽ phải dành hàng giờ mỗi ngày để kiểm kê, đối chiếu và chỉnh sữa báo cáo, thay vì tập trung vào phần bán hàng hoặc chăm sóc khách hàng. Cuối cùng là thất thoát tài chính, khi mà dữ liệu không được nhập chính xác, chủ cửa hàng sẽ không thể kiểm soát được tình trạng của hàng hóa như là hàng hóa hết hạn, hàng hóa bị hư hỏng, hoặc là bị mất cắp, dẫn đến thất thoát 5-10% giá trị hàng tồn kho hàng tháng.
 - **Vấn đề lệ thuộc vào bán hàng offline, bỏ lỡ thị trường E-commerce:** Thông thường các mini-market ở Việt Nam đa số sẽ phụ thuộc vào khách vãng lai(offline). Họ cũng bị giới hạn bởi vị trí địa lí (chỉ phục vụ trong khu vực) và tệp khách hàng quen thuộc. Các cửa hàng như này sẽ đứng ngoài thị trường E-commerce, bỏ lỡ tệp khách hàng trẻ vốn đã quen thuộc với việc mua sắm online. Họ sẽ không thể cạnh tranh về sự tiện lợi như là đặt hàng 24/7 hay là giao hàng tận nơi so với các chuỗi cửa hàng tiện lợi lớn như là Circle K hoặc 7-Eleven và các ứng dụng giao hàng như Grab và Shopee, dẫn đến mất nguy cơ mất khách hàng theo thời gian.
 - **Vấn đề về vận hành và trải nghiệm của khách hàng:** Quy trình thanh toán và tra cứu thông tin ở các mini-market truyền thống thông thường sẽ rất chậm chạp. Khi khách hàng hỏi về giá, thông tin của sản phẩm, hoặc là chương trình khuyến mãi, nhân viên (đặc biệt là nhân viên mới) sẽ phải tra cứu thủ công trong sổ sách dẫn đến tốn thời gian. Việc bắt khách hàng phải chờ đợi lâu để tra cứu thông tin hoặc tính tiền sẽ tạo ra sự ức chế và thiếu chuyên nghiệp. Nhân viên sẽ mất quá nhiều thời gian cho các tác vụ đơn giản, dễ nhầm lẫn (như là đọc nhầm giá do chữ viết xấu), làm giảm số lượng khách hàng có thể phục vụ trong giờ cao điểm.
 
@@ -35,7 +35,7 @@ _Một số vấn đề chính_
 
 Kiến trúc được thiết kế để giải quyết các vấn đề đã nêu, bằng cách kết hợp kiến trúc phần mềm .NET 3-lớp (Tier-3) với các dịch vụ đám mây được quản lý (Managed Services) của AWS. Kiến trúc này tuân thủ các nguyên tắc của AWS Well-Architected Framework, đảm bảo tính bảo mật, hiệu năng cao, khả năng phục hồi lỗi và tối ưu chi phí.
 
-![Mini-market Architecture](/images/2-Proposal/project_architecture.jpg)
+![Mini-market Architecture](/images/2-Proposal/project_architecture_3.1.png)
 
 _Dịch vụ AWS sử dụng_
 
@@ -49,11 +49,11 @@ _Dịch vụ AWS sử dụng_
 
 - _Amazon WAF và Route 53_: WAF (Web Application Firewall) và Route 53 (Dịch vụ DNS). WAF được liên kết với CloudFront để chặn các cuộc tấn công web phổ biến (như SQL injection, XSS). Route 53 cung cấp tên miền cho người dùng.
 
-- _Amazon ElastiCache (Redis)_: Dịch vụ in-memory data stores. Giúp giảm tải tối đa cho CSDL RDS khi có các truy vấn lặp đi lặp lại (ví dụ: lấy danh sách sản phẩm trang chủ). Ứng dụng .NET sẽ cache các dữ liệu "nóng" này trên ElastiCache, giúp tăng tốc độ phản hồi (Performance). Tương tự như RDS, ElastiCache cũng được đặt trong Private Subnet để đảm bảo an toàn.
+- _Amazon ElastiCache (Redis)_: Dịch vụ in-memory data stores. Giúp giảm tải tối đa cho CSDL RDS khi có các truy vấn lặp đi lặp lại (ví dụ: lấy danh sách sản phẩm trang chủ). Ứng dụng .NET sẽ cache các dữ liệu "nóng" này trên ElastiCache, giúp tăng tốc độ phản hồi. Tương tự như RDS, ElastiCache cũng được đặt trong Private Subnet để đảm bảo an toàn.
 
 - _NAT Gateway_: Dịch vụ Network Address Translation. NAT sẽ cung cấp lối ra Internet an toàn cho các dịch vụ trong Private Subnet (như Elastic Beanstalk). Điều này cho phép máy chủ tải về các bản vá bảo mật mà không bị truy cập trực tiếp từ bên ngoài.
 
-- _AWS CodePipeline/CodeBuild_: Dịch vụ tích hợp và triển khai liên tục (CI/CD). Các dịch vụ này được tích hợp với GitLab để tự động hóa quy trình: (1) CodeBuild biên dịch (build) code .NET, (2) CodePipeline triển khai (deploy) phiên bản mới lên Elastic Beanstalk.
+- _AWS CodePipeline/CodeBuild_: Dịch vụ tích hợp và triển khai liên tục (CI/CD). Các dịch vụ này được tích hợp với GitLab để tự động hóa quy trình: (1) CodeBuild build code .NET, (2) CodePipeline deploy phiên bản mới lên Elastic Beanstalk.
 
 _Luồng dữ liệu_
 
@@ -135,17 +135,17 @@ Về phần tính toán ROI, và đầu tư lúc ban đầu gần như bằng 0 
 
 Một số rủi ro tiềm ẩn nằm trong ba lĩnh vực: Technical, Business, và Operational. Vậy nên một kế hoạch giảm thiểu và kế hoạch dự phòng đã được chuẩn bị cho các rủi ro có tác động cao.
 
-1. Rủi ro Kỹ thuật: Quá tải Hệ thống (Performance Bottleneck):
+1. Technical: Quá tải Hệ thống (Performance Bottleneck):
 
    - Impact: **High** | Probability: **Medium**
    - Đây là rủi ro hệ thống bị chậm hoặc sập khi có lượng traffic cao. Chiến lược giảm thiểu của nhóm là sử dụng ElastiCache để giảm tải query cho RDS, cấu hình Auto Scaling (trong Elastic Beanstalk) với các trigger hợp lý (ví dụ: CPU > 70%), và dùng CloudFront để cache file tĩnh. Kế hoạch dự phòng là sử dụng CloudWatch Alarms để cảnh báo ngay lập tức, và nếu RDS quá tải, nhóm sẽ thực hiện vertical scaling instance của RDS ngay lập tức.
 
-2. Rủi ro Nghiệp vụ: Người dùng không chấp nhận (Low User Adoption):
+2. Business: Người dùng không chấp nhận (Low User Adoption):
 
    - Impact: **High** | Probability: **Medium**
    - Đây là rủi ro các chủ mini-market thấy giải pháp quá phức tạp và không sử dụng. Để giảm thiểu rủi ro này, nhóm sẽ bám sát thiết kế frontend (Bootstrap) đơn giản, thu thập feedback của chủ tiệm sớm từ Phase 2, và cung cấp tài liệu hướng dẫn. Kế hoạch dự phòng là nếu adoption thấp sau khi deploy, nhóm sẽ thực hiện một Sprint bổ sung (Phase 5) để ưu tiên điều chỉnh các features dựa trên feedback thu được.
 
-3. Rủi ro Vận hành: Mất mát hoặc Lộ dữ liệu (Data Loss / Breach):
+3. Operational: Mất hoặc rò rỉ dữ liệu (Data Loss / Breach):
 
    - Impact: **Critical** | Probability: **Low**
    - Chiến lược giảm thiểu của nhóm là cấu hình RDS tự động backup hàng ngày, đặt RDS và Beanstalk trong Private Subnet, sử dụng WAF để chặn tấn công, và quản lý connection string qua environment variables của Beanstalk. Kế hoạch dự phòng là nếu mất dữ liệu, nhóm sẽ thực hiện Point-in-Time Recovery (PITR) ngay lập tức từ backup của RDS.
