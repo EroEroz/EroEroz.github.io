@@ -39,3 +39,7 @@ Tạo 2 Route Table, **Public** với **Private**
    - Và trong phần **Subnet associations**, gán cho cả hai **Private Subnets**
 
 ![RT9](/images/5-Workshop/5.3-Network/RT9.png)
+
+{{% notice tip %}}
+Việc tách biệt Route Table đảm bảo rằng các Database trong Private Subnet không bao giờ bị lộ trực tiếp ra Internet.
+{{% /notice %}}
