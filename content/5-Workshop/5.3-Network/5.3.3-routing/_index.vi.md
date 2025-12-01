@@ -1,9 +1,9 @@
 ---
-title: "Kiểm tra Gateway Endpoint"
+title: "Cấu hình Route Table"
 date: 2025-09-10
 weight: 2
 chapter: false
-pre: " <b> 5.3.2 </b> "
+pre: " <b> 5.3.3 </b> "
 ---
 
 #### Tạo S3 bucket
