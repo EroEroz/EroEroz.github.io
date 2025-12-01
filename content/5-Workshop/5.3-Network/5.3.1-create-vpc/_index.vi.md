@@ -23,6 +23,6 @@ pre: " <b> 5.3.1 </b> "
 
 ![VPC Tutorial 3](/images/5-Workshop/5.3-Network/vpc-tutorial-3.png)
 
-5. Nhấn **Create VPC** và đợi 
+5. Nhấn **Create VPC** và đợi cho state chuyển sang **Available** là sẽ thành công
 
 ![VPC Tutorial 4](/images/5-Workshop/5.3-Network/vpc-tutorial-4.png)

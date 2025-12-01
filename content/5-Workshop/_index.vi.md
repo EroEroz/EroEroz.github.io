@@ -26,7 +26,7 @@ Chúng ta sẽ thiết lập một kiến trúc Đa tầng (Multi-tier) bao gồ
 
 1. [Tổng quan về workshop](5.1-Workshop-overview/)
 2. [Chuẩn bị](5.2-Prerequiste/)
-3. [Thiết lập hạ tầng mạng (VPC, NAT, Security Groups)](5.3-S3-vpc/)
+3. [Thiết lập hạ tầng mạng (VPC, NAT, Security Groups)](5.3-Network/)
 4. [Triển khai tầng dữ liệu (RDS & Redis)](5.4-S3-onprem/)
 5. [Triển khai ứng dụng với Elastic Beanstalk & Docker](5.5-Policy/)
 6. [Tự động hóa với CI/CD Pipeline](5.6-Cleanup/)

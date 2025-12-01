@@ -6,78 +6,57 @@ chapter: false
 pre: " <b> 5.3.2 </b> "
 ---
 
-#### Tạo S3 bucket
+#### Tạo Internet Gateway
+1. Trong phần [VPC dashboard](https://ap-southeast-1.console.aws.amazon.com/vpcconsole/home?region=ap-southeast-1#Home:) nhấn vào **Internet gateways**
 
-1. Đi đến S3 management console
-2. Trong Bucket console, chọn **Create bucket**
+![IGW1](/images/5-Workshop/5.3-Network/IGW1.png)
 
-![Create bucket](/images/5-Workshop/5.3-S3-vpc/create-bucket.png)
+2. Sau đó nhấn vào **Create internet gateway**
 
-3. Trong Create bucket console
+![IGW2](/images/5-Workshop/5.3-Network/IGW2.png)
 
-- Đặt tên bucket: chọn 1 tên mà không bị trùng trong phạm vi toàn cầu (gợi ý: lab\<số-lab\>\<tên-bạn\>)
+3. Trong phần tạo **Internet gateway**, hãy đặt tên tùy thích sau đó nhấn vào **Create internet gateway** rồi đợi nó được tạo
 
-![Bucket name](/images/5-Workshop/5.3-S3-vpc/bucket-name.png)
+![IGW3](/images/5-Workshop/5.3-Network/IGW3.png)
 
-- Giữ nguyên giá trị của các fields khác (default)
-- Kéo chuột xuống và chọn **Create bucket**
+4. Sau khi **Internet gateway** được tạo xong hãy vào phần **Actions** và bấm vào **Attach to VPC** để gán nó vào VPC đã được tạo ở phần trước
 
-![Create](/images/5-Workshop/5.3-S3-vpc/create-button.png)
+![IGW4](/images/5-Workshop/5.3-Network/IGW4.png)
 
-- Tạo thành công S3 bucket
+![IGW5](/images/5-Workshop/5.3-Network/IGW5.png)
 
-![Success](/images/5-Workshop/5.3-S3-vpc/bucket-success.png)
+#### Tạo NAT Gateway
+1. Tạo **NAT Gateway** đặt tại **Public Subnet 1**
+2. Gán **Elastic IP** để có địa chỉ tỉnh ra Internet
 
-#### Kết nối với EC2 bằng session manager
+![NAT1](/images/5-Workshop/5.3-Network/NAT1.png)
 
-- Trong workshop này, bạn sẽ dùng AWS Session Manager để kết nối đến các EC2 instances. Session Manager là 1 tính năng trong dịch vụ Systems Manager được quản lý hoàn toàn bởi AWS. System manager cho phép bạn quản lý Amazon EC2 instances và các máy ảo on-premises (VMs)thông qua 1 browser-based shell. Session Manager cung cấp khả năng quản lý phiên bản an toàn và có thể kiểm tra mà không cần mở cổng vào, duy trì máy chủ bastion host hoặc quản lý khóa SSH.
+![NAT2](/images/5-Workshop/5.3-Network/NAT2.png)
 
-- First cloud journey [Lab](https://000058.awsstudygroup.com/1-introduce/) để hiểu sâu hơn về Session manager.
 
-1. Trong AWS Management Console, gõ Systems Manager trong ô tìm kiếm và nhấn Enter:
 
-![system manager](/images/5-Workshop/5.3-S3-vpc/sm.png)
+#### Tạo Route Table
+Ấn vào phần **Route tables** trong VPC dashboard
 
-2. Từ **Systems Manager** menu, tìm **Node Management** ở thanh bên trái và chọn **Session Manager**:
+![RT1](/images/5-Workshop/5.3-Network/RT1.png)
 
-![system manager](/images/5-Workshop/5.3-S3-vpc/sm1.png)
+Tạo 2 Route Table, **Public** với **Private**
 
-3. Click Start Session, và chọn EC2 instance tên **Test-Gateway-Endpoint**.
-   {{% notice info %}}
-   Phiên bản EC2 này đã chạy trong "VPC cloud" và sẽ được dùng để kiểm tra khả năng kết nối với Amazon S3 thông qua điểm cuối Cổng mà bạn vừa tạo (s3-gwe). {{% /notice %}}
+![RT2](/images/5-Workshop/5.3-Network/RT2.png)
 
-![Start session](/images/5-Workshop/5.3-S3-vpc/start-session.png)
+![RT3](/images/5-Workshop/5.3-Network/RT3.png)
 
-Session Manager sẽ mở browser tab mới với shell prompt: sh-4.2 $
+1. **Public Route Table:**
+   - Đối với **Public Route Table**, trong phần **Routes** ấn vào **Edit routes**
+   - Trỏ 0.0.0.0/0 về **Internet Gateway** 
 
-![Success](/images/5-Workshop/5.3-S3-vpc/start-session-success.png)
+![RT4](/images/5-Workshop/5.3-Network/RT4.png)
 
-Bạn đã bắt đầu phiên kết nối đến EC2 trong VPC Cloud thành công. Trong bước tiếp theo, chúng ta sẽ tạo một S3 bucket và một tệp trong đó.
+![RT5](/images/5-Workshop/5.3-Network/RT5.png)
 
-#### Create a file and upload to s3 bucket
+   - Và trong phần Subnet associations, gán cho cả hai **Public Subnet**
 
-1. Đổi về ssm-user's thư mục bằng lệnh "cd ~"
+![RT6](/images/5-Workshop/5.3-Network/RT6.png)
 
-![Change user's dir](/images/5-Workshop/5.3-S3-vpc/cli1.png)
+![RT7](/images/5-Workshop/5.3-Network/RT7.png)
 
-2. Tạo 1 file để kiểm tra bằng lệnh "fallocate -l 1G testfile.xyz", 1 file tên "testfile.xyz" có kích thước 1GB sẽ được tạo.
-
-![Create file](/images/5-Workshop/5.3-S3-vpc/cli-file.png)
-
-3. Tải file mình vừa tạo lên S3 với lệnh "aws s3 cp testfile.xyz s3://your-bucket-name". Thay your-bucket-name bằng tên S3 bạn đã tạo.
-
-![Uploaded](/images/5-Workshop/5.3-S3-vpc/uploaded.png)
-
-Bạn đã tải thành công tệp lên bộ chứa S3 của mình. Bây giờ bạn có thể kết thúc session.
-
-#### Kiểm tra object trong S3 bucket
-
-1. Đi đến S3 console.
-2. Click tên s3 bucket của bạn
-3. Trong Bucket console, bạn sẽ thấy tệp bạn đã tải lên S3 bucket của mình
-
-![Check S3](/images/5-Workshop/5.3-S3-vpc/check-s3-bucket.png)
-
-#### Tóm tắt
-
-Chúc mừng bạn đã hoàn thành truy cập S3 từ VPC. Trong phần này, bạn đã tạo gateway endpoint cho Amazon S3 và sử dụng AWS CLI để tải file lên. Quá trình tải lên hoạt động vì gateway endpoint cho phép giao tiếp với S3 mà không cần Internet gateway gắn vào "VPC Cloud". Điều này thể hiện chức năng của gateway endpoint như một đường dẫn an toàn đến S3 mà không cần đi qua pub lic Internet.
