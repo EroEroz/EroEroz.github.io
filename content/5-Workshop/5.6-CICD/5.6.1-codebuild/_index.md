@@ -1,57 +1,44 @@
 ---
-title: "Prepare the environment"
+title: "Create Build Project"
 date: 2025-09-10
 weight: 1
 chapter: false
-pre: " <b> 5.4.1 </b> "
+pre: " <b> 5.6.1 </b> "
 ---
 
-To prepare for this part of the workshop you will need to:
+1.  Access **CodeBuild** > **Create project**
 
-- Deploying a CloudFormation stack
-- Modifying a VPC route table.
+    ![cicd1](/images/5-Workshop/5.6-ClCD/cicd1.png)
 
-These components work together to simulate on-premises DNS forwarding and name resolution.
+2.  **Project name:** MiniMarket-Build
+    
+    ![cicd2](/images/5-Workshop/5.6-ClCD/cicd2.png)
 
-#### Deploy the CloudFormation stack
+3.  **Source:** Select GitHub (Connect to Repo containing code)
+  
+    ![cicd3](/images/5-Workshop/5.6-ClCD/cicd3.png)
 
-The CloudFormation template will create additional services to support an on-premises simulation:
+4.  **Environment:**
+     - Environment image: Managed Image
+     - Operating system: Amazon Linux
+     - Runtime: Standard 
+     - Image: 5.0
+     - Service role: New service role
 
-- One Route 53 Private Hosted Zone that hosts Alias records for the PrivateLink S3 endpoint
-- One Route 53 Inbound Resolver endpoint that enables "VPC Cloud" to resolve inbound DNS resolution requests to the Private Hosted Zone
-- One Route 53 Outbound Resolver endpoint that enables "VPC On-prem" to forward DNS requests for S3 to "VPC Cloud"
+    ![cicd4](/images/5-Workshop/5.6-ClCD/cicd4.png)
 
-![route 53 diagram](/images/5-Workshop/5.4-S3-onprem/route53.png)
+    ![cicd5](/images/5-Workshop/5.6-ClCD/cicd5.png)
 
-1. Click the following link to open the [AWS CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.amazonaws.com/reinvent-endpoints-builders-session/R53CF.yaml&stackName=PLOnpremSetup). The required template will be pre-loaded into the menu. Accept all default and click Create stack.
+    - **Privileged:** Enable (Required to run Docker build commands)
 
-![Create stack](/images/5-Workshop/5.4-S3-onprem/create-stack.png)
+    ![cicd6](/images/5-Workshop/5.6-ClCD/cicd6.png)
 
-![Button](/images/5-Workshop/5.4-S3-onprem/create-stack-button.png)
+5.  **Buildspec:** Use a buildspec file
 
-It may take a few minutes for stack deployment to complete. You can continue with the next step without waiting for the deployemnt to finish.
+    ![cicd7](/images/5-Workshop/5.6-ClCD/cicd7.png)
 
-#### Update on-premise private route table
+6.  Click **Create build project**
 
-This workshop uses a strongSwan VPN running on an EC2 instance to simulate connectivty between an on-premises datacenter and the AWS cloud. Most of the required components are provisioned before your start. To finalize the VPN configuration, you will modify the "VPC On-prem" routing table to direct traffic destined for the cloud to the strongSwan VPN instance.
-
-1. Open the Amazon EC2 console
-
-2. Select the instance named infra-vpngw-test. From the Details tab, copy the Instance ID and paste this into your text editor
-
-![ec2 id](/images/5-Workshop/5.4-S3-onprem/ec2-onprem-id.png)
-
-3. Navigate to the VPC menu by using the Search box at the top of the browser window.
-
-4. Click on Route Tables, select the RT Private On-prem route table, select the Routes tab, and click Edit Routes.
-
-![rt](/images/5-Workshop/5.4-S3-onprem/rt.png)
-
-5. Click Add route.
-
-- Destination: your Cloud VPC cidr range
-- Target: ID of your infra-vpngw-test instance (you saved in your editor at step 1)
-
-![add route](/images/5-Workshop/5.4-S3-onprem/add-route.png)
-
-6. Click Save changes
+{{% notice tip %}}
+ After creation is complete, go to **IAM Role** of the newly created CodeBuild, grant additional permission **AmazonEC2ContainerRegistryPowerUser** so it can push images to ECR
+{{% /notice %}}

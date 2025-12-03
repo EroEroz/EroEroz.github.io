@@ -1,57 +1,46 @@
 ---
-title: "Prepare the environment"
+title: "Initialize Elastic Beanstalk"
 date: 2025-09-10
-weight: 1
+weight: 2
 chapter: false
-pre: " <b> 5.4.1 </b> "
+pre: " <b> 5.5.2 </b> "
 ---
 
-To prepare for this part of the workshop you will need to:
+We will create an environment to run the application
 
-- Deploying a CloudFormation stack
-- Modifying a VPC route table.
+1.  Access **Elastic Beanstalk** > **Create application**
 
-These components work together to simulate on-premises DNS forwarding and name resolution.
+![EB1](/images/5-Workshop/5.5-App/EB1.png)
 
-#### Deploy the CloudFormation stack
+- **App Name:** MiniMarket-App
+- **Platform:** Docker (Amazon Linux 2023)
+- **Application code:** Select **Sample application** (To test infrastructure first)
 
-The CloudFormation template will create additional services to support an on-premises simulation:
+![EB2](/images/5-Workshop/5.5-App/EB2.png)
 
-- One Route 53 Private Hosted Zone that hosts Alias records for the PrivateLink S3 endpoint
-- One Route 53 Inbound Resolver endpoint that enables "VPC Cloud" to resolve inbound DNS resolution requests to the Private Hosted Zone
-- One Route 53 Outbound Resolver endpoint that enables "VPC On-prem" to forward DNS requests for S3 to "VPC Cloud"
+![EB3](/images/5-Workshop/5.5-App/EB6.png)
 
-![route 53 diagram](/images/5-Workshop/5.4-S3-onprem/route53.png)
+2.  **Network Configuration (Networking) - Extremely Important:**
 
-1. Click the following link to open the [AWS CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.amazonaws.com/reinvent-endpoints-builders-session/R53CF.yaml&stackName=PLOnpremSetup). The required template will be pre-loaded into the menu. Accept all default and click Create stack.
+- **VPC:** Select the VPC you created for MiniMarket
+- **Instance settings:**
+  - Public IP address: **Uncheck**
+  - Subnets: Select 2 **Private Subnets**
+  - EC2 security groups: Select **sg-web-app**
 
-![Create stack](/images/5-Workshop/5.4-S3-onprem/create-stack.png)
+![EB4](/images/5-Workshop/5.5-App/EB3.png)
 
-![Button](/images/5-Workshop/5.4-S3-onprem/create-stack-button.png)
+![EB5](/images/5-Workshop/5.5-App/EBSG.png)
 
-It may take a few minutes for stack deployment to complete. You can continue with the next step without waiting for the deployemnt to finish.
+- **Capacity:**
+  - Environment type: Select Load balanced
 
-#### Update on-premise private route table
+![EB6](/images/5-Workshop/5.5-App/EB4.png)
 
-This workshop uses a strongSwan VPN running on an EC2 instance to simulate connectivty between an on-premises datacenter and the AWS cloud. Most of the required components are provisioned before your start. To finalize the VPN configuration, you will modify the "VPC On-prem" routing table to direct traffic destined for the cloud to the strongSwan VPN instance.
+- **Load balancer network settings:**
+  - Visibility: **Public**
+  - Subnets: Select 2 **Public Subnets**
 
-1. Open the Amazon EC2 console
+![EB7](/images/5-Workshop/5.5-App/EB5.png)
 
-2. Select the instance named infra-vpngw-test. From the Details tab, copy the Instance ID and paste this into your text editor
-
-![ec2 id](/images/5-Workshop/5.4-S3-onprem/ec2-onprem-id.png)
-
-3. Navigate to the VPC menu by using the Search box at the top of the browser window.
-
-4. Click on Route Tables, select the RT Private On-prem route table, select the Routes tab, and click Edit Routes.
-
-![rt](/images/5-Workshop/5.4-S3-onprem/rt.png)
-
-5. Click Add route.
-
-- Destination: your Cloud VPC cidr range
-- Target: ID of your infra-vpngw-test instance (you saved in your editor at step 1)
-
-![add route](/images/5-Workshop/5.4-S3-onprem/add-route.png)
-
-6. Click Save changes
+3.  Click **Create**. The system will take about 5-7 minutes to initialize

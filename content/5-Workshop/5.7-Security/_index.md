@@ -1,37 +1,24 @@
 ---
-title: "Clean up"
+title: "Optimization & Security"
 date: 2025-09-10
-weight: 6
+weight: 7
 chapter: false
-pre: " <b> 5.6. </b> "
+pre: " <b> 5.7. </b> "
 ---
 
-Congratulations on completing this workshop!
-In this workshop, you learned architecture patterns for accessing Amazon S3 without using the Public Internet.
+#### Resource Cleanup
 
-- By creating a gateway endpoint, you enabled direct communication between EC2 resources and Amazon S3, without traversing an Internet Gateway.
-- By creating an interface endpoint you extended S3 connectivity to resources running in your on-premises data center via AWS Site-to-Site VPN or Direct Connect.
+#### Overview
 
-#### clean up
+A Production system needs not only to "run" but also to "run fast" and be "secure". In this part, we will refine the MiniMarket architecture
 
-1. Navigate to Hosted Zones on the left side of Route 53 console. Click the name of _s3.us-east-1.amazonaws.com_ zone. Click Delete and confirm deletion by typing delete.
+Implementation items:
+*   **Offloading Static Assets:** Transfer all product images from Web Server to **Amazon S3** and distribute via **Amazon CloudFront** (CDN) to accelerate global page load speed and offload the server
+*   **Security Hardening:** Deploy **AWS WAF (Web Application Firewall)** in front of CloudFront to protect the application from common attacks such as SQL Injection and XSS
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/delete-zone.png)
+![Security Architecture](/images/5-Workshop/5.7-Security/security-diagram.png)
 
-2. Disassociate the Route 53 Resolver Rule - myS3Rule from "VPC Onprem" and Delete it.
+#### Content
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/vpc.png)
-
-4. Open the CloudFormation console and delete the two CloudFormation Stacks that you created for this lab:
-
-- PLOnpremSetup
-- PLCloudSetup
-
-![delete stack](/images/5-Workshop/5.6-Cleanup/delete-stack.png)
-
-5. Delete S3 buckets
-
-- Open S3 console
-- Choose the bucket we created for the lab, click and confirm empty. Click delete and confirm delete.
-
-![delete s3](/images/5-Workshop/5.6-Cleanup/delete-s3.png)
+1. [Configure S3 and CloudFront](5.7.1-s3-cloudfront/)
+2. [Set up AWS WAF](5.7.2-waf/)

@@ -1,37 +1,24 @@
 ---
-title: "Clean up"
+title: "Monitoring & Operations"
 date: 2025-09-10
-weight: 6
+weight: 8
 chapter: false
-pre: " <b> 5.6. </b> "
+pre: " <b> 5.8. </b> "
 ---
 
-Congratulations on completing this workshop!
-In this workshop, you learned architecture patterns for accessing Amazon S3 without using the Public Internet.
+#### Overview
 
-- By creating a gateway endpoint, you enabled direct communication between EC2 resources and Amazon S3, without traversing an Internet Gateway.
-- By creating an interface endpoint you extended S3 connectivity to resources running in your on-premises data center via AWS Site-to-Site VPN or Direct Connect.
+A Production system cannot be considered complete without **Monitoring** and **Alerting** capabilities. You cannot sit watching the screen 24/7 to check if the Server is still alive
 
-#### clean up
+In this module, we will set up monitoring and alerting for MiniMarket using AWS operations management services:
 
-1. Navigate to Hosted Zones on the left side of Route 53 console. Click the name of _s3.us-east-1.amazonaws.com_ zone. Click Delete and confirm deletion by typing delete.
+- **Amazon CloudWatch:** Collect metrics (Metrics) from EC2, RDS, ELB
+- **Amazon SNS (Simple Notification Service):** Notification service. We will use it to send Emails to administrators when the system encounters issues
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/delete-zone.png)
+We will set up a **CloudWatch Alarm** to monitor Web Server CPU. If CPU exceeds **70%** (sign of overload or attack), the system will automatically trigger SNS to send emergency alert Emails
 
-2. Disassociate the Route 53 Resolver Rule - myS3Rule from "VPC Onprem" and Delete it.
+![Monitoring Architecture](/images/5-Workshop/5.8-Monitoring/monitoring-diagram.png)
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/vpc.png)
+#### Content
 
-4. Open the CloudFormation console and delete the two CloudFormation Stacks that you created for this lab:
-
-- PLOnpremSetup
-- PLCloudSetup
-
-![delete stack](/images/5-Workshop/5.6-Cleanup/delete-stack.png)
-
-5. Delete S3 buckets
-
-- Open S3 console
-- Choose the bucket we created for the lab, click and confirm empty. Click delete and confirm delete.
-
-![delete s3](/images/5-Workshop/5.6-Cleanup/delete-s3.png)
+1. [Set up CloudWatch Alarms & SNS](5.8.1-cloudwatch/)

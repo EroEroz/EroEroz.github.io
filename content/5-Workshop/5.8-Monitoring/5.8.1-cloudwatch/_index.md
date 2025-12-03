@@ -1,57 +1,49 @@
 ---
-title: "Prepare the environment"
+title: "Monitoring with CloudWatch"
 date: 2025-09-10
 weight: 1
 chapter: false
-pre: " <b> 5.4.1 </b> "
+pre: " <b> 5.8.1 </b> "
 ---
+1.  **Create SNS Topic:**
+    *   Go to SNS > Topics > Create Topic 
+        *   **Type:** Standard
+        *   **Name:** DevOps-Alerts 
 
-To prepare for this part of the workshop you will need to:
+    ![SNS1](/images/5-Workshop/5.8-Monitoring/SNS1.png)
 
-- Deploying a CloudFormation stack
-- Modifying a VPC route table.
+    ![SNS2](/images/5-Workshop/5.8-Monitoring/SNS2.png)
 
-These components work together to simulate on-premises DNS forwarding and name resolution.
+ 
+2.  **Create Subscription**
+    *   Create Subscription > Protocol: Email > Enter your email (Remember to Confirm mail)
 
-#### Deploy the CloudFormation stack
+    ![SNS3](/images/5-Workshop/5.8-Monitoring/SNS3.png)
 
-The CloudFormation template will create additional services to support an on-premises simulation:
+    ![SNS4](/images/5-Workshop/5.8-Monitoring/SNS4.png)
 
-- One Route 53 Private Hosted Zone that hosts Alias records for the PrivateLink S3 endpoint
-- One Route 53 Inbound Resolver endpoint that enables "VPC Cloud" to resolve inbound DNS resolution requests to the Private Hosted Zone
-- One Route 53 Outbound Resolver endpoint that enables "VPC On-prem" to forward DNS requests for S3 to "VPC Cloud"
+    ![SNS5](/images/5-Workshop/5.8-Monitoring/SNS5.png)
 
-![route 53 diagram](/images/5-Workshop/5.4-S3-onprem/route53.png)
 
-1. Click the following link to open the [AWS CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.amazonaws.com/reinvent-endpoints-builders-session/R53CF.yaml&stackName=PLOnpremSetup). The required template will be pre-loaded into the menu. Accept all default and click Create stack.
+3.  **Create CPU Alarm:**
+    *   Go to CloudWatch > Alarms > Create alarm
 
-![Create stack](/images/5-Workshop/5.4-S3-onprem/create-stack.png)
+    ![CW1](/images/5-Workshop/5.8-Monitoring/CW1.png)
 
-![Button](/images/5-Workshop/5.4-S3-onprem/create-stack-button.png)
+    *   Select metric > EC2 > Per-Instance Metrics > Select InstanceID of Beanstalk > **CPUUtilization**
 
-It may take a few minutes for stack deployment to complete. You can continue with the next step without waiting for the deployemnt to finish.
+    ![CW2](/images/5-Workshop/5.8-Monitoring/CW2.png)
 
-#### Update on-premise private route table
+    ![CW3](/images/5-Workshop/5.8-Monitoring/CW3.png)
 
-This workshop uses a strongSwan VPN running on an EC2 instance to simulate connectivty between an on-premises datacenter and the AWS cloud. Most of the required components are provisioned before your start. To finalize the VPN configuration, you will modify the "VPC On-prem" routing table to direct traffic destined for the cloud to the strongSwan VPN instance.
+    ![CW4](/images/5-Workshop/5.8-Monitoring/CW4.png)
 
-1. Open the Amazon EC2 console
+    *   Condition: **CPUUtilization:** Greater than **70%**
 
-2. Select the instance named infra-vpngw-test. From the Details tab, copy the Instance ID and paste this into your text editor
+    ![CW5](/images/5-Workshop/5.8-Monitoring/CW5.png)
 
-![ec2 id](/images/5-Workshop/5.4-S3-onprem/ec2-onprem-id.png)
+    *   Notification: Select Topic **DevOps-Alerts**
 
-3. Navigate to the VPC menu by using the Search box at the top of the browser window.
+    ![CW6](/images/5-Workshop/5.8-Monitoring/CW6.png)
 
-4. Click on Route Tables, select the RT Private On-prem route table, select the Routes tab, and click Edit Routes.
-
-![rt](/images/5-Workshop/5.4-S3-onprem/rt.png)
-
-5. Click Add route.
-
-- Destination: your Cloud VPC cidr range
-- Target: ID of your infra-vpngw-test instance (you saved in your editor at step 1)
-
-![add route](/images/5-Workshop/5.4-S3-onprem/add-route.png)
-
-6. Click Save changes
+    *   Create Alarm.

@@ -1,37 +1,24 @@
 ---
-title: "Clean up"
+title: "CI/CD Automation"
 date: 2025-09-10
 weight: 6
 chapter: false
 pre: " <b> 5.6. </b> "
 ---
 
-Congratulations on completing this workshop!
-In this workshop, you learned architecture patterns for accessing Amazon S3 without using the Public Internet.
+#### Overview
 
-- By creating a gateway endpoint, you enabled direct communication between EC2 resources and Amazon S3, without traversing an Internet Gateway.
-- By creating an interface endpoint you extended S3 connectivity to resources running in your on-premises data center via AWS Site-to-Site VPN or Direct Connect.
+In the Cloud Native environment, manual deployment (Manual Deployment) is risky and time-consuming. This module will guide you to build a fully automated **CI/CD (Continuous Integration / Continuous Deployment)** process
 
-#### clean up
+The process operates as follows:
 
-1. Navigate to Hosted Zones on the left side of Route 53 console. Click the name of _s3.us-east-1.amazonaws.com_ zone. Click Delete and confirm deletion by typing delete.
+1.  **Source:** Developer pushes code (Push) to **GitHub**
+2.  **Build:** **AWS CodePipeline** detects changes and activates **AWS CodeBuild**. CodeBuild will package the Docker Image and push to the **Amazon ECR** repository
+3.  **Deploy:** Pipeline automatically commands **Elastic Beanstalk** to update the latest version from ECR without service interruption
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/delete-zone.png)
+![CI/CD Pipeline](/images/5-Workshop/5.6-ClCD/pipeline-diagram.png)
 
-2. Disassociate the Route 53 Resolver Rule - myS3Rule from "VPC Onprem" and Delete it.
+#### Content
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/vpc.png)
-
-4. Open the CloudFormation console and delete the two CloudFormation Stacks that you created for this lab:
-
-- PLOnpremSetup
-- PLCloudSetup
-
-![delete stack](/images/5-Workshop/5.6-Cleanup/delete-stack.png)
-
-5. Delete S3 buckets
-
-- Open S3 console
-- Choose the bucket we created for the lab, click and confirm empty. Click delete and confirm delete.
-
-![delete s3](/images/5-Workshop/5.6-Cleanup/delete-s3.png)
+1. [Create Build Project with AWS CodeBuild](5.6.1-codebuild/)
+2. [Set up AWS CodePipeline](5.6.2-codepipeline/)
