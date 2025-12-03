@@ -1,57 +1,32 @@
 ---
-title: "Prepare the environment"
+title: "Configure Environment Variables"
 date: 2025-09-10
-weight: 1
+weight: 3
 chapter: false
-pre: " <b> 5.4.1 </b> "
+pre: " <b> 5.5.3 </b> "
 ---
 
-To prepare for this part of the workshop you will need to:
+To enable the application to connect to Database and Redis, we do not hardcode in the code but use Environment Variables
 
-- Deploying a CloudFormation stack
-- Modifying a VPC route table.
+1.  Go to Beanstalk Environment > **Configuration** > **Updates, monitoring, and logging** > **Edit**
+2.  Scroll down to **Environment properties** section
+3.  Add the following variables:
 
-These components work together to simulate on-premises DNS forwarding and name resolution.
+    - **Name:** ConnectionStrings\_\_DefaultConnection
 
-#### Deploy the CloudFormation stack
+      - **Value:** Server=sql-shop-db....rds.amazonaws.com;Database=MiniMarketDB;User Id=admin;Password=PASSWORD YOU SET;TrustServerCertificate=True;
 
-The CloudFormation template will create additional services to support an on-premises simulation:
+    - **Name:** ConnectionStrings\_\_RedisConnection
 
-- One Route 53 Private Hosted Zone that hosts Alias records for the PrivateLink S3 endpoint
-- One Route 53 Inbound Resolver endpoint that enables "VPC Cloud" to resolve inbound DNS resolution requests to the Private Hosted Zone
-- One Route 53 Outbound Resolver endpoint that enables "VPC On-prem" to forward DNS requests for S3 to "VPC Cloud"
+      - **Value:** webapp.redis.cache...:6379
 
-![route 53 diagram](/images/5-Workshop/5.4-S3-onprem/route53.png)
+    - **Name:** VnPay\_\_IPNUrl
 
-1. Click the following link to open the [AWS CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.amazonaws.com/reinvent-endpoints-builders-session/R53CF.yaml&stackName=PLOnpremSetup). The required template will be pre-loaded into the menu. Accept all default and click Create stack.
+      - **Value:** https://[cloudfrontdomain].cloudfront.net/Payment/VnPayIPN
 
-![Create stack](/images/5-Workshop/5.4-S3-onprem/create-stack.png)
+    - **Name:** VnPay\_\_ReturnUrl
+      - **Value:** https://[cloudfrontdomain].cloudfront.net/Payment/VnPayReturn
 
-![Button](/images/5-Workshop/5.4-S3-onprem/create-stack-button.png)
+![config1](/images/5-Workshop/5.5-App/config1.png)
 
-It may take a few minutes for stack deployment to complete. You can continue with the next step without waiting for the deployemnt to finish.
-
-#### Update on-premise private route table
-
-This workshop uses a strongSwan VPN running on an EC2 instance to simulate connectivty between an on-premises datacenter and the AWS cloud. Most of the required components are provisioned before your start. To finalize the VPN configuration, you will modify the "VPC On-prem" routing table to direct traffic destined for the cloud to the strongSwan VPN instance.
-
-1. Open the Amazon EC2 console
-
-2. Select the instance named infra-vpngw-test. From the Details tab, copy the Instance ID and paste this into your text editor
-
-![ec2 id](/images/5-Workshop/5.4-S3-onprem/ec2-onprem-id.png)
-
-3. Navigate to the VPC menu by using the Search box at the top of the browser window.
-
-4. Click on Route Tables, select the RT Private On-prem route table, select the Routes tab, and click Edit Routes.
-
-![rt](/images/5-Workshop/5.4-S3-onprem/rt.png)
-
-5. Click Add route.
-
-- Destination: your Cloud VPC cidr range
-- Target: ID of your infra-vpngw-test instance (you saved in your editor at step 1)
-
-![add route](/images/5-Workshop/5.4-S3-onprem/add-route.png)
-
-6. Click Save changes
+4.  Click **Apply**. Server will restart to apply new configuration

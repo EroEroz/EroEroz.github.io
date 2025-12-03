@@ -10,7 +10,7 @@ pre: " <b> 5.7. </b> "
 
 #### Tổng quan
 
-Một hệ thống Production không chỉ cần "chạy được" mà còn phải "chạy nhanh" và "an toàn". Trong module cuối cùng này, chúng ta sẽ tinh chỉnh kiến trúc MiniMarket
+Một hệ thống Production không chỉ cần "chạy được" mà còn phải "chạy nhanh" và "an toàn". Trong phần này, chúng ta sẽ tinh chỉnh kiến trúc MiniMarket
 
 Các hạng mục thực hiện:
 *   **Offloading Static Assets:** Chuyển toàn bộ hình ảnh sản phẩm từ Web Server sang **Amazon S3** và phân phối qua **Amazon CloudFront** (CDN) để tăng tốc độ tải trang toàn cầu và giảm tải cho server

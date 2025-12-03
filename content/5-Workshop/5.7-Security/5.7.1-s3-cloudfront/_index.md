@@ -1,57 +1,80 @@
 ---
-title: "Prepare the environment"
+title: "Configure S3 & CloudFront"
 date: 2025-09-10
 weight: 1
 chapter: false
-pre: " <b> 5.4.1 </b> "
+pre: " <b> 5.7.1 </b> "
 ---
+**1. Create S3 Bucket:**
+*   Create Bucket (Ex: **minimarket-assets-prod**)
+*   Block Public Access: **On**
 
-To prepare for this part of the workshop you will need to:
 
-- Deploying a CloudFormation stack
-- Modifying a VPC route table.
+![s31](/images/5-Workshop/5.7-Security/s31.png)
 
-These components work together to simulate on-premises DNS forwarding and name resolution.
+![s32](/images/5-Workshop/5.7-Security/s32.png)
 
-#### Deploy the CloudFormation stack
+*   Manually upload **images** folder from code to this Bucket
 
-The CloudFormation template will create additional services to support an on-premises simulation:
+![s33](/images/5-Workshop/5.7-Security/s33.png)
 
-- One Route 53 Private Hosted Zone that hosts Alias records for the PrivateLink S3 endpoint
-- One Route 53 Inbound Resolver endpoint that enables "VPC Cloud" to resolve inbound DNS resolution requests to the Private Hosted Zone
-- One Route 53 Outbound Resolver endpoint that enables "VPC On-prem" to forward DNS requests for S3 to "VPC Cloud"
+**2. Create CloudFront Distribution:**
+*   **Origin type:** Select Elastic Load Balancer
+*   **Origin Domain:** Select Load Balancer of Beanstalk
 
-![route 53 diagram](/images/5-Workshop/5.4-S3-onprem/route53.png)
+![LB1](/images/5-Workshop/5.7-Security/LB1.png)
+![LB2](/images/5-Workshop/5.7-Security/LB2.png)
 
-1. Click the following link to open the [AWS CloudFormation console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.amazonaws.com/reinvent-endpoints-builders-session/R53CF.yaml&stackName=PLOnpremSetup). The required template will be pre-loaded into the menu. Accept all default and click Create stack.
+*   **Settings:** Select Customize origin settings
+    *   **Protocol:** HTTP Only
 
-![Create stack](/images/5-Workshop/5.4-S3-onprem/create-stack.png)
+![LB3](/images/5-Workshop/5.7-Security/LB3.png)
 
-![Button](/images/5-Workshop/5.4-S3-onprem/create-stack-button.png)
+*   **Cache settings:** Select Customize cache settings
+    *   **Viewer Protocol Policy:** Redirect HTTP to HTTPS
 
-It may take a few minutes for stack deployment to complete. You can continue with the next step without waiting for the deployemnt to finish.
+![LB4](/images/5-Workshop/5.7-Security/LB4.png)
 
-#### Update on-premise private route table
+**3. Add S3 Origin (To retrieve images):**
+*   Go to newly created **Distribution**
 
-This workshop uses a strongSwan VPN running on an EC2 instance to simulate connectivty between an on-premises datacenter and the AWS cloud. Most of the required components are provisioned before your start. To finalize the VPN configuration, you will modify the "VPC On-prem" routing table to direct traffic destined for the cloud to the strongSwan VPN instance.
+![LB5](/images/5-Workshop/5.7-Security/LB5.png)
 
-1. Open the Amazon EC2 console
+*   Go to **Origins** tab > Create Origin
 
-2. Select the instance named infra-vpngw-test. From the Details tab, copy the Instance ID and paste this into your text editor
+![LB6](/images/5-Workshop/5.7-Security/LB6.png)
 
-![ec2 id](/images/5-Workshop/5.4-S3-onprem/ec2-onprem-id.png)
+*   **Origin domain** select the S3 created earlier (**minimarket-assets-prod**)
 
-3. Navigate to the VPC menu by using the Search box at the top of the browser window.
+![LB7](/images/5-Workshop/5.7-Security/LB7.png)
 
-4. Click on Route Tables, select the RT Private On-prem route table, select the Routes tab, and click Edit Routes.
+*   **Origin Access:** Select **Origin access control (OAC)** > Create new OAC
 
-![rt](/images/5-Workshop/5.4-S3-onprem/rt.png)
+![LB8](/images/5-Workshop/5.7-Security/LB8.png)
 
-5. Click Add route.
+![LB9](/images/5-Workshop/5.7-Security/LB9.png)
 
-- Destination: your Cloud VPC cidr range
-- Target: ID of your infra-vpngw-test instance (you saved in your editor at step 1)
+*   **Bucket Policy:** Copy policy provided by CloudFront and paste into S3 Bucket policy
 
-![add route](/images/5-Workshop/5.4-S3-onprem/add-route.png)
+![LB10](/images/5-Workshop/5.7-Security/LB10.png)
 
-6. Click Save changes
+![LB11](/images/5-Workshop/5.7-Security/LB11.png)
+
+![LB12](/images/5-Workshop/5.7-Security/LB12.png)
+
+![LB13](/images/5-Workshop/5.7-Security/LB13.png)
+
+
+**4. Configure Behavior:**
+*   Return to **CloudFront** go to **Behaviors** tab
+
+![LB14](/images/5-Workshop/5.7-Security/LB14.png)
+
+*   Create Behavior with Path pattern: **/images/**
+*   Point to Origin S3
+
+![LB15](/images/5-Workshop/5.7-Security/LB15.png)
+
+*   Cache Policy: **CachingOptimized**
+
+![LB16](/images/5-Workshop/5.7-Security/LB16.png)
