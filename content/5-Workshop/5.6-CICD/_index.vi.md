@@ -16,7 +16,7 @@ Quy trình hoạt động như sau:
 2.  **Build:** **AWS CodePipeline** phát hiện thay đổi và kích hoạt **AWS CodeBuild**. CodeBuild sẽ đóng gói Docker Image và đẩy lên kho chứa **Amazon ECR**
 3.  **Deploy:** Pipeline tự động ra lệnh cho **Elastic Beanstalk** cập nhật phiên bản mới nhất từ ECR mà không gây gián đoạn dịch vụ
 
-![CI/CD Pipeline](/images/5.6-CICD/pipeline-diagram.png)
+![CI/CD Pipeline](/images/5-Workshop/5.6-ClCD/pipeline-diagram.png)
 
 #### Nội dung
 

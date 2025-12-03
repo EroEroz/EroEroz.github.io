@@ -21,7 +21,7 @@ Chúng ta sẽ thiết lập một kiến trúc Đa tầng (Multi-tier) bao gồ
 - **Compute**: Sử dụng AWS Elastic Beanstalk kết hợp với Docker để đơn giản hóa việc triển khai và quản lý ứng dụng, hỗ trợ Auto Scaling tự động dựa trên lưu lượng truy cập.
 - **Data & Caching**: Chuyển đổi từ SQL Server cục bộ sang Amazon RDS (đặt trong Private Subnet) để đảm bảo an toàn dữ liệu. Đồng thời, triển khai Amazon ElastiCache (Redis) để quản lý Session người dùng, đảm bảo hiệu năng cao cho ứng dụng.
 - **Networking & Security**: Sử dụng **VPC** cùng với **Public/Private Subnet** và **NAT Gateway** cho kết nối ra ngoài an toàn, và bảo vệ ứng dụng trước các cuộc tấn công bằng **AWS WAF** kết hợp **CloudFront**.
-- **DevOps**: Xây dựng quy trình **CI/CD** sử dụng **AWS CodePipeline** và **CodeBuild**, cho phép tự động hóa quy trình từ lúc commit code lên GitHub đến khi ứng dụng chạy trên môi trường Production.
+- **DevOps**: Xây dựng quy trình **CI/CD** sử dụng **AWS CodePipeline** và **CodeBuild**, cho phép tự động hóa quy trình từ lúc commit code lên GitHub đến khi ứng dụng chạy trên môi trường Production
 #### Nội dung
 
 1. [Tổng quan về workshop](5.1-Workshop-overview/)

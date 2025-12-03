@@ -15,7 +15,7 @@ Mục tiêu của module này:
 *   **Deployment:** Triển khai Container lên Elastic Beanstalk. Hệ thống sẽ tự động cấp phát EC2, cấu hình Load Balancer và Auto Scaling Group
 *   **Connectivity:** Cấu hình để ứng dụng kết nối an toàn tới RDS và Redis thông qua Biến môi trường (Environment Variables)
 
-![App Deployment Architecture](/images/5.5-App/beanstalk-diagram.png)
+![App Deployment Architecture](/images/5-Workshop/5.5-App/beanstalk-diagram.png)
 
 #### Nội dung
 

@@ -6,10 +6,10 @@ chapter: false
 pre: " <b> 5.5.1 </b> "
 ---
 
-Trước khi đưa lên Cloud, chúng ta cần đóng gói ứng dụng .NET Core thành một Docker Image.
+Trước khi đưa lên Cloud, chúng ta cần đóng gói ứng dụng .NET Core thành một Docker Image
 
 1.  **Tạo Dockerfile:**
-    Tại thư mục gốc của Solution, tạo file tên là **Dockerfile** (không có đuôi).
+    Tại thư mục gốc của Solution, tạo file tên là **Dockerfile** (không có đuôi)
 
 ![docker1](/images/5-Workshop/5.5-App/docker1.png)
 

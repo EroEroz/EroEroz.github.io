@@ -38,5 +38,5 @@ pre: " <b> 5.6.2 </b> "
 
 
 {{% notice warning %}}
-Nếu bước Deploy bị lỗi Permission, hãy vào IAM Role của CodePipeline và cấp quyền **AdministratorAccess-AWSElasticBeanstalk**.
+Nếu bước Deploy bị lỗi Permission, hãy vào IAM Role của CodePipeline và cấp quyền **AdministratorAccess-AWSElasticBeanstalk**
 {{% /notice %}}

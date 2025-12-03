@@ -17,8 +17,7 @@ Trong module này, chúng ta sẽ thiết lập cho hệ thống giám sát và 
 
 Chúng ta sẽ thiết lập một **CloudWatch Alarm** để theo dõi CPU của Web Server. Nếu CPU vượt quá **70%** (dấu hiệu quá tải hoặc bị tấn công), hệ thống sẽ tự động kích hoạt SNS để gửi Email cảnh báo khẩn cấp
 
-![Monitoring Architecture](/images/5.8-Monitoring/monitoring-diagram.png)
-_(Bạn có thể chụp ảnh biểu đồ CloudWatch hoặc sơ đồ Alarm -> SNS -> Email để chèn vào đây)_
+![Monitoring Architecture](/images/5-Workshop/5.8-Monitoring/monitoring-diagram.png)
 
 #### Nội dung
 
