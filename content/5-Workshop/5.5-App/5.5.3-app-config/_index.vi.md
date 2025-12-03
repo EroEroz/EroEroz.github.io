@@ -6,10 +6,10 @@ chapter: false
 pre: " <b> 5.5.3 </b> "
 ---
 
-Để ứng dụng kết nối được với Database và Redis, chúng ta không hardcode trong code mà dùng Biến môi trường.
+Để ứng dụng kết nối được với Database và Redis, chúng ta không hardcode trong code mà dùng Biến môi trường
 
-1.  Vào Beanstalk Environment > **Configuration** > **Updates, monitoring, and logging** > **Edit**.
-2.  Kéo xuống mục **Environment properties**.
+1.  Vào Beanstalk Environment > **Configuration** > **Updates, monitoring, and logging** > **Edit**
+2.  Kéo xuống mục **Environment properties**
 3.  Thêm các biến sau:
 
     - **Name:** ConnectionStrings\_\_DefaultConnection
@@ -29,4 +29,4 @@ pre: " <b> 5.5.3 </b> "
 
 ![config1](/images/5-Workshop/5.5-App/config1.png)
 
-4.  Bấm **Apply**. Server sẽ khởi động lại để nhận cấu hình mới.
+4.  Bấm **Apply**. Server sẽ khởi động lại để nhận cấu hình mới

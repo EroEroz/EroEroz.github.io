@@ -9,7 +9,7 @@ pre: " <b> 5.2. </b> "
 #### IAM permissions
 
 - Gắn quyền AdministratorAccess trong IAM permission policy vào tài khoản AWS để dễ dàng làm việc hơn
-    - Lưu ý: Việc sử dụng quyền Administrator chỉ được khuyến nghị cho môi trường Workshop để đảm bảo quá trình triển khai không bị gián đoạn. Trong môi trường Production thực tế, cần tuân thủ nguyên tắc Least Privilege cho từng dịch vụ.
+    - Lưu ý: Việc sử dụng quyền Administrator chỉ được khuyến nghị cho môi trường Workshop để đảm bảo quá trình triển khai không bị gián đoạn. Trong môi trường Production thực tế, cần tuân thủ nguyên tắc Least Privilege cho từng dịch vụ
 
 ```
 {
@@ -26,7 +26,7 @@ pre: " <b> 5.2. </b> "
 
 #### Source Code
 
-- Repository GitHub chứa code .NET Core và Dockerfile hợp lệ.
+- Repository GitHub chứa code .NET Core và Dockerfile hợp lệ
 
 ![repository](/images/5-Workshop/5.2-Prerequisite/source.png)
 

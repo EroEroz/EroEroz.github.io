@@ -32,10 +32,10 @@ pre: " <b> 5.4.3 </b> "
     *   **Auto-failover:** **Bỏ tích** (Enable)
 
 5.  Tại màn hình **Cache settings**:
-    *   **Engine version:** Để mặc định (VD: 7.1).
-    *   **Port:** **6379**.
+    *   **Engine version:** Để mặc định (VD: 7.1)
+    *   **Port:** **6379**
     *   **Node type:** Chọn dòng **t3** > Chọn **cache.t3.micro**
-    *   **Number of replicas:** Nhập **0**. (Chúng ta chỉ cần 1 node chính, không cần node dự phòng)
+    *   **Number of replicas:** Nhập **0** (Chúng ta chỉ cần 1 node chính, không cần node dự phòng)
 
 ![Elasti4](/images/5-Workshop/5.4-Data/Elasti4.png)
 
@@ -53,7 +53,7 @@ pre: " <b> 5.4.3 </b> "
 
 ![Elasti6](/images/5-Workshop/5.4-Data/Elasti6.png)
 
-8.  Kéo xuống cuối cùng và bấm **Create**.
+8.  Kéo xuống cuối cùng và bấm **Create**
 
 #### 3. Lấy thông tin kết nối
 Quá trình khởi tạo sẽ mất khoảng 5-10 phút

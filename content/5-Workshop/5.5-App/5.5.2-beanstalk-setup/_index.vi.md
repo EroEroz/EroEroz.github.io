@@ -38,9 +38,9 @@ Chúng ta sẽ tạo môi trường chạy ứng dụng
 ![EB6](/images/5-Workshop/5.5-App/EB4.png)
 
 - **Load balancer network settings:**
-  - Visibility: **Public**.
+  - Visibility: **Public**
   - Subnets: Tích chọn 2 **Public Subnet**
 
 ![EB7](/images/5-Workshop/5.5-App/EB5.png)
 
-3.  Bấm **Create**. Hệ thống sẽ mất khoảng 5-7 phút để khởi tạo.
+3.  Bấm **Create**. Hệ thống sẽ mất khoảng 5-7 phút để khởi tạo

@@ -6,8 +6,6 @@ chapter: false
 pre: " <b> 5.4.1 </b> "
 ---
 
-Security Group đóng vai trò là tường lửa ảo (Virtual Firewall). Chúng ta áp dụng mô hình **Security Group Chaining**
-
 1.  Truy cập **EC2** > **Security Groups** > **Create security group**
 
 ![Security1](/images/5-Workshop/5.4-Data/security1.png)
