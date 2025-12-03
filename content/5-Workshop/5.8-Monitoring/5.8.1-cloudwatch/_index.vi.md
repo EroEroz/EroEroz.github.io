@@ -42,7 +42,7 @@ pre: " <b> 5.8.1 </b> "
 
     ![CW5](/images/5-Workshop/5.8-Monitoring/CW5.png)
 
-    *   Notification: Chọn Topic `DevOps-Alerts`
+    *   Notification: Chọn Topic **DevOps-Alerts**
 
     ![CW6](/images/5-Workshop/5.8-Monitoring/CW6.png)
 
