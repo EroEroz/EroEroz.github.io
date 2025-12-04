@@ -6,127 +6,105 @@ chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
+# “AI/ML/GenAI on AWS” Report
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+### Event Purpose
 
-### Event Objectives
+- Provide an overview of Foundation Models and the Amazon Bedrock platform
+- Guide on Prompt Engineering techniques from basic to advanced
+- Explain the architecture and operational workflow of RAG (Retrieval Augmented Generation)
+- Introduce AWS's ecosystem of Pretrained AI services and Frameworks for building AI Agents
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+### Speaker List
 
-### Speakers
+- **Lam Tuan Kiet**
+- **Danh Hoanh Hieu Nghi**
+- **Dinh Le Hoang Anh**
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+### Highlights
 
-### Key Highlights
+#### Foundation Models & Amazon Bedrock
 
-#### Identifying the drawbacks of legacy application architecture
+- **Foundation Models (FMs)**: Trained using self-supervised training, capable of processing many tasks.
+- **Amazon Bedrock**: Platform providing access to leading models like Luma, Deepseek...
 
-- Long product release cycles → Lost revenue/missed opportunities
-- Inefficient operations → Reduced productivity, higher costs
-- Non-compliance with security regulations → Security breaches, loss of reputation
+#### Prompt Engineering (AI Command Techniques)
 
-#### Transitioning to modern application architecture – Microservices
+Basic process: Prompt → Bedrock → Response. Key techniques:
+- **Zero-Shot Prompting**: Asking questions directly without providing sample data.
+- **Few-Shot Prompting**: Providing a few examples (example frame) for the model to learn the answer structure when encountering similar questions.
+- **Chain of Thought (CoT)**: Guiding AI on step-by-step reasoning, helping AI provide more accurate answers based on learned logic.
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+#### Retrieval Augmented Generation (RAG)
 
-- **Queue Management**: Handle asynchronous tasks
-- **Caching Strategy**: Optimize performance
-- **Message Handling**: Flexible inter-service communication
+Currently popular model (used widely in Banking). Process includes: **Retrieval → Augmentation → Generation**.
+- **Embeddings**: Convert human language into Vectors. Using Amazon Titan Embedding (supports multiple languages).
+- **RAG in Action**:
+    1. **Data preparation**: Data source → Document chunk → Embeddings model → Vector store.
+    2. **Query processing**: User input → Embeddings model → Vector → Semantic search (in Vector store) → Context → Prompt augmentation → LLM → Response.
 
-#### Domain-Driven Design (DDD)
+#### Other Pretrained AI Services
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts
-- **Bookstore case study**: Demonstrates real-world DDD application
-- **Context mapping**: 7 patterns for integrating bounded contexts
+AWS provides specialized services with optimal costs:
+- **Amazon Rekognition** (Computer Vision): Image/video analysis, face and object detection. Pricing: ~$0.0013/image.
+- **Amazon Translate**: Real-time or batch text translation. Pricing: ~$15/million characters.
+- **Amazon Textract**: Extract text and layout from documents (OCR). Pricing: ~$0.05/page.
+- **Amazon Transcribe**: Convert speech to text, supports streaming.
+- **Amazon Polly**: Convert text to speech, supports Real-time TTS. Pricing: ~$4/million characters.
+- **Amazon Comprehend** (NLP): Sentiment Analysis, key phrase extraction, PII detection. Pricing: ~$0.0001/100 chars.
+- **Amazon Kendra**: Intelligent Search service, supports Natural Language Search and RAG.
+- **Amazon Lookout Family**: Detect anomalies in Metrics, Equipment, and Vision.
+- **Amazon Personalize**: Personalized recommendation system for users.
 
-#### Event-Driven Architecture
+#### AI Agents & Frameworks
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming
-- **Benefits**: Loose coupling, scalability, resilience
-- **Sync vs async comparison**: Understanding the trade-offs
+- **Pipecat**: Framework for voice/multimodal AI agents, optimized for real-time conversation assistants.
+- **Amazon Bedrock AgentCore**:
+    - Supported frameworks: Langgraph, Langchain, Strands Agents SDK.
+    - Process from Idea → Production needs to focus on: Performance, Scalability, Security, Governance.
+    - Core components: Runtime, Memory, Identity, Gateway, Code Interpreter, Browser tool, Observability.
 
-#### Compute Evolution
+### What I Learned
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria for appropriate choice
+#### Prompting Mindset
 
-#### Amazon Q Developer
+- **Optimization Techniques**: Clearly understand the differences between Zero-shot, Few-shot, and Chain of Thought to apply to specific problem complexities.
+- **Structuring**: Providing examples helps better control the model's output format.
 
-- **SDLC automation**: From planning to maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+#### RAG Architecture
 
-### Key Takeaways
+- **Vector Database**: Understand the critical role of Vector Store and Semantic Search in providing accurate context for LLMs.
+- **Embedding Models**: The importance of choosing embedding models (like Amazon Titan) to support multiple languages and search accuracy.
 
-#### Design Mindset
+#### Service Selection (Trade-offs)
 
-- **Business-first approach**: Always start from the business domain, not the technology
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams
-- **Bounded contexts**: Identifying and managing complexity in large systems
+- **Cost vs Flexibility**: Know how to balance costs between using Pretrained Services (pay per request/char) versus building custom models or using general LLMs.
+- **Use case specific**: Each service (Rekognition, Textract...) solves a specific problem better and cheaper than forcing an LLM to do everything.
 
-#### Technical Architecture
+### Application to Work
 
-- **Event storming technique**: Practical method for modeling business processes
-- Use **event-driven communication** instead of synchronous calls
-- **Integration patterns**: When to use sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless
-
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap
-- **7Rs framework**: Multiple modernization paths depending on the application
-- **ROI measurement**: Cost reduction + business agility
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams
-- **Refactor microservices**: Use bounded contexts to define service boundaries
-- **Implement event-driven patterns**: Replace some sync calls with async messaging
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity
+- **Deploy RAG**: Apply Retrieval Augmented Generation model to build internal search systems for enterprise/banking.
+- **Integrate Pretrained Services**: Use Amazon Textract and Comprehend to automate document and record processing.
+- **Build intelligent Chatbots**: Combine Amazon Lex/Bedrock with Pipecat framework to create real-time conversational virtual assistants.
+- **Cost Optimization**: Use Caching for Amazon Polly or select the right tier of AI services to minimize operating costs.
 
 ### Event Experience
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+Participating in the **“Generative AI with Amazon Bedrock”** event helped me systematize knowledge about GenAI and the AWS ecosystem. Some highlights:
 
-#### Learning from highly skilled speakers
+#### Practical Knowledge from Experts
 
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.
+- Speakers shared real-world experiences on applying RAG and Prompt Engineering.
+- Deeper understanding of the AI **reasoning process** through Chain of Thought.
 
-#### Hands-on technical exposure
+#### Overview of AI Services
 
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.
+- Not stopping at LLMs, the event provided a broad view of Specialized AI Services like Lookout, Kendra, Personalize... helping solve niche problems effectively.
+- The Pricing analysis gave me more data to make decisions when designing solutions.
 
-#### Leveraging modern tools
+#### Tech Trend Updates
 
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.
+- Introduced to **Agentic AI** and components of Bedrock AgentCore, opening new directions in building AI applications capable of executing complex tasks (Idea to Production).
+- Approached **Pipecat framework**, an optimal solution for voice AI agents.
 
-#### Networking and discussions
-
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.
-
-#### Lessons learned
-
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.
-
-#### Some event photos
-
-_Add your event photos here_
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+  > In conclusion, the event provided a solid knowledge foundation about Amazon Bedrock and GenAI techniques, thereby helping me feel more confident in proposing and implementing AI solutions for projects.

@@ -6,127 +6,102 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+# “Reinventing DevSecOps” Report
 
-### Event Objectives
+### Event Purpose
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+- Redefine the secure software development process (DevSecOps Lifecycle) from planning to operations.
+- Introduce a comprehensive toolchain to integrate security into every stage of CI/CD.
+- Build a "Security-First" mindset for development and operations teams.
 
-### Speakers
+### Organizer
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+- **CMC Global**
 
-### Key Highlights
+### Highlights
 
-#### Identifying the drawbacks of legacy application architecture
+#### 1. The DevSecOps Lifecycle
 
-- Long product release cycles → Lost revenue/missed opportunities
-- Inefficient operations → Reduced productivity, higher costs
-- Non-compliance with security regulations → Security breaches, loss of reputation
+The process is divided into 7 closed stages, ensuring security is not a "bottleneck" but part of the flow:
 
-#### Transitioning to modern application architecture – Microservices
+1.  **PLAN:**
+    - Identify security requirements & risks right from the start.
+    - Align goals between Dev, Sec, and Ops.
+    - Create a security roadmap aligned with project goals.
+2.  **CODE:**
+    - Apply clean code and secure coding standards.
+    - Use **SAST** (Static Application Security Testing) directly in the IDE to detect errors early.
+    - Form a "Security-first" mindset for developers.
+3.  **BUILD:**
+    - Automate security checks in the CI/CD Pipeline.
+    - Perform dependency and binary scans.
+    - Ensure secure and consistent builds (Immutable Artifacts).
+4.  **TEST:**
+    - Run vulnerability scans and **DAST** (Dynamic Application Security Testing).
+    - Perform Penetration Testing.
+5.  **DEPLOY:**
+    - Check configuration and **IaC** (Infrastructure as Code) before deployment.
+    - Monitor runtime configuration.
+6.  **OPERATE:**
+    - Automate patching and continuous security updates.
+    - Have an incident response process.
+7.  **MONITOR:**
+    - Continuously monitor for threats.
+    - Use Real-time Analytics and alerting tools.
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+#### 2. DevSecOps Toolchain Overview
 
-- **Queue Management**: Handle asynchronous tasks
-- **Caching Strategy**: Optimize performance
-- **Message Handling**: Flexible inter-service communication
+A robust DevSecOps system requires the coordination of many specialized tools:
 
-#### Domain-Driven Design (DDD)
+- **Pre-commit & Code Quality:**
+    - *SonarQube, Codacy*: Check code quality.
+    - *GitLeaks*: Scan and prevent leaking Secrets/Keys in code before commit.
+- **Dependency & SBOM Scanning:**
+    - *Syft, Grype, Dependency-Track*: Manage software packages and detect vulnerabilities in 3rd party libraries.
+- **IaC & Policy-as-Code:**
+    - *Checkov, Tfsec*: Scan for security errors in Terraform/Kubernetes files.
+    - *OPA Gatekeeper, Kyverno*: Enforce compliance policies automatically on Clusters.
+- **SAST / DAST & Security Tests:**
+    - *Trivy, Checkmarx*: Detect comprehensive vulnerabilities from Code to Runtime.
+- **CI/CD Integration:**
+    - *Jenkins, GitHub Actions, GitLab CI, ArgoCD*: Platforms to automate the entire process above.
+- **Monitoring & Logging:**
+    - *Prometheus, Grafana, Loki*: Monitor system health (Observability).
+- **Alerting & Governance:**
+    - *Slack, Email, AI Anomaly Detection*: Instant alerts when issues occur.
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts
-- **Bookstore case study**: Demonstrates real-world DDD application
-- **Context mapping**: 7 patterns for integrating bounded contexts
+### What I Learned
 
-#### Event-Driven Architecture
+#### "Shift Left" Mindset
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming
-- **Benefits**: Loose coupling, scalability, resilience
-- **Sync vs async comparison**: Understanding the trade-offs
+- Security should not be left to the end (Test/Operate stage) but must be shifted left - meaning done right from the **Plan** and **Code** stages. Detecting errors early saves repair costs significantly.
 
-#### Compute Evolution
+#### The Importance of Automation
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria for appropriate choice
+- Security cannot be done manually in the Cloud era. Scanning tools need to be integrated into the Pipeline to block faulty builds automatically.
 
-#### Amazon Q Developer
+#### Supply Chain Security Risk Management
 
-- **SDLC automation**: From planning to maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+- By scanning Dependencies (SBOM), we can prevent attacks on 3rd party libraries (similar to the Log4j incident).
 
-### Key Takeaways
+### Application to Work
 
-#### Design Mindset
-
-- **Business-first approach**: Always start from the business domain, not the technology
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams
-- **Bounded contexts**: Identifying and managing complexity in large systems
-
-#### Technical Architecture
-
-- **Event storming technique**: Practical method for modeling business processes
-- Use **event-driven communication** instead of synchronous calls
-- **Integration patterns**: When to use sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless
-
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap
-- **7Rs framework**: Multiple modernization paths depending on the application
-- **ROI measurement**: Cost reduction + business agility
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams
-- **Refactor microservices**: Use bounded contexts to define service boundaries
-- **Implement event-driven patterns**: Replace some sync calls with async messaging
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity
+- **Integrate GitLeaks**: Install pre-commit hook immediately to prevent accidentally pushing AWS Access Keys to GitHub.
+- **Deploy SonarQube**: Integrate into current CI process to measure technical debt and security vulnerabilities.
+- **Apply IaC Scanning**: Use **Checkov** to scan CloudFormation/Terraform files before applying infrastructure to AWS.
+- **Monitoring**: Set up Grafana Dashboard to monitor real-time application status.
 
 ### Event Experience
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+Although only participating by following the materials, the content from CMC Global provided a very systematic view of DevSecOps.
 
-#### Learning from highly skilled speakers
+#### Clarity in process
 
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.
+- The slide on **DevSecOps Lifecycle** helped me visualize the big picture clearly, knowing what needs to be done at each stage instead of just focusing on coding as before.
 
-#### Hands-on technical exposure
+#### Practical Toolchain
 
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.
+- The **Toolchain** slide is a real "treasure". It provides a list of Industry Standard tools that I can research and apply immediately to my MiniMarket project (for example, using Trivy to scan Docker Images).
 
-#### Leveraging modern tools
-
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.
-
-#### Networking and discussions
-
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.
-
-#### Lessons learned
-
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.
-
-#### Some event photos
-
-_Add your event photos here_
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+  > The event emphasized that: In the AI and Cloud era, Security is not a feature, but a culture that needs to be built from the very first lines of code.

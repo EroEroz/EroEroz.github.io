@@ -6,126 +6,102 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+# Bài thu hoạch “Reinventing DevSecOps”
 
 ### Mục Đích Của Sự Kiện
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+- Định nghĩa lại quy trình phát triển phần mềm an toàn (DevSecOps Lifecycle) từ khâu lập kế hoạch đến vận hành.
+- Giới thiệu bộ công cụ (Toolchain) toàn diện để tích hợp bảo mật vào từng giai đoạn của CI/CD.
+- Xây dựng tư duy "Security-First" cho đội ngũ phát triển và vận hành.
 
-### Danh Sách Diễn Giả
+### Đơn Vị Tổ Chức
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+- **CMC Global**
 
 ### Nội Dung Nổi Bật
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+#### 1. Vòng Đời DevSecOps (The DevSecOps Lifecycle)
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+Quy trình được chia thành 7 giai đoạn khép kín, đảm bảo bảo mật không phải là "nút thắt cổ chai" mà là một phần của dòng chảy:
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+1.  **PLAN (Lập kế hoạch):**
+    - Xác định yêu cầu bảo mật ngay từ đầu (Security Requirements).
+    - Thống nhất mục tiêu giữa Dev, Sec và Ops.
+    - Xây dựng lộ trình bảo mật (Security Roadmap) bám sát mục tiêu dự án.
+2.  **CODE (Viết mã):**
+    - Áp dụng các tiêu chuẩn Clean Code và Secure Coding.
+    - Sử dụng **SAST** (Static Application Security Testing) ngay trên IDE để phát hiện lỗi sớm.
+    - Hình thành tư duy "Security-first" cho Developer.
+3.  **BUILD (Xây dựng):**
+    - Tự động kiểm tra bảo mật trong CI/CD Pipeline.
+    - Quét các thư viện phụ thuộc (Dependency Scan) và mã nhị phân (Binary Scan).
+    - Đảm bảo bản build an toàn và nhất quán (Immutable Artifacts).
+4.  **TEST (Kiểm thử):**
+    - Chạy quét lỗ hổng (Vulnerability Scan) và **DAST** (Dynamic Application Security Testing).
+    - Thực hiện Penetration Test (Kiểm thử xâm nhập).
+5.  **DEPLOY (Triển khai):**
+    - Kiểm tra cấu hình và **IaC** (Infrastructure as Code) trước khi deploy.
+    - Giám sát cấu hình Runtime.
+6.  **OPERATE (Vận hành):**
+    - Tự động vá lỗi (Auto-patching) và cập nhật bảo mật liên tục.
+    - Có quy trình phản ứng sự cố (Incident Response).
+7.  **MONITOR (Giám sát):**
+    - Theo dõi liên tục các mối đe dọa (Threats).
+    - Sử dụng Real-time Analytics và các công cụ cảnh báo (Alerting).
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+#### 2. Hệ Sinh Thái Công Cụ (DevSecOps Toolchain Overview)
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+Một hệ thống DevSecOps mạnh mẽ cần sự phối hợp của nhiều công cụ chuyên biệt:
 
-#### Domain-Driven Design (DDD)
-
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
-
-#### Event-Driven Architecture
-
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
-
-#### Compute Evolution
-
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
-
-#### Amazon Q Developer
-
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+- **Pre-commit & Code Quality:**
+    - *SonarQube, Codacy*: Kiểm tra chất lượng code.
+    - *GitLeaks*: Quét và ngăn chặn việc lộ Secret/Key trong code trước khi commit.
+- **Dependency & SBOM Scanning:**
+    - *Syft, Grype, Dependency-Track*: Quản lý các gói phần mềm và phát hiện lỗ hổng trong thư viện bên thứ 3.
+- **IaC & Policy-as-Code:**
+    - *Checkov, Tfsec*: Quét lỗi bảo mật trong file Terraform/Kubernetes.
+    - *OPA Gatekeeper, Kyverno*: Thực thi chính sách tuân thủ tự động trên Cluster.
+- **SAST / DAST & Security Tests:**
+    - *Trivy, Checkmarx*: Phát hiện lỗ hổng toàn diện từ Code đến Runtime.
+- **CI/CD Integration:**
+    - *Jenkins, GitHub Actions, GitLab CI, ArgoCD*: Nền tảng để tự động hóa toàn bộ quy trình trên.
+- **Monitoring & Logging:**
+    - *Prometheus, Grafana, Loki*: Giám sát sức khỏe hệ thống (Observability).
+- **Alerting & Governance:**
+    - *Slack, Email, AI Anomaly Detection*: Cảnh báo tức thì khi có sự cố.
 
 ### Những Gì Học Được
 
-#### Tư Duy Thiết Kế
+#### Tư Duy "Shift Left"
 
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
+- Bảo mật không nên để đến cuối mới làm (Giai đoạn Test/Operate) mà phải đưa sang trái (Shift Left) - tức là làm ngay từ khâu **Plan** và **Code**. Việc phát hiện lỗi sớm giúp tiết kiệm chi phí sửa chữa gấp nhiều lần.
 
-#### Kiến Trúc Kỹ Thuật
+#### Tầm Quan Trọng Của Automation
 
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
+- Không thể làm bảo mật thủ công trong thời đại Cloud. Cần tích hợp các công cụ quét (Scan) vào Pipeline để chặn các bản build lỗi một cách tự động.
 
-#### Chiến Lược Hiện Đại Hóa
+#### Quản Lý Rủi Ro Chuỗi Cung Ứng (Supply Chain Security)
 
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
+- Thông qua việc quét Dependency (SBOM), ta có thể ngăn chặn các cuộc tấn công vào thư viện thứ 3 (tương tự vụ Log4j).
 
 ### Ứng Dụng Vào Công Việc
 
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
+- **Tích hợp GitLeaks**: Cài đặt ngay pre-commit hook để ngăn chặn việc vô tình push AWS Access Key lên GitHub.
+- **Triển khai SonarQube**: Tích hợp vào quy trình CI hiện tại để đo lường nợ kỹ thuật và lỗ hổng bảo mật.
+- **Áp dụng IaC Scanning**: Sử dụng **Checkov** để quét các file CloudFormation/Terraform trước khi apply hạ tầng lên AWS.
+- **Monitoring**: Thiết lập Dashboard Grafana để theo dõi trạng thái ứng dụng real-time.
 
 ### Trải nghiệm trong event
 
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
+Mặc dù chỉ tham gia qua hình thức theo dõi tài liệu, nhưng nội dung của CMC Global mang lại cái nhìn rất hệ thống về DevSecOps.
 
-#### Học hỏi từ các diễn giả có chuyên môn cao
+#### Sự rõ ràng trong quy trình
 
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
+- Slide về **DevSecOps Lifecycle** giúp mình hình dung rõ ràng bức tranh toàn cảnh, biết được ở mỗi giai đoạn cần làm gì thay vì chỉ tập trung vào viết code như trước đây.
 
-#### Trải nghiệm kỹ thuật thực tế
+#### Bộ công cụ thực chiến
 
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
+- Slide **Toolchain** là một "kho báu" thực sự. Nó cung cấp danh sách các công cụ tiêu chuẩn ngành (Industry Standard) mà mình có thể tìm hiểu và áp dụng ngay lập tức cho dự án MiniMarket của mình (ví dụ như dùng Trivy để quét Docker Image).
 
-#### Ứng dụng công cụ hiện đại
-
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
-
-#### Bài học rút ra
-
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
-
-#### Một số hình ảnh khi tham gia sự kiện
-
-- Thêm các hình ảnh của các bạn tại đây
-  > Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+  > Sự kiện đã nhấn mạnh rằng: Trong kỷ nguyên AI và Cloud, Bảo mật không phải là một tính năng (feature), mà là một văn hóa (culture) cần được xây dựng từ những dòng code đầu tiên.
