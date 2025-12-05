@@ -18,7 +18,7 @@ The group's solution is to build a comprehensive e-commerce and operations manag
 
 Business benefits are immediate, including automated inventory management (reducing loss) and opening a new online revenue channel. Regarding investment, infrastructure costs in the first 12 months are nearly zero by leveraging AWS Free Tier (e.g., RDS Express Edition, EC2 t3.micro). Long-term operating costs (after Free Tier) are also very practical, estimated at around 138.06 USD/month for the entire system. With minimal initial investment and the ability to directly solve problems causing revenue loss, ROI is very high and almost instant.
 
-The project is proposed to be implemented in 11 weeks, divided into 4 main phases: (1) Foundation & Architecture, (2) Core Feature Development, (3) AWS Integration & CI/CD, and (4) Finalization & Deployment. Expected results are measured by specific success metrics: reduce inventory errors by 90%, reduce checkout time by 50%, and achieve 20% revenue from online channels in the first 6 months. This solution not only solves immediate problems but also provides mini-markets with a scalable platform for data-driven decision-making in the future.
+The project is proposed to be implemented in 12 weeks, divided into 4 main phases: (1) Foundation & Architecture, (2) Core Feature Development, (3) AWS Integration & CI/CD, and (4) Finalization & Deployment. Expected results are measured by specific success metrics: reduce inventory errors by 90%, reduce checkout time by 50%, and achieve 20% revenue from online channels in the first 6 months. This solution not only solves immediate problems but also provides mini-markets with a scalable platform for data-driven decision-making in the future.
 
 ### 2. Problem Statement
 
@@ -72,7 +72,7 @@ _Data Flow_
 ### 4. Technical Implementation
 
 _Implementation Stages_  
-The project will be divided into 4 main stages, lasting 11 weeks to ensure progress and quality:
+The project will be divided into 4 main stages, lasting 12 weeks to ensure progress and quality:
 
 1. _Building Technical Foundation_: Focus on building the technical foundation, including finalizing the data model for main entities, setting up .NET 3-tier solution structure (Domain, Application, Persistence, WebShop), initializing repository on Github, and researching AWS services. (Weeks 1-4)
 
@@ -106,7 +106,7 @@ Apply fully automated CI/CD process. The process is automatically triggered when
 
 ### 5. Roadmap & Milestones
 
-The project is planned to be executed in 11 weeks, divided into 4 main stages. This schedule ensures time for development, integration, and thorough testing.
+The project is planned to be executed in 12 weeks, divided into 4 main stages. This schedule ensures time for development, integration, and thorough testing.
 
 Phase 1 (Weeks 1 - 4): This stage focuses on building the technical foundation, including finalizing data models, setting up .NET 3-tier Solution Architecture, initializing Github Repository, and researching AWS services. The milestone of this stage is Solution Architecture and Repository established, along with AWS environment (VPC, Subnets).
 

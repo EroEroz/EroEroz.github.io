@@ -18,7 +18,7 @@ Giải pháp của nhóm là xây dựng một nền tảng e-commerce và quả
 
 Business benefits là ngay lập tức, bao gồm tự động hóa quản lý kho (giảm thất thoát) và mở ra một kênh doanh thu online mới. Về investment, chi phí hạ tầng trong 12 tháng đầu tiên là gần như bằng 0 nhờ tận dụng AWS Free Tier (ví dụ: RDS Express Edition, EC2 t3.micro). Chi phí vận hành dài hạn (sau Free Tier) cũng rất thực tế, ước tính chỉ khoảng 138.06 USD/tháng cho toàn bộ hệ thống. Với investment ban đầu tối thiểu và khả năng giải quyết trực tiếp các vấn đề gây thất thoát doanh thu, ROI là rất cao và gần như tức thì.
 
-Dự án được đề xuất triển khai trong 11 tuần, chia thành 4 phases (giai đoạn) chính: (1) Foundation & Architecture, (2) Core Feature Development, (3) AWS Integration & CI/CD, và (4) Finalization & Deployment. Kết quả mong đợi được đo lường bằng các success metrics cụ thể: giảm 90% sai sót kho vận, giảm 50% thời gian thanh toán, và đạt 20% doanh thu từ kênh online trong 6 tháng đầu. Giải pháp này không chỉ giải quyết các vấn đề trước mắt mà còn cung cấp cho mini-market một nền tảng scalable để đưa ra quyết định dựa trên dữ liệu trong tương lai.
+Dự án được đề xuất triển khai trong 12 tuần, chia thành 4 phases (giai đoạn) chính: (1) Foundation & Architecture, (2) Core Feature Development, (3) AWS Integration & CI/CD, và (4) Finalization & Deployment. Kết quả mong đợi được đo lường bằng các success metrics cụ thể: giảm 90% sai sót kho vận, giảm 50% thời gian thanh toán, và đạt 20% doanh thu từ kênh online trong 6 tháng đầu. Giải pháp này không chỉ giải quyết các vấn đề trước mắt mà còn cung cấp cho mini-market một nền tảng scalable để đưa ra quyết định dựa trên dữ liệu trong tương lai.
 
 ### 2. Tuyên bố vấn đề
 
