@@ -1,109 +1,107 @@
 ---
 title: "Event 3"
 date: 2025-09-10
-weight: 2
+weight: 3
 chapter: false
 pre: " <b> 4.3. </b> "
 ---
 
-# Bài thu hoạch “DevOps on AWS”
+
+# Bài thu hoạch “Reinventing DevSecOps”
 
 ### Mục Đích Của Sự Kiện
 
-- Định hướng lộ trình nghề nghiệp trong lĩnh vực DevOps và Cloud.
-- Hiểu sâu về quy trình CI/CD và Containerization.
-- Phân tích vai trò của Infrastructure as Code (IaC) so với ClickOps.
-- So sánh các giải pháp Orchestration trên AWS (ECS vs EKS) và chiến lược Monitoring/Observability.
+- Định nghĩa lại quy trình phát triển phần mềm an toàn (DevSecOps Lifecycle) từ khâu lập kế hoạch đến vận hành.
+- Giới thiệu bộ công cụ (Toolchain) toàn diện để tích hợp bảo mật vào từng giai đoạn của CI/CD.
+- Xây dựng tư duy "Security-First" cho đội ngũ phát triển và vận hành.
+
+### Đơn Vị Tổ Chức
+
+- **CMC Global**
 
 ### Nội Dung Nổi Bật
 
-#### Lộ Trình DevOps Thế Hệ Mới
+#### 1. Vòng Đời DevSecOps (The DevSecOps Lifecycle)
 
-- **Các vai trò liên quan**: DevOps Engineer, Cloud Engineer, Platform Engineer, Site Reliability Engineer (SRE).
-- **T-shaped Skill**: Mô hình phát triển kỹ năng với kiến thức rộng về nhiều mảng và chuyên sâu vào một mảng cụ thể.
-- **Lời khuyên cho người mới**:
-    - **Do**: Bắt đầu từ nền tảng, học qua dự án thực tế, viết tài liệu, tập trung làm chủ từng kỹ năng một.
-    - **Don't**: Sa lầy vào "Tutorial Hell", copy-paste mù quáng, so sánh bản thân với người khác, bỏ cuộc sau thất bại.
+Quy trình được chia thành 7 giai đoạn khép kín, đảm bảo bảo mật không phải là "nút thắt cổ chai" mà là một phần của dòng chảy:
 
-#### Continuous Integration & Deployment (CI/CD)
+1.  **PLAN (Lập kế hoạch):**
+    - Xác định yêu cầu bảo mật ngay từ đầu (Security Requirements).
+    - Thống nhất mục tiêu giữa Dev, Sec và Ops.
+    - Xây dựng lộ trình bảo mật (Security Roadmap) bám sát mục tiêu dự án.
+2.  **CODE (Viết mã):**
+    - Áp dụng các tiêu chuẩn Clean Code và Secure Coding.
+    - Sử dụng **SAST** (Static Application Security Testing) ngay trên IDE để phát hiện lỗi sớm.
+    - Hình thành tư duy "Security-first" cho Developer.
+3.  **BUILD (Xây dựng):**
+    - Tự động kiểm tra bảo mật trong CI/CD Pipeline.
+    - Quét các thư viện phụ thuộc (Dependency Scan) và mã nhị phân (Binary Scan).
+    - Đảm bảo bản build an toàn và nhất quán (Immutable Artifacts).
+4.  **TEST (Kiểm thử):**
+    - Chạy quét lỗ hổng (Vulnerability Scan) và **DAST** (Dynamic Application Security Testing).
+    - Thực hiện Penetration Test (Kiểm thử xâm nhập).
+5.  **DEPLOY (Triển khai):**
+    - Kiểm tra cấu hình và **IaC** (Infrastructure as Code) trước khi deploy.
+    - Giám sát cấu hình Runtime.
+6.  **OPERATE (Vận hành):**
+    - Tự động vá lỗi (Auto-patching) và cập nhật bảo mật liên tục.
+    - Có quy trình phản ứng sự cố (Incident Response).
+7.  **MONITOR (Giám sát):**
+    - Theo dõi liên tục các mối đe dọa (Threats).
+    - Sử dụng Real-time Analytics và các công cụ cảnh báo (Alerting).
 
-- **CI (Continuous Integration)**: Quy trình tích hợp code thường xuyên vào kho lưu trữ chung.
-- **Phân biệt CD**:
-    - **Continuous Delivery**: Tự động hóa đến bước Acceptance Test, việc deploy lên Production cần kích hoạt thủ công.
-    - **Continuous Deployment**: Tự động hóa hoàn toàn từ code đến Production.
+#### 2. Hệ Sinh Thái Công Cụ (DevSecOps Toolchain Overview)
 
-#### Infrastructure as Code (IaC)
+Một hệ thống DevSecOps mạnh mẽ cần sự phối hợp của nhiều công cụ chuyên biệt:
 
-- **Vấn đề của ClickOps**: Chậm, dễ gây lỗi con người (Human Error), thiếu nhất quán, khó cộng tác.
-- **Lợi ích của IaC**: Tự động hóa, khả năng mở rộng (Scalability), khả năng tái tạo (Reproducibility), tăng cường cộng tác.
-- **AWS CloudFormation**:
-    - Công cụ IaC tích hợp sẵn của AWS sử dụng JSON/YAML templates.
-    - **Stack**: Tập hợp các resource được quản lý chung.
-    - **Drift Detection**: Phát hiện sự sai lệch giữa cấu hình thực tế và template (khi có ai đó sửa tay resource).
-- **AWS CDK (Cloud Development Kit)**:
-    - Sử dụng ngôn ngữ lập trình (Python, TS...) để định nghĩa hạ tầng.
-    - Các khái niệm: L1 (Mapping 1:1), L2, L3 Constructs.
-    - Các lệnh CLI: **cdk init**, **cdk synth**, **cdk deploy**, **cdk diff,** **cdk destroy**.
-- **Terraform**: Công cụ mã nguồn mở, hỗ trợ Multi-cloud, sử dụng ngôn ngữ HCL, quản lý trạng thái qua State file.
-
-#### Container Ecosystem
-
-- **Docker Fundamentals**: Dockerfile (định nghĩa build) → Image (bản thiết kế đóng gói) → Container (runtime).
-- **Amazon ECR**: Private container registry của AWS, hỗ trợ image scanning, immutable tags và lifecycle policies.
-- **Container Orchestration**: Quản lý vòng đời container (restart, scale, distribute traffic).
-    - **Amazon ECS**: Giải pháp native của AWS. Hỗ trợ Launch types: EC2 (quản lý server) và Fargate (Serverless - dễ dàng hơn).
-    - **Amazon EKS**: Dịch vụ Kubernetes được quản lý. Phù hợp cho hệ thống phức tạp, yêu cầu kinh nghiệm về K8s.
-    - **Amazon App Runner**: Giải pháp đơn giản nhất để deploy web app/API nhanh chóng và tiết kiệm chi phí.
-
-#### Monitoring & Observability
-
-- **Phân biệt**:
-    - **Monitoring**: Theo dõi Logs, Metrics (Hệ thống đang hoạt động ra sao?).
-    - **Observability**: Hiểu sâu nguyên nhân sự việc (Tại sao hệ thống lại hoạt động như vậy?).
-- **Amazon CloudWatch**:
-    - Thu thập Metrics (CPU, RAM, Network...) và Logs theo thời gian thực.
-    - **Alarms**: Cảnh báo và phản ứng tự động.
-    - **Dashboards**: Trực quan hóa dữ liệu vận hành.
-- **AWS X-Ray**: Distributed tracing cho microservices, giúp vẽ bản đồ dịch vụ (Service maps) và phân tích điểm nghẽn hiệu năng (Performance bottlenecks).
+- **Pre-commit & Code Quality:**
+    - *SonarQube, Codacy*: Kiểm tra chất lượng code.
+    - *GitLeaks*: Quét và ngăn chặn việc lộ Secret/Key trong code trước khi commit.
+- **Dependency & SBOM Scanning:**
+    - *Syft, Grype, Dependency-Track*: Quản lý các gói phần mềm và phát hiện lỗ hổng trong thư viện bên thứ 3.
+- **IaC & Policy-as-Code:**
+    - *Checkov, Tfsec*: Quét lỗi bảo mật trong file Terraform/Kubernetes.
+    - *OPA Gatekeeper, Kyverno*: Thực thi chính sách tuân thủ tự động trên Cluster.
+- **SAST / DAST & Security Tests:**
+    - *Trivy, Checkmarx*: Phát hiện lỗ hổng toàn diện từ Code đến Runtime.
+- **CI/CD Integration:**
+    - *Jenkins, GitHub Actions, GitLab CI, ArgoCD*: Nền tảng để tự động hóa toàn bộ quy trình trên.
+- **Monitoring & Logging:**
+    - *Prometheus, Grafana, Loki*: Giám sát sức khỏe hệ thống (Observability).
+- **Alerting & Governance:**
+    - *Slack, Email, AI Anomaly Detection*: Cảnh báo tức thì khi có sự cố.
 
 ### Những Gì Học Được
 
-#### Tư Duy Hệ Thống
+#### Tư Duy "Shift Left"
 
-- **Infrastructure Drift**: Hiểu được rủi ro khi sửa đổi tài nguyên thủ công ngoài IaC và tầm quan trọng của việc dùng Drift Detection.
-- **Trade-offs**: Biết cách lựa chọn công cụ IaC (CDK cho AWS-centric, Terraform cho Multi-cloud) và công cụ Orchestration (ECS cho người mới/đơn giản, EKS cho tính năng cao cấp).
+- Bảo mật không nên để đến cuối mới làm (Giai đoạn Test/Operate) mà phải đưa sang trái (Shift Left) - tức là làm ngay từ khâu **Plan** và **Code**. Việc phát hiện lỗi sớm giúp tiết kiệm chi phí sửa chữa gấp nhiều lần.
 
-#### Kỹ Năng Vận Hành
+#### Tầm Quan Trọng Của Automation
 
-- **Quy trình chuẩn**: Sự khác biệt cốt lõi giữa Continuous Delivery và Continuous Deployment nằm ở bước duyệt thủ công lên Production.
-- **Quản lý Container**: Hiểu rõ workflow từ Dockerfile lên ECR và cách ECS/EKS điều phối container hoạt động.
+- Không thể làm bảo mật thủ công trong thời đại Cloud. Cần tích hợp các công cụ quét (Scan) vào Pipeline để chặn các bản build lỗi một cách tự động.
+
+#### Quản Lý Rủi Ro Chuỗi Cung Ứng (Supply Chain Security)
+
+- Thông qua việc quét Dependency (SBOM), ta có thể ngăn chặn các cuộc tấn công vào thư viện thứ 3 (tương tự vụ Log4j).
 
 ### Ứng Dụng Vào Công Việc
 
-- **Chuyển đổi sang IaC**: Bắt đầu viết CloudFormation hoặc CDK cho dự án hiện tại thay vì thao tác trên Console.
-- **Tối ưu Pipeline**: Rà soát lại quy trình CI/CD, tích hợp thêm các bước test tự động trước khi deploy.
-- **Triển khai Observability**: Tích hợp AWS X-Ray vào ứng dụng để trace request qua các microservices, kết hợp với CloudWatch Alarms để giám sát chủ động.
-- **Refactor Docker**: Tối ưu hóa Dockerfile và sử dụng ECR Lifecycle Policies để quản lý dung lượng lưu trữ image.
+- **Tích hợp GitLeaks**: Cài đặt ngay pre-commit hook để ngăn chặn việc vô tình push AWS Access Key lên GitHub.
+- **Triển khai SonarQube**: Tích hợp vào quy trình CI hiện tại để đo lường nợ kỹ thuật và lỗ hổng bảo mật.
+- **Áp dụng IaC Scanning**: Sử dụng **Checkov** để quét các file CloudFormation/Terraform trước khi apply hạ tầng lên AWS.
+- **Monitoring**: Thiết lập Dashboard Grafana để theo dõi trạng thái ứng dụng real-time.
 
 ### Trải nghiệm trong event
 
-Tham gia sự kiện **“Next-Generation DevOps & Cloud Architecture”** là một bước đệm quan trọng giúp mình định hình rõ ràng con đường phát triển kỹ năng DevOps.
+Mặc dù chỉ tham gia qua hình thức theo dõi tài liệu, nhưng nội dung của CMC Global mang lại cái nhìn rất hệ thống về DevSecOps.
 
-#### Định hướng rõ ràng
+#### Sự rõ ràng trong quy trình
 
-- Diễn giả đã vẽ ra một roadmap rất thực tế với lời khuyên "Don't stay in Tutorial Hell" - điều mà mình rất tâm đắc.
-- Mô hình **T-shaped skill** giúp mình nhận ra không cần phải biết tất cả mọi thứ ngay lập tức mà nên tập trung chuyên sâu vào một mảng trước.
+- Slide về **DevSecOps Lifecycle** giúp mình hình dung rõ ràng bức tranh toàn cảnh, biết được ở mỗi giai đoạn cần làm gì thay vì chỉ tập trung vào viết code như trước đây.
 
-#### Kiến thức chuyên sâu về công cụ
+#### Bộ công cụ thực chiến
 
-- Sự so sánh chi tiết giữa **ECS và EKS** giúp mình tự tin hơn trong việc lựa chọn giải pháp compute phù hợp cho dự án (với người mới bắt đầu như mình, ECS Fargate là lựa chọn tối ưu).
-- Phần trình bày về **IaC và Drift Detection** đã thay đổi hoàn toàn tư duy của mình về việc quản lý hạ tầng: "Use code, not clicks".
+- Slide **Toolchain** là một "kho báu" thực sự. Nó cung cấp danh sách các công cụ tiêu chuẩn ngành (Industry Standard) mà mình có thể tìm hiểu và áp dụng ngay lập tức cho dự án MiniMarket của mình (ví dụ như dùng Trivy để quét Docker Image).
 
-#### Tầm quan trọng của Observability
-
-- Mình nhận ra rằng chỉ Monitoring là chưa đủ, mà cần phải đạt được **Observability** thông qua các công cụ như AWS X-Ray để giải quyết triệt để các vấn đề trong hệ thống phân tán.
-
-#### Một số hình ảnh khi tham gia sự kiện
-
-- Thêm các hình ảnh của các bạn tại đây
-  > Sự kiện này không chỉ cung cấp kiến thức kỹ thuật mà còn truyền cảm hứng về tư duy làm nghề, từ việc xây dựng văn hóa CI/CD đến việc tự động hóa mọi thứ có thể.
+  > Sự kiện đã nhấn mạnh rằng: Trong kỷ nguyên AI và Cloud, Bảo mật không phải là một tính năng (feature), mà là một văn hóa (culture) cần được xây dựng từ những dòng code đầu tiên.

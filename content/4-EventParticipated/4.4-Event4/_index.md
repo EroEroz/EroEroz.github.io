@@ -1,92 +1,110 @@
 ---
 title: "Event 4"
 date: 2025-09-10
-weight: 3
+weight: 4
 chapter: false
 pre: " <b> 4.4. </b> "
 ---
 
-# “AWS Security Governance & Automation” Report
+# “AI/ML/GenAI on AWS” Report
 
 ### Event Purpose
 
-- Introduce the vision of Cloud Club and the importance of community.
-- Share methods for centralized Identity Management and account security.
-- Guide on Multi-Layer Security Visibility strategy.
-- Automate security incident response process (Automated Alerting) with EventBridge.
+- Provide an overview of Foundation Models and the Amazon Bedrock platform
+- Guide on Prompt Engineering techniques from basic to advanced
+- Explain the architecture and operational workflow of RAG (Retrieval Augmented Generation)
+- Introduce AWS's ecosystem of Pretrained AI services and Frameworks for building AI Agents
+
+### Speaker List
+
+- **Lam Tuan Kiet**
+- **Danh Hoanh Hieu Nghi**
+- **Dinh Le Hoang Anh**
 
 ### Highlights
 
-#### Identity & Access Management (IAM & Governance)
+#### Foundation Models & Amazon Bedrock
 
-- **Single Sign-On (SSO)**: "One login, multiple systems" mechanism. Instead of creating many scattered IAM Users, SSO allows centralized identity management, helping users log in once to access multiple AWS accounts/applications.
-- **Service Control Policies (SCPs)**: A type of Organizational Policy used to set up "guardrails". SCPs limit maximum permissions for member accounts in AWS Organization.
-- **Credentials Spectrum**:
-    - **Long-term**: IAM User Access Keys (do not expire) → High risk, need to limit usage.
-    - **Short-term**: IAM Roles, STS tokens (expire after 15 minutes - 36 hours) → Higher security, is best practice.
-- **MFA (Multi-Factor Authentication)**: Mandatory security layer for every account.
+- **Foundation Models (FMs)**: Trained using self-supervised training, capable of processing many tasks.
+- **Amazon Bedrock**: Platform providing access to leading models like Luma, Deepseek...
 
-#### Multi-Layer Security Visibility
+#### Prompt Engineering (AI Command Techniques)
 
-- **IAM Access Analyzer**: Tool helping detect resources (S3, KMS, IAM Roles...) being publicly shared or shared with untrusted accounts.
-- **Event Classification (Logging)**:
-    - **Management Events**: Who did what to resources? (Ex: Create EC2, Delete S3 Bucket).
-    - **Data Events**: Who accessed the data? (Ex: GetObject S3, Invoke Lambda).
-    - **Network Activity Events**: Monitor VPC network traffic.
+Basic process: Prompt → Bedrock → Response. Key techniques:
+- **Zero-Shot Prompting**: Asking questions directly without providing sample data.
+- **Few-Shot Prompting**: Providing a few examples (example frame) for the model to learn the answer structure when encountering similar questions.
+- **Chain of Thought (CoT)**: Guiding AI on step-by-step reasoning, helping AI provide more accurate answers based on learned logic.
 
-#### Automation & Alerting
+#### Retrieval Augmented Generation (RAG)
 
-- **Amazon EventBridge**: Real-time Event processing center.
-    - Supports **Cross-account Event**: Receive events from child accounts to the central security account.
-    - **Automated Alerting**: Automatically send alerts when abnormal behavior is detected.
-- **Detection as Code**:
-    - Convert threat detection logic into code (Infrastructure as Code).
-    - Use **CloudTrail Lake queries** to query history.
-    - Version control for security rules.
+Currently popular model (used widely in Banking). Process includes: **Retrieval → Augmentation → Generation**.
+- **Embeddings**: Convert human language into Vectors. Using Amazon Titan Embedding (supports multiple languages).
+- **RAG in Action**:
+    1. **Data preparation**: Data source → Document chunk → Embeddings model → Vector store.
+    2. **Query processing**: User input → Embeddings model → Vector → Semantic search (in Vector store) → Context → Prompt augmentation → LLM → Response.
 
-#### Network Security
+#### Other Pretrained AI Services
 
-- **Common Attack Vectors**: Common network attack vectors (DDoS, SQL Injection, Man-in-the-middle...).
-- **AWS Layered Security**: Defense in Depth strategy - protecting from the outer layer (Edge), network layer (VPC), to application and data layers.
+AWS provides specialized services with optimal costs:
+- **Amazon Rekognition** (Computer Vision): Image/video analysis, face and object detection. Pricing: ~$0.0013/image.
+- **Amazon Translate**: Real-time or batch text translation. Pricing: ~$15/million characters.
+- **Amazon Textract**: Extract text and layout from documents (OCR). Pricing: ~$0.05/page.
+- **Amazon Transcribe**: Convert speech to text, supports streaming.
+- **Amazon Polly**: Convert text to speech, supports Real-time TTS. Pricing: ~$4/million characters.
+- **Amazon Comprehend** (NLP): Sentiment Analysis, key phrase extraction, PII detection. Pricing: ~$0.0001/100 chars.
+- **Amazon Kendra**: Intelligent Search service, supports Natural Language Search and RAG.
+- **Amazon Lookout Family**: Detect anomalies in Metrics, Equipment, and Vision.
+- **Amazon Personalize**: Personalized recommendation system for users.
+
+#### AI Agents & Frameworks
+
+- **Pipecat**: Framework for voice/multimodal AI agents, optimized for real-time conversation assistants.
+- **Amazon Bedrock AgentCore**:
+    - Supported frameworks: Langgraph, Langchain, Strands Agents SDK.
+    - Process from Idea → Production needs to focus on: Performance, Scalability, Security, Governance.
+    - Core components: Runtime, Memory, Identity, Gateway, Code Interpreter, Browser tool, Observability.
 
 ### What I Learned
 
-#### Modern Security Mindset
+#### Prompting Mindset
 
-- **Identity is the new perimeter**: In Cloud environment, identity management (IAM/SSO) is more important than traditional firewalls.
-- **Zero Trust**: Trust no one, always authenticate (MFA) and grant least privilege.
+- **Optimization Techniques**: Clearly understand the differences between Zero-shot, Few-shot, and Chain of Thought to apply to specific problem complexities.
+- **Structuring**: Providing examples helps better control the model's output format.
 
-#### Governance Strategy
+#### RAG Architecture
 
-- **Shift from Long-term to Short-term**: Understand clearly the risks of long-term Access Keys and the importance of shifting to Temporary Credentials.
-- **Governance at Scale**: Use SCPs to manage hundreds of AWS accounts consistently instead of manual configuration for each.
+- **Vector Database**: Understand the critical role of Vector Store and Semantic Search in providing accurate context for LLMs.
+- **Embedding Models**: The importance of choosing embedding models (like Amazon Titan) to support multiple languages and search accuracy.
 
-#### Automation Techniques
+#### Service Selection (Trade-offs)
 
-- **Event-Driven Security**: Instead of manual log review (passive), use EventBridge to react immediately (active) when security incidents occur.
+- **Cost vs Flexibility**: Know how to balance costs between using Pretrained Services (pay per request/char) versus building custom models or using general LLMs.
+- **Use case specific**: Each service (Rekognition, Textract...) solves a specific problem better and cheaper than forcing an LLM to do everything.
 
 ### Application to Work
 
-- **Review IAM**: Check and disable old IAM Access Keys, enforce MFA for the whole team.
-- **Deploy Access Analyzer**: Activate immediately to scan if any S3 bucket is mistakenly public.
-- **Set up alerts**: Create simple EventBridge rules to send notifications to Slack/Email when someone logs in with Root account or changes Security Group.
-- **Learn about CloudTrail**: Configure CloudTrail to record both Management and Data events for critical resources.
+- **Deploy RAG**: Apply Retrieval Augmented Generation model to build internal search systems for enterprise/banking.
+- **Integrate Pretrained Services**: Use Amazon Textract and Comprehend to automate document and record processing.
+- **Build intelligent Chatbots**: Combine Amazon Lex/Bedrock with Pipecat framework to create real-time conversational virtual assistants.
+- **Cost Optimization**: Use Caching for Amazon Polly or select the right tier of AI services to minimize operating costs.
 
 ### Event Experience
 
-The 3rd event brought a very deep perspective on **Security & Governance** aspects - an area often overlooked in development but vital for businesses.
+Participating in the **“Generative AI with Amazon Bedrock”** event helped me systematize knowledge about GenAI and the AWS ecosystem. Some highlights:
 
-#### Risk Awareness
+#### Practical Knowledge from Experts
 
-- The presentation on **Credentials Spectrum** startled me into realizing how dangerous the habit of using IAM Users with Long-term keys is. Shifting to Short-term credentials is mandatory.
+- Speakers shared real-world experiences on applying RAG and Prompt Engineering.
+- Deeper understanding of the AI **reasoning process** through Chain of Thought.
 
-#### The Power of Automation
+#### Overview of AI Services
 
-- I was very impressed with the concept of **"Detection as Code"**. Managing security rules like source code helps operations become transparent and easier to control.
-- The **EventBridge** demo showed excellent real-time response capabilities, minimizing the time attackers can cause harm in the system.
+- Not stopping at LLMs, the event provided a broad view of Specialized AI Services like Lookout, Kendra, Personalize... helping solve niche problems effectively.
+- The Pricing analysis gave me more data to make decisions when designing solutions.
 
-#### Multi-layered Defense Mindset
+#### Tech Trend Updates
 
-- Understood better about **AWS Layered Security**, security is not just a door but multiple barrier layers coordinating from Network to Identity.
+- Introduced to **Agentic AI** and components of Bedrock AgentCore, opening new directions in building AI applications capable of executing complex tasks (Idea to Production).
+- Approached **Pipecat framework**, an optimal solution for voice AI agents.
 
-  > This event changed my mindset from "Make it run" to "Make it safe and compliant". Security is not a barrier, but a foundation for sustainable development.
+  > In conclusion, the event provided a solid knowledge foundation about Amazon Bedrock and GenAI techniques, thereby helping me feel more confident in proposing and implementing AI solutions for projects.

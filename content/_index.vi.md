@@ -9,17 +9,17 @@ chapter: false
 
 ### Thông tin sinh viên:
 
-&emsp; **Họ và tên:** Nguyễn Văn A
+&emsp; **Họ và tên:** Nguyễn Hoàng Gia Huy
 
-&emsp; **Số điện thoại:** 0989888999
+&emsp; **Số điện thoại:** 0902566797
 
-&emsp; **Email:** Anguyenvan@gmail.com
+&emsp; **Email:** huynhgse182631@fpt.edu.vn
 
-&emsp; **Trường:** Đại học Sư phạm Kỹ thuật TP.HCM
+&emsp; **Trường:** Đại học FPT
 
-&emsp; **Ngành:** Công nghệ thông tin
+&emsp; **Ngành:** Trí tuệ nhân tạo
 
-&emsp; **Lớp:** AWS082025
+&emsp; **Lớp:** AWS First Cloud Journey
 
 &emsp; **Công ty thực tập:** Công ty TNHH Amazon Web Services Vietnam
 
