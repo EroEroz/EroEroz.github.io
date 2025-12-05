@@ -34,4 +34,4 @@ pre: " <b> 4.2. </b> "
 ### Application to Work
 
 - Potential to integrate **Amazon Polly** into MiniMarket project to read product information for visually impaired users (Accessibility).
-- Use **Textract** to automate input invoice data entry for the inventory management system.
+- Use **Textract** to automate input invoice data entry for the inventory management system. 
