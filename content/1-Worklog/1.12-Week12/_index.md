@@ -30,4 +30,4 @@ pre: " <b> 1.12. </b> "
 - Established CI/CD pipeline using **CodePipeline**, **CodeBuild**, and **CodeDeploy**.
 - Successfully integrated **S3** and **CloudFront** for static asset storage and delivery.
 - Implemented **Amazon ElastiCache** to handle distributed sessions.
-- Initiated AWS training: Completed introductory modules on **AWS Global Infrastructure**.
+- Completed introductory modules on **AWS Global Infrastructure**.
