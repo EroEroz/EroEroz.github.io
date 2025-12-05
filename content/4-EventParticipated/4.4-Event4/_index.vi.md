@@ -1,97 +1,110 @@
 ---
 title: "Event 4"
 date: 2025-09-10
-weight: 3
+weight: 4
 chapter: false
 pre: " <b> 4.4. </b> "
 ---
 
-# Bài thu hoạch “AWS Security Governance & Automation”
+# Bài thu hoạch “AI/ML/GenAI on AWS”
 
 ### Mục Đích Của Sự Kiện
 
-- Giới thiệu tầm nhìn của Cloud Club và tầm quan trọng của cộng đồng.
-- Chia sẻ các phương pháp quản lý danh tính tập trung (Identity Management) và bảo mật tài khoản.
-- Hướng dẫn chiến lược giám sát an ninh đa lớp (Multi-Layer Visibility).
-- Tự động hóa quy trình phản ứng sự cố bảo mật (Automated Alerting) với EventBridge.
+- Giới thiệu tổng quan về Foundation Models và nền tảng Amazon Bedrock
+- Hướng dẫn các kỹ thuật Prompt Engineering từ cơ bản đến nâng cao
+- Giải thích kiến trúc và quy trình hoạt động của RAG (Retrieval Augmented Generation)
+- Giới thiệu hệ sinh thái các dịch vụ Pretrained AI của AWS và các Framework xây dựng AI Agents
 
 ### Danh Sách Diễn Giả
 
-- **[Tên Diễn Giả]** - [Chức vụ/Tổ chức] *(Bạn điền tên diễn giả vào đây nhé)*
+- **Lam Tuan Kiet**
+- **Danh Hoanh Hieu Nghi**
+- **Dinh Le Hoang Anh**
 
 ### Nội Dung Nổi Bật
 
-#### Quản Lý Danh Tính & Truy Cập (IAM & Governance)
+#### Foundation Models & Amazon Bedrock
 
-- **Single Sign-On (SSO)**: Cơ chế "One login, multiple systems". Thay vì tạo nhiều IAM User lẻ tẻ, SSO cho phép quản lý danh tính tập trung, giúp người dùng chỉ cần đăng nhập một lần để truy cập nhiều tài khoản/ứng dụng AWS.
-- **Service Control Policies (SCPs)**: Một loại chính sách tổ chức (Organizational Policy) dùng để thiết lập "hàng rào bảo vệ" (guardrails). SCPs giới hạn quyền tối đa (maximum permissions) cho các tài khoản thành viên trong AWS Organization.
-- **Phổ thông tin xác thực (Credentials Spectrum)**:
-    - **Long-term**: Access Keys của IAM User (không hết hạn) → Rủi ro cao, cần hạn chế sử dụng.
-    - **Short-term**: IAM Roles, STS tokens (hết hạn sau 15 phút - 36 giờ) → Bảo mật cao hơn, là best practice.
-- **MFA (Multi-Factor Authentication)**: Lớp bảo mật bắt buộc phải có cho mọi tài khoản.
+- **Foundation Models (FMs)**: Được huấn luyện theo phương pháp self-supervisor training, có khả năng xử lý đa nhiệm (many tasks).
+- **Amazon Bedrock**: Nền tảng cung cấp quyền truy cập vào các mô hình hàng đầu như Luma, Deepseek...
 
-#### Khả Năng Quan Sát Bảo Mật Đa Lớp (Visibility)
+#### Prompt Engineering (Kỹ thuật ra lệnh cho AI)
 
-- **IAM Access Analyzer**: Công cụ giúp phát hiện các tài nguyên (S3, KMS, IAM Roles...) đang bị chia sẻ công khai hoặc chia sẻ với tài khoản ngoài vùng tin cậy.
-- **Phân loại sự kiện (Logging)**:
-    - **Management Events**: Ai đã làm gì với tài nguyên? (VD: Tạo EC2, Xóa S3 Bucket).
-    - **Data Events**: Ai đã truy cập vào dữ liệu? (VD: GetObject S3, Invoke Lambda).
-    - **Network Activity Events**: Giám sát lưu lượng mạng VPC.
+Quy trình cơ bản: Prompt → Bedrock → Response. Các kỹ thuật chính:
+- **Zero-Shot Prompting**: Đặt câu hỏi trực tiếp mà không cần cung cấp dữ liệu mẫu.
+- **Few-Shot Prompting**: Cung cấp một vài ví dụ (example frame) để mô hình học theo cấu trúc câu trả lời khi gặp câu hỏi tương tự.
+- **Chain of Thought (CoT)**: Hướng dẫn AI cách suy luận từng bước (step-by-step reasoning), giúp AI đưa ra câu trả lời chính xác hơn dựa trên logic đã học.
 
-#### Tự Động Hóa & Cảnh Báo (Automation)
+#### Retrieval Augmented Generation (RAG)
 
-- **Amazon EventBridge**: Trung tâm xử lý sự kiện thời gian thực (Real-time Events).
-    - Hỗ trợ **Cross-account Event**: Nhận sự kiện từ tài khoản con về tài khoản bảo mật trung tâm.
-    - **Automated Alerting**: Tự động gửi cảnh báo khi phát hiện hành vi bất thường.
-- **Detection as Code**:
-    - Chuyển đổi logic phát hiện mối đe dọa thành mã (Infrastructure as Code).
-    - Sử dụng **CloudTrail Lake queries** để truy vấn lịch sử.
-    - Quản lý phiên bản (Version control) cho các quy tắc bảo mật.
+Mô hình phổ biến hiện nay (dùng nhiều trong Banking). Quy trình gồm: **Retrieval → Augmentation → Generation**.
+- **Embeddings**: Chuyển đổi ngôn ngữ con người thành Vector. Sử dụng Amazon Titan Embedding (hỗ trợ đa ngôn ngữ).
+- **RAG in Action**:
+    1. **Chuẩn bị dữ liệu**: Data source → Document chunk → Embeddings model → Vector store.
+    2. **Xử lý truy vấn**: User input → Embeddings model → Vector → Semantic search (trong Vector store) → Context → Prompt augmentation → LLM → Response.
 
-#### Bảo Mật Mạng (Network Security)
+#### Các Dịch Vụ Pretrained AI Khác
 
-- **Common Attack Vectors**: Các hướng tấn công mạng phổ biến (DDoS, SQL Injection, Man-in-the-middle...).
-- **AWS Layered Security**: Chiến lược phòng thủ chiều sâu (Defense in Depth) - bảo vệ từ lớp ngoài (Edge), lớp mạng (VPC), đến lớp ứng dụng và dữ liệu.
+AWS cung cấp các dịch vụ chuyên biệt với chi phí tối ưu:
+- **Amazon Rekognition** (Computer Vision): Phân tích hình ảnh/video, nhận diện khuôn mặt, vật thể. Pricing: ~$0.0013/image.
+- **Amazon Translate**: Dịch thuật văn bản thời gian thực hoặc theo lô (batch). Pricing: ~$15/million characters.
+- **Amazon Textract**: Trích xuất văn bản và layout từ tài liệu (OCR). Pricing: ~$0.05/page.
+- **Amazon Transcribe**: Chuyển đổi giọng nói thành văn bản (Speech-to-text), hỗ trợ streaming.
+- **Amazon Polly**: Chuyển đổi văn bản thành giọng nói (Text-to-Speech), hỗ trợ Real-time TTS. Pricing: ~$4/million characters.
+- **Amazon Comprehend** (NLP): Phân tích cảm xúc (Sentiment Analysis), trích xuất key phrase, phát hiện thông tin cá nhân (PII). Pricing: ~$0.0001/100 chars.
+- **Amazon Kendra**: Dịch vụ tìm kiếm thông minh (Intelligent Search), hỗ trợ Natural Language Search và RAG.
+- **Amazon Lookout Family**: Phát hiện bất thường (Anomalies) trong Metrics, Equipment (thiết bị) và Vision (hình ảnh).
+- **Amazon Personalize**: Hệ thống gợi ý (Recommendation) cá nhân hóa cho người dùng.
+
+#### AI Agents & Frameworks
+
+- **Pipecat**: Framework cho voice/multimodal AI agents, tối ưu cho hội thoại thời gian thực (real-time conversation assistant).
+- **Amazon Bedrock AgentCore**:
+    - Frameworks hỗ trợ: Langgraph, Langchain, Strands Agents SDK.
+    - Quy trình từ Idea → Production cần chú trọng: Performance, Scalability, Security, Governance.
+    - Các thành phần cốt lõi: Runtime, Memory, Identity, Gateway, Code Interpreter, Browser tool, Observability.
 
 ### Những Gì Học Được
 
-#### Tư Duy Bảo Mật Hiện Đại
+#### Tư Duy Prompting
 
-- **Identity is the new perimeter**: Trong môi trường Cloud, quản lý danh tính (IAM/SSO) quan trọng hơn cả tường lửa truyền thống.
-- **Zero Trust**: Không tin tưởng bất kỳ ai, luôn xác thực (MFA) và cấp quyền tối thiểu (Least Privilege).
+- **Kỹ thuật tối ưu**: Hiểu rõ sự khác biệt giữa Zero-shot, Few-shot và Chain of Thought để áp dụng cho từng độ phức tạp của bài toán.
+- **Cấu trúc hóa**: Việc cung cấp ví dụ (examples) giúp kiểm soát định dạng đầu ra của mô hình tốt hơn.
 
-#### Chiến Lược Quản Trị
+#### Kiến Trúc RAG
 
-- **Shift from Long-term to Short-term**: Hiểu rõ rủi ro của Access Key lâu dài và tầm quan trọng của việc chuyển sang sử dụng Temporary Credentials.
-- **Governance at Scale**: Sử dụng SCPs để quản lý hàng trăm tài khoản AWS một cách đồng bộ thay vì cấu hình thủ công từng cái.
+- **Vector Database**: Hiểu vai trò quan trọng của Vector Store và Semantic Search trong việc cung cấp ngữ cảnh (context) chính xác cho LLM.
+- **Embedding Models**: Tầm quan trọng của việc chọn model embedding (như Amazon Titan) để hỗ trợ đa ngôn ngữ và độ chính xác khi tìm kiếm.
 
-#### Kỹ Thuật Tự Động Hóa
+#### Lựa Chọn Dịch Vụ (Trade-offs)
 
-- **Event-Driven Security**: Thay vì rà soát log thủ công (thụ động), sử dụng EventBridge để phản ứng ngay lập tức (chủ động) khi có sự cố bảo mật xảy ra.
+- **Cost vs Flexibility**: Biết cách cân nhắc chi phí giữa việc dùng các Pretrained Services (tính tiền theo request/char) so với việc tự build model hoặc dùng LLM tổng quát.
+- **Use case specific**: Mỗi dịch vụ (Rekognition, Textract...) giải quyết một bài toán cụ thể tốt hơn và rẻ hơn so với việc ép LLM làm tất cả.
 
 ### Ứng Dụng Vào Công Việc
 
-- **Rà soát IAM**: Kiểm tra và vô hiệu hóa các IAM Access Keys cũ, bắt buộc bật MFA cho toàn bộ team.
-- **Triển khai Access Analyzer**: Kích hoạt ngay để quét xem có S3 bucket nào đang public nhầm không.
-- **Thiết lập cảnh báo**: Tạo rule EventBridge đơn giản để bắn thông báo về Slack/Email khi có ai đó đăng nhập bằng tài khoản Root hoặc thay đổi Security Group.
-- **Học về CloudTrail**: Cấu hình CloudTrail để ghi lại cả Management và Data events cho các tài nguyên quan trọng.
+- **Triển khai RAG**: Áp dụng mô hình Retrieval Augmented Generation để xây dựng hệ thống search nội bộ cho doanh nghiệp/ngân hàng.
+- **Tích hợp Pretrained Services**: Sử dụng Amazon Textract và Comprehend để tự động hóa quy trình xử lý hồ sơ, giấy tờ.
+- **Xây dựng Chatbot thông minh**: Kết hợp Amazon Lex/Bedrock với Pipecat framework để tạo trợ lý ảo hội thoại thời gian thực.
+- **Tối ưu hóa chi phí**: Sử dụng Caching cho Amazon Polly hoặc chọn đúng tier của các dịch vụ AI để giảm thiểu chi phí vận hành.
 
 ### Trải nghiệm trong event
 
-Sự kiện thứ 3 mang đến một góc nhìn rất sâu sắc về khía cạnh **Security & Governance** - mảng thường bị xem nhẹ trong quá trình phát triển nhưng lại sống còn đối với doanh nghiệp.
+Tham gia sự kiện **“Generative AI with Amazon Bedrock”** giúp mình hệ thống hóa lại các kiến thức về GenAI và hệ sinh thái AWS. Một số điểm nhấn:
 
-#### Nhận thức về rủi ro
+#### Kiến thức thực tiễn từ chuyên gia
 
-- Phần trình bày về **Credentials Spectrum** giúp tôi giật mình nhận ra thói quen sử dụng IAM User với Long-term keys nguy hiểm như thế nào. Việc chuyển dịch sang Short-term credentials là điều bắt buộc.
+- Các diễn giả đã chia sẻ những kinh nghiệm thực tế (Real-world examples) về việc áp dụng RAG và Prompt Engineering.
+- Hiểu sâu hơn về **quy trình suy luận (reasoning)** của AI thông qua Chain of Thought.
 
-#### Sức mạnh của tự động hóa
+#### Bức tranh toàn cảnh về AI Services
 
-- Tôi rất ấn tượng với khái niệm **"Detection as Code"**. Việc quản lý các quy tắc bảo mật như quản lý source code giúp quy trình vận hành trở nên minh bạch và dễ kiểm soát hơn.
-- Demo về **EventBridge** cho thấy khả năng phản ứng thời gian thực tuyệt vời, giúp giảm thiểu thời gian kẻ tấn công có thể gây hại trong hệ thống.
+- Không chỉ dừng lại ở LLM, sự kiện cung cấp cái nhìn rộng về các dịch vụ AI chuyên biệt (Specialized AI Services) như Lookout, Kendra, Personalize... giúp giải quyết các bài toán ngách hiệu quả.
+- Sự phân tích về giá (Pricing) giúp mình có thêm dữ liệu để ra quyết định khi thiết kế giải pháp.
 
-#### Tư duy phòng thủ nhiều lớp
+#### Cập nhật xu hướng công nghệ
 
-- Hiểu rõ hơn về **AWS Layered Security**, bảo mật không chỉ là một cánh cửa mà là nhiều lớp rào chắn phối hợp với nhau từ Network đến Identity.
+- Được giới thiệu về **Agentic AI** và các thành phần của Bedrock AgentCore, mở ra hướng đi mới trong việc xây dựng các ứng dụng AI có khả năng thực thi tác vụ phức tạp (Idea to Production).
+- Tiếp cận với **Pipecat framework**, giải pháp tối ưu cho voice AI agents.
 
-
-  > Sự kiện này đã thay đổi tư duy của tôi từ "Làm cho chạy được" sang "Làm cho an toàn và tuân thủ chuẩn". Bảo mật không phải là rào cản, mà là nền móng để phát triển bền vững.
+  > Tổng kết lại, sự kiện đã cung cấp một nền tảng kiến thức vững chắc về Amazon Bedrock và các kỹ thuật GenAI, từ đó giúp mình tự tin hơn trong việc đề xuất và triển khai các giải pháp AI cho dự án.

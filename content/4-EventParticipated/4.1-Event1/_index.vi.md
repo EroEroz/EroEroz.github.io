@@ -6,102 +6,37 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-
-# Bài thu hoạch “Reinventing DevSecOps”
+# Bài thu hoạch “AWS Cloud Day 2025”
 
 ### Mục Đích Của Sự Kiện
 
-- Định nghĩa lại quy trình phát triển phần mềm an toàn (DevSecOps Lifecycle) từ khâu lập kế hoạch đến vận hành.
-- Giới thiệu bộ công cụ (Toolchain) toàn diện để tích hợp bảo mật vào từng giai đoạn của CI/CD.
-- Xây dựng tư duy "Security-First" cho đội ngũ phát triển và vận hành.
-
-### Đơn Vị Tổ Chức
-
-- **CMC Global**
+- Cập nhật xu hướng công nghệ đám mây trong các ngành công nghiệp trọng điểm (Tài chính, Ngân hàng).
+- Hiểu rõ chiến lược dữ liệu hiện đại để phục vụ cho Generative AI.
+- Nắm bắt các mô hình hiện đại hóa ứng dụng (Modernization) trên AWS.
 
 ### Nội Dung Nổi Bật
 
-#### 1. Vòng Đời DevSecOps (The DevSecOps Lifecycle)
+#### Dịch vụ Tài chính (Financial Services) & Hiện đại hóa
 
-Quy trình được chia thành 7 giai đoạn khép kín, đảm bảo bảo mật không phải là "nút thắt cổ chai" mà là một phần của dòng chảy:
+- **Phá bỏ rào cản (Dissolving boundaries):** Xu hướng xóa bỏ khoảng cách giữa Business và IT trong các tổ chức tài chính. Công nghệ không chỉ là hỗ trợ mà là động lực kinh doanh.
+- **Modernization:** Các ngân hàng và tổ chức thanh toán đang chuyển dịch mạnh mẽ sang Cloud để tăng độ linh hoạt và trải nghiệm khách hàng.
 
-1.  **PLAN (Lập kế hoạch):**
-    - Xác định yêu cầu bảo mật ngay từ đầu (Security Requirements).
-    - Thống nhất mục tiêu giữa Dev, Sec và Ops.
-    - Xây dựng lộ trình bảo mật (Security Roadmap) bám sát mục tiêu dự án.
-2.  **CODE (Viết mã):**
-    - Áp dụng các tiêu chuẩn Clean Code và Secure Coding.
-    - Sử dụng **SAST** (Static Application Security Testing) ngay trên IDE để phát hiện lỗi sớm.
-    - Hình thành tư duy "Security-first" cho Developer.
-3.  **BUILD (Xây dựng):**
-    - Tự động kiểm tra bảo mật trong CI/CD Pipeline.
-    - Quét các thư viện phụ thuộc (Dependency Scan) và mã nhị phân (Binary Scan).
-    - Đảm bảo bản build an toàn và nhất quán (Immutable Artifacts).
-4.  **TEST (Kiểm thử):**
-    - Chạy quét lỗ hổng (Vulnerability Scan) và **DAST** (Dynamic Application Security Testing).
-    - Thực hiện Penetration Test (Kiểm thử xâm nhập).
-5.  **DEPLOY (Triển khai):**
-    - Kiểm tra cấu hình và **IaC** (Infrastructure as Code) trước khi deploy.
-    - Giám sát cấu hình Runtime.
-6.  **OPERATE (Vận hành):**
-    - Tự động vá lỗi (Auto-patching) và cập nhật bảo mật liên tục.
-    - Có quy trình phản ứng sự cố (Incident Response).
-7.  **MONITOR (Giám sát):**
-    - Theo dõi liên tục các mối đe dọa (Threats).
-    - Sử dụng Real-time Analytics và các công cụ cảnh báo (Alerting).
+#### Phân tích Dữ liệu & GenAI (Data Analytics)
 
-#### 2. Hệ Sinh Thái Công Cụ (DevSecOps Toolchain Overview)
+- **Data Strategy:** Dữ liệu là nhiên liệu cho AI. Cần xây dựng chiến lược dữ liệu vững chắc trước khi áp dụng Generative AI.
+- **Integration:** Tích hợp các Foundation Models vào quy trình phân tích dữ liệu để cải thiện hiệu quả ra quyết định.
 
-Một hệ thống DevSecOps mạnh mẽ cần sự phối hợp của nhiều công cụ chuyên biệt:
+#### Xây dựng & Hiện đại hóa trên AWS
 
-- **Pre-commit & Code Quality:**
-    - *SonarQube, Codacy*: Kiểm tra chất lượng code.
-    - *GitLeaks*: Quét và ngăn chặn việc lộ Secret/Key trong code trước khi commit.
-- **Dependency & SBOM Scanning:**
-    - *Syft, Grype, Dependency-Track*: Quản lý các gói phần mềm và phát hiện lỗ hổng trong thư viện bên thứ 3.
-- **IaC & Policy-as-Code:**
-    - *Checkov, Tfsec*: Quét lỗi bảo mật trong file Terraform/Kubernetes.
-    - *OPA Gatekeeper, Kyverno*: Thực thi chính sách tuân thủ tự động trên Cluster.
-- **SAST / DAST & Security Tests:**
-    - *Trivy, Checkmarx*: Phát hiện lỗ hổng toàn diện từ Code đến Runtime.
-- **CI/CD Integration:**
-    - *Jenkins, GitHub Actions, GitLab CI, ArgoCD*: Nền tảng để tự động hóa toàn bộ quy trình trên.
-- **Monitoring & Logging:**
-    - *Prometheus, Grafana, Loki*: Giám sát sức khỏe hệ thống (Observability).
-- **Alerting & Governance:**
-    - *Slack, Email, AI Anomaly Detection*: Cảnh báo tức thì khi có sự cố.
+- **Cloud-native Architectures:** Chuyển đổi từ kiến trúc nguyên khối (Monolith) sang Microservices và Serverless.
+- **Workload Modernization:** Các chiến lược di chuyển (Migrate) và tối ưu hóa các ứng dụng cũ lên nền tảng AWS hiện đại.
 
 ### Những Gì Học Được
 
-#### Tư Duy "Shift Left"
-
-- Bảo mật không nên để đến cuối mới làm (Giai đoạn Test/Operate) mà phải đưa sang trái (Shift Left) - tức là làm ngay từ khâu **Plan** và **Code**. Việc phát hiện lỗi sớm giúp tiết kiệm chi phí sửa chữa gấp nhiều lần.
-
-#### Tầm Quan Trọng Của Automation
-
-- Không thể làm bảo mật thủ công trong thời đại Cloud. Cần tích hợp các công cụ quét (Scan) vào Pipeline để chặn các bản build lỗi một cách tự động.
-
-#### Quản Lý Rủi Ro Chuỗi Cung Ứng (Supply Chain Security)
-
-- Thông qua việc quét Dependency (SBOM), ta có thể ngăn chặn các cuộc tấn công vào thư viện thứ 3 (tương tự vụ Log4j).
+- **Tư duy hiện đại hóa:** Hiểu rằng "lên mây" không chỉ là di chuyển máy chủ, mà là thay đổi kiến trúc sang Cloud-native để tận dụng tối đa khả năng mở rộng.
+- **Tầm quan trọng của Dữ liệu:** Generative AI chỉ hiệu quả khi có nguồn dữ liệu sạch và được tổ chức tốt.
 
 ### Ứng Dụng Vào Công Việc
 
-- **Tích hợp GitLeaks**: Cài đặt ngay pre-commit hook để ngăn chặn việc vô tình push AWS Access Key lên GitHub.
-- **Triển khai SonarQube**: Tích hợp vào quy trình CI hiện tại để đo lường nợ kỹ thuật và lỗ hổng bảo mật.
-- **Áp dụng IaC Scanning**: Sử dụng **Checkov** để quét các file CloudFormation/Terraform trước khi apply hạ tầng lên AWS.
-- **Monitoring**: Thiết lập Dashboard Grafana để theo dõi trạng thái ứng dụng real-time.
-
-### Trải nghiệm trong event
-
-Mặc dù chỉ tham gia qua hình thức theo dõi tài liệu, nhưng nội dung của CMC Global mang lại cái nhìn rất hệ thống về DevSecOps.
-
-#### Sự rõ ràng trong quy trình
-
-- Slide về **DevSecOps Lifecycle** giúp mình hình dung rõ ràng bức tranh toàn cảnh, biết được ở mỗi giai đoạn cần làm gì thay vì chỉ tập trung vào viết code như trước đây.
-
-#### Bộ công cụ thực chiến
-
-- Slide **Toolchain** là một "kho báu" thực sự. Nó cung cấp danh sách các công cụ tiêu chuẩn ngành (Industry Standard) mà mình có thể tìm hiểu và áp dụng ngay lập tức cho dự án MiniMarket của mình (ví dụ như dùng Trivy để quét Docker Image).
-
-  > Sự kiện đã nhấn mạnh rằng: Trong kỷ nguyên AI và Cloud, Bảo mật không phải là một tính năng (feature), mà là một văn hóa (culture) cần được xây dựng từ những dòng code đầu tiên.
+- Áp dụng tư duy **Cloud-native** vào dự án MiniMarket (sử dụng Docker, Managed Services như RDS/ElastiCache thay vì tự cài đặt trên EC2).
+- Cân nhắc về chiến lược dữ liệu cho các tính năng mở rộng sau này (VD: Phân tích hành vi mua hàng).

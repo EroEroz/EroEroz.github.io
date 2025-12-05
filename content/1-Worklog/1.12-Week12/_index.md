@@ -8,11 +8,11 @@ pre: " <b> 1.12. </b> "
 
 ### Week 12 Objectives:
 
-- Deploy and verify project stability on **AWS Cloud**
-- Implement CI/CD automation using **AWS CodePipeline**
-- Optimize static asset delivery using **S3** and **CloudFront**
-- Implement distributed caching using **Amazon ElastiCache (Redis)**
-- Begin **AWS Cloud Architecture** training
+- Deploy and verify project stability on **AWS Cloud**.
+- Implement CI/CD automation using **AWS CodePipeline**.
+- Optimize static asset delivery using **S3** and **CloudFront**.
+- Implement distributed caching using **Amazon ElastiCache (Redis)**.
+- Begin **AWS Cloud Architecture** training.
 
 ### Tasks to be carried out this week:
 
@@ -26,8 +26,8 @@ pre: " <b> 1.12. </b> "
 
 ### Week 12 Achievements:
 
-- Validated project deployment on **AWS Cloud**
-- Established CI/CD pipeline using **CodePipeline**, **CodeBuild**, and **CodeDeploy**
-- Successfully integrated **S3** and **CloudFront** for static asset storage and delivery
-- Implemented **Amazon ElastiCache** to handle distributed sessions
-- Initiated AWS training: Completed introductory modules on **AWS Global Infrastructure**
+- Validated project deployment on **AWS Cloud**.
+- Established CI/CD pipeline using **CodePipeline**, **CodeBuild**, and **CodeDeploy**.
+- Successfully integrated **S3** and **CloudFront** for static asset storage and delivery.
+- Implemented **Amazon ElastiCache** to handle distributed sessions.
+- Initiated AWS training: Completed introductory modules on **AWS Global Infrastructure**.
