@@ -1,12 +1,12 @@
 ---
 title: "Events Participated"
 date: 2025-09-10
-weight: 4
+weight: 7
 chapter: false
 pre: " <b> 4. </b> "
 ---
 
-During the internship, I participated in 4 events. Each event was a memorable experience providing new, interesting, and useful knowledge, along with gifts and wonderful moments.
+During the internship, I participated in 6 events. Each event was a memorable experience providing new, interesting, and useful knowledge, along with gifts and wonderful moments.
 
 ### [Event 1](4.1-Event1/)
 
