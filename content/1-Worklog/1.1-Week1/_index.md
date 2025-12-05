@@ -7,33 +7,23 @@ pre: " <b> 1.1. </b> "
 ---
 
 ### Week 1 Objectives:
-
-- Connect and get acquainted with members of First Cloud Journey.
-- Understand basic AWS services, how to use the console & CLI.
-
+- Onboard with the **First Cloud Journey (FCJ)** community and understand rules.
+- Set up **AWS Free Tier** account and development environment.
+- Master basic AWS service categories (Compute, Storage, Networking, Database).
+- Begin technical exploration of **VPC** and core services.
 ### Tasks to be carried out this week:
 
 | Day | Task                                                                                                                                                                                                                                                                                                    | Start Date | Completion Date | Reference Material                        |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ----------------------------------------- |
-| 3   | - Get acquainted with FCJ members <br> - Read rules and regulations <br> - Create AWS free tier account <br> - Get familiar with AWS Console interface <br> - Finished module 1                                                                                                                         | 09/09/2025 | 09/09/2025      | <https://policies.fcjuni.com/>            |
-| 4   | - Read guide and installed neccessary extensions to create a site for worklog and others in the future <br> - Started Module 2: <br>&emsp; + Learned about AWS Virtual Private Cloud <br>&emsp; + Understand the concept of VPC <br>&emsp; + Get to know about VPC Security and others VPC feature <br> | 09/10/2025 | 09/10/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Watched Module 2 lab 3 to get an overview of the topic <br> - Practiced before implementation                                                                                                                                                                                                         | 09/11/2025 | 09/11/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - Launched EC2 Instance <br> - Testing Amazon Bedrock Playground feature <br> - Created a web using Lambda service <br> - Created a database with RDS service for testing purpose                                                                                                                        | 09/12/2025 | 09/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Onboarding & Account Setup** <br>&emsp; + Met with **FCJ** members and reviewed community regulations <br>&emsp; + Created **AWS Free Tier** account <br>&emsp; + Explored AWS Management Console interface and finished **Module 1**| 09/09/2025 | 09/09/2025      | <https://policies.fcjuni.com/>            |
+| 4   | - **Environment & VPC Setup** <br>&emsp; + Installed extensions to build the documentation site (Hugo/Worklog) <br>&emsp; + Started **Module 2: Networking** <br>&emsp;&emsp; - Learned **Virtual Private Cloud (VPC)** concepts <br>&emsp;&emsp; - Reviewed VPC Security features (Security Groups/NACLs) | 09/10/2025 | 09/10/2025 | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Watched **Module 2 Lab 3** to get an overview of the topic <br>&emsp; + Practiced networking concepts theory before implementation | 09/11/2025 | 09/11/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Service Exploration (Hands-on)** <br>&emsp; + Launched an **EC2 Instance** <br>&emsp; + Tested GenAI features in **Amazon Bedrock Playground** <br>&emsp; + Created a test function using **AWS Lambda** <br>&emsp; + Provisioned a test database using **Amazon RDS** | 09/12/2025 | 09/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
 ### Week 1 Achievements:
-
-- Understood what AWS is and mastered the basic service groups:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-
-
-- Successfully created and configured an AWS account.
-
-- Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-- Learned how to reduce costs by choosing AWS services that align with specific project requirements
+- Successfully created and configured the **AWS Account**.
+- Gained familiarity with the **AWS Management Console** and service navigation.
+- Mastered the four basic service pillars: **Compute**, **Storage**, **Networking**, and **Database**.
+- Learned fundamental cost optimization strategies for cloud projects.
 
 
