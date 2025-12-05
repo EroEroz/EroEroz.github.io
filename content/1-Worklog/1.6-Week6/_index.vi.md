@@ -1,59 +1,32 @@
 ---
-title: "Worklog Tuần 6"
+title: "Worklog tuần 6"
 date: 2025-09-10
 weight: 1
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 ### Mục tiêu tuần 6:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Hoàn thành Tuần 2 và Tuần 3 của khóa học Coursera **“Natural Language Processing with Probabilistic Models”**.
+- Xem lại và tóm tắt các khái niệm chính từ các bài lab AWS trước đây liên quan đến kiến trúc serverless.
+- Tiếp tục phát triển đề xuất dự án, tập trung vào việc triển khai kỹ thuật và giải thích kiến trúc.
+- Phối hợp với các thành viên trong nhóm để tinh chỉnh kiến trúc hệ thống và đảm bảo tính tương thích của các dịch vụ.
 
-### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Các nhiệm vụ thực hiện trong tuần này:
+
+| Thứ | Nhiệm vụ                                                                                                                                                                                                  | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo                                           |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------------------------------------------------ |
+| 2   | - Tiếp tục Tuần 2 khóa học Coursera **“Natural Language Processing with Probabilistic Models”** <br> - Xem lại các bài lab AWS trước để củng cố hiểu biết về các dịch vụ cốt lõi và quy trình làm việc | 13/10/2025 | 13/10/2025      | <https://www.coursera.org/learn/probabilistic-models-in-nlp/home/module/2> |
+| 3   | - Tập trung và hoàn thành Tuần 2 của khóa học NLP trên Coursera <br> - Chỉnh sửa và xuất bản trang worklog lên **GitHub Pages**                                                                                                                                                                            | 14/10/2025 | 14/10/2025      | <https://www.coursera.org/learn/probabilistic-models-in-nlp/programming/8POp8/part-of-speech-tagging>                                                           |
+| 4   | - Bắt đầu Tuần 3 của khóa học Coursera **“Natural Language Processing with Probabilistic Models”**                                                                                                                                                                                       | 15/10/2025 | 15/10/2025      | <https://www.coursera.org/learn/probabilistic-models-in-nlp/home/module/3>                                                           |
+| 5   | - Tham gia workshop **"Data Science On AWS"**: <br>&emsp; + Khám phá các dịch vụ như **Amazon Textract** và **Amazon Polly** <br>&emsp; + Tìm hiểu về chuẩn bị dữ liệu với **SageMaker Canvas** và **Processing** <br>&emsp; + Xem hướng dẫn xây dựng mô hình trong **SageMaker Studio** <br> - Ôn tập tài liệu cho kỳ thi giữa kỳ AWS sắp tới <br> - Tham gia hội thảo trực tuyến **"Reinventing DevSecOps with AWS Generative AI"**: <br>&emsp; + Tìm hiểu về vai trò DevSecOps và tác động của AI <br>&emsp; + Xem demo **Amazon Q** về review code và phát hiện vấn đề bảo mật | 16/10/2025 | 16/10/2025      | <https://qhdn-hcmuni.fpt.edu.vn/2025/10/13/workshop-data-science-on-aws-mo-khoa-suc-manh-du-lieu-cung-dien-toan-dam-may/> <br> <https://www.facebook.com/share/v/1BnNV19jPs/>                                                           |
+| 6   | - Tiếp tục tiến độ Tuần 3 khóa học Coursera <br> - Ôn tập tài liệu cho **kỳ thi giữa kỳ AWS** sắp tới <br> - Thiết kế lại sơ đồ **Kiến trúc Dự án** | 17/10/2025 | 17/10/2025      | <https://www.coursera.org/learn/probabilistic-models-in-nlp/home/module/3>                                                           |
 
 ### Kết quả đạt được tuần 6:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Đã hoàn thành Tuần 2 khóa học Coursera **“Natural Language Processing with Probabilistic Models”**
+- Đạt được tiến bộ đáng kể trong Tuần 3 của khóa học Coursera
+- Mở rộng kiến thức thông qua việc tham gia hai sự kiện: workshop **"Data Science On AWS"** và **"Reinventing DevSecOps with AWS Generative AI"**
+- Thiết kế lại kiến trúc dự án để nâng cao hiệu quả hệ thống và tích hợp dịch vụ

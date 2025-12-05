@@ -1,59 +1,30 @@
 ---
-title: "Worklog Tuần 4"
+title: "Worklog tuần 4"
 date: 2025-09-10
 weight: 1
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 ### Mục tiêu tuần 4:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Hoàn thành tuần cuối cùng của khóa học Coursera **"Natural Language Processing with Classification and Vector Spaces"**.
+- Thúc đẩy **các phiên thảo luận nhóm** để quyết định chủ đề dự án cuối cùng.
+- Thiết lập môi trường phát triển cục bộ (SQL Server, .NET SDK) cho dự án sắp tới.
+- Dịch tài liệu kỹ thuật về **AWS Disaster Recovery**.
 
-### Các công việc cần triển khai trong tuần này:
+### Các nhiệm vụ thực hiện trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Nhiệm vụ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo                                                                                    |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ----------------------------------------------------------------------------------------------------- |
+| 2   | - Hoàn thành các bài giảng tuần 4 của khóa học **NLP (Classification and Vector Spaces)** <br> - Luyện tập 2 bài **LeetCode** để duy trì tư duy lập trình  | 29/09/2025 | 29/09/2025      | <https://www.coursera.org/learn/classification-vector-spaces-in-nlp/home/module/4>|
+| 3   | - **Thảo luận Ý tưởng Dự án Nhóm** <br>&emsp; + Gặp gỡ nhóm để thảo luận về các ý tưởng dự án tiềm năng (thương mại điện tử so với hệ thống quản lý) <br>&emsp; + Phân tích ưu và nhược điểm của các tech stack khác nhau <br> - Hoàn thành bài tập lập trình cuối cùng cho khóa học **NLP** | 30/09/2025 | 30/09/2025      | <https://www.coursera.org/learn/classification-vector-spaces-in-nlp/programming/qFU3R/word-translation> |
+| 4   | - **Lựa chọn Tech Stack** <br>&emsp; + Xác nhận quyết định sử dụng **.NET Core** cho backend và **SQL Server** cho cơ sở dữ liệu <br> - Tiếp tục luyện tập **LeetCode** | 01/10/2025 | 01/10/2025      | |
+| 5   | - **Thiết lập Cơ sở dữ liệu & Môi trường** <br>&emsp; + Cài đặt **SQL Server** và **SSMS** trên máy cục bộ <br>&emsp; + Cấu hình chuỗi kết nối cục bộ và xác minh kết nối <br>&emsp; + Nghiên cứu các best practice về lược đồ cơ sở dữ liệu cho chủ đề thương mại điện tử tiềm năng | 02/10/2025 | 02/10/2025      | <https://learn.microsoft.com/en-us/sql/sql-server/> |
+| 6   | - Dịch bài blog **"Cross-Region disaster recovery using AWS Elastic Disaster Recovery"** <br> - Xem lại và hoàn thiện các mục worklog tuần 4 | 03/10/2025 | 03/10/2025      | <https://aws.amazon.com/blogs/storage/cross-region-disaster-recovery-using-aws-elastic-disaster-recovery/>                                                                                                    |
 
 ### Kết quả đạt được tuần 4:
-
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Đã hoàn thành thành công khóa học Coursera **"Natural Language Processing with Classification and Vector Spaces"**.
+- Chốt **Chủ đề Dự án** và **Tech Stack** (.NET/SQL) sau khi thảo luận nhóm.
+- Thiết lập **Môi trường Phát triển Cục bộ** hoạt động tốt, sẵn sàng để code.
+- Mở rộng kiến thức về cloud thông qua việc dịch các bài blog kỹ thuật về **AWS Disaster Recovery**.

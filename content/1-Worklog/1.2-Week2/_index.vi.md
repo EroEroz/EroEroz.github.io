@@ -6,54 +6,26 @@ chapter: false
 pre: " <b> 1.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Mục tiêu Tuần 2:
 
-### Mục tiêu tuần 2:
+- Có kinh nghiệm thực tế về việc tạo và kết nối mạng **Amazon EC2**.
+- Quản lý bảo mật tài khoản AWS và quy trình xử lý sự cố.
+- Nắm bắt thông tin chi tiết về ngành thông qua **AWS Cloud Day 2025**.
+- Bắt đầu chương trình chuyên sâu về **Xử lý Ngôn ngữ Tự nhiên (NLP)** trên Coursera.
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các nhiệm vụ thực hiện trong tuần này:
 
-### Các công việc cần triển khai trong tuần này:
+| Thứ | Nhiệm vụ                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo                                                                                                                                                                         |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
+| 2   | - **Lab EC2 & Xử lý sự cố** <br>&emsp; + **Public EC2 instance:** Đã tạo thành công và xác minh kết nối <br>&emsp; + **Private EC2 instance:** Tạo thất bại; tài khoản bị tạm khóa trong quá trình <br>&emsp; + Đã tạo ticket hỗ trợ với AWS và hủy các instance hiện có để tiết kiệm chi phí | 09/15/2025 | 09/15/2025      | <https://000003.awsstudygroup.com/4-createec2server/4.2-connectec2/> <br> <br><https://www.youtube.com/watch?v=wWu67GyrUNY&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=42>               |
+| 3   | - Xem video lab **AWS Module 2** trong khi chờ phản hồi hỗ trợ từ AWS <br> - Đăng ký khóa học trên Coursera: **"Natural Language Processing with Classification and Vector Spaces"** | 09/16/2025 | 09/16/2025      | <https://www.youtube.com/watch?v=Oo2UpjL-exE&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=46> <br> <br><https://www.coursera.org/learn/classification-vector-spaces-in-nlp/home/module/1> |
+| 4   | - Kiểm tra trạng thái hỗ trợ AWS (Đang chờ phản hồi) <br> - Tiếp tục xem lại tài liệu lab AWS <br> - Tiến triển qua Tuần 1 của khóa học **NLP** | 09/17/2025 | 09/17/2025      |  <https://www.youtube.com/watch?v=Oo2UpjL-exE&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=46> <br> <br><https://www.coursera.org/learn/classification-vector-spaces-in-nlp/home/module/1> |
+| 5   | - Tham dự **Cloud Day 2025:** <br>&emsp; + **Dịch vụ Tài chính:** Cách AWS hỗ trợ các tổ chức tài chính; xóa bỏ ranh giới giữa kinh doanh/CNTT; hiện đại hóa trong thanh toán, ngân hàng v.v. <br>&emsp; + **Phân tích Dữ liệu:** Chiến lược dữ liệu + generative AI, tích hợp các foundation model, sử dụng dữ liệu để cải thiện hiệu quả AI. <br>&emsp; + **Di chuyển, Hiện đại hóa và Xây dựng trên AWS:** Kiến trúc Cloud-native, serverless/microservices, hiện đại hóa workload. | 09/18/2025 | 09/18/2025      |                                                                                                                                                                                            |
+| 6   | - **Hoàn thành Tuần 1 khóa học NLP trên Coursera** <br>&emsp; + Hoàn thành bài tập lập trình: **Hồi quy Logistic cho Phân tích Cảm xúc Tweet**| 09/19/2025 | 09/19/2025      | <https://www.coursera.org/learn/classification-vector-spaces-in-nlp/programming/P4CTb/logistic-regression>                                                                                 |
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Thành tựu Tuần 2:
 
-### Kết quả đạt được tuần 2:
-
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Đã khởi chạy và kiểm thử thành công các **public EC2 instance**.
+- Đã bắt đầu quy trình xử lý sự cố chính thức cho việc tài khoản AWS bị tạm khóa.
+- Nắm bắt được những hiểu biết chiến lược về **FinTech**, **GenAI**, và **Di chuyển lên Đám mây** thông qua Cloud Day 2025.
+- Hoàn thành Tuần 1 của khóa học **NLP**, áp dụng hồi quy logistic vào dữ liệu phân tích cảm xúc thực tế.

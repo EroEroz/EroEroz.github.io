@@ -1,59 +1,28 @@
 ---
-title: "Worklog Tuần 11"
+title: "Worklog tuần 11"
 date: 2025-09-10
 weight: 2
 chapter: false
 pre: " <b> 1.11. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 ### Mục tiêu tuần 11:
+- Kiểm tra và đồng bộ hóa codebase backend mới nhất để triển khai.
+- Chuẩn bị cấu hình ứng dụng (Biến môi trường) cho production.
+- Soạn thảo các script build và file cấu hình cho các dịch vụ AWS.
+- Hoàn thiện cấu trúc dự án cho việc di chuyển lên cloud sắp tới.
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các nhiệm vụ thực hiện trong tuần này:
 
-### Các công việc cần triển khai trong tuần này:
-
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Nhiệm vụ | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 2 | - Tham dự workshop **"DevOps on AWS"** <br>&emsp; + **Buổi sáng (CI/CD & IaC):** <br>&emsp;&emsp; - Học về **Tư duy DevOps** và các chỉ số (DORA, MTTR) <br>&emsp;&emsp; - Tìm hiểu sâu về **AWS Code** Suite (CodeCommit, CodeBuild, CodeDeploy, CodePipeline) <br>&emsp;&emsp; - Khám phá **Infrastructure as Code (IaC)** sử dụng CloudFormation và CDK <br>&emsp; + **Buổi chiều (Containers & Observability):** <br>&emsp;&emsp; - Bao gồm các kiến thức cơ bản về **Docker** và điều phối **Amazon ECR/ECS/EKS** <br>&emsp;&emsp; - Học các best practice về **Monitoring & Observability** sử dụng **CloudWatch** và **AWS X-Ray**  | 17/11/2025 | 17/11/2025 | |
+| 3 | - **Chuẩn bị Codebase & Cấu hình** (Thực hiện sau workshop) <br>&emsp; + Đồng bộ với team backend để lấy nhánh release ổn định <br>&emsp; + Làm sạch `appsettings.json` và mapped **Biến môi trường** cho cloud  | 18/11/2025 | 18/11/2025 | |
+| 4 | - Soạn thảo các lệnh `buildspec.yml` cho pipeline CI/CD sắp tới| 19/11/2025 | 19/11/2025 | |
+| 5 | - Xóa các file không sử dụng và log debug khỏi thư mục dự án | 20/11/2025 | 20/11/2025 | |
+| 6 | - Xem lại danh sách kiểm tra triển khai cho tuần tới <br>&emsp; + Xác nhận với nhóm rằng sẽ không có thay đổi code nào được thực hiện trước thứ Hai | 21/11/2025 | 21/11/2025 | |
 
 ### Kết quả đạt được tuần 11:
-
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Chuẩn bị thành công cấu hình ứng dụng cho môi trường production.
+- Dọn dẹp cấu trúc dự án để đảm bảo triển khai suôn sẻ.
+- Xác nhận dự án đã sẵn sàng cho việc di chuyển lên cloud vào tuần 12.
